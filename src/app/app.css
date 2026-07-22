@@ -6483,6 +6483,30 @@ html {
   flex-shrink: 0;
 }
 
+/* On phones, restack the card: icon groups share a top row (drag+check left,
+   edit+delete right), then the badge, title, and description each span the
+   full card width instead of being squeezed into a narrow middle strip. */
+@media (max-width: 600px) {
+  .pico ol.task-list > li.task-row {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "lead actions"
+      "body body";
+  }
+  .pico .task-row-leading { grid-area: lead; }
+  .pico .task-row-actions { grid-area: actions; justify-self: end; }
+  .pico .task-row-body    { grid-area: body; }
+
+  .pico .task-row-body .task-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .pico .task-row-body .task-title-row .action-badge {
+    margin-left: 0;
+  }
+}
+
 /* .pico button.icon-button is defined globally (32×32 transparent square). */
 
 /* .enrolled-badge is defined globally (matches Pico form-element sizing). */
