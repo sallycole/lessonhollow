@@ -4560,6 +4560,15 @@ html {
   background: transparent;
 }
 
+/* On phones, stack the task card so the title/description span the full
+   width instead of being squeezed by the fixed-width action cluster. */
+@media (max-width: 600px) {
+  .pico article.plan-task-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
 .pico .show-more-row {
   text-align: center;
   margin: 0.75rem 0 0;
