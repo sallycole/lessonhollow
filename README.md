@@ -9,6 +9,17 @@ paced daily task list. It is a [Next.js](https://nextjs.org) app backed by
 
 Live at **[lessonhollow.com](https://lessonhollow.com)**.
 
+**Why this exists:** I built it so a curriculum becomes a paced daily list instead of a
+static outline you re-plan every morning. The planner, the CSV curriculum format, and the
+agent MCP surface are open source under MIT so families and builders can inspect, self-host,
+and contribute.
+
+**Try it fast**
+
+1. Use the live app: [lessonhollow.com](https://lessonhollow.com)
+2. Browse example curricula in [`public/curriculums/`](./public/curriculums/)
+3. Run locally with the steps under [Local development](#local-development)
+
 ## Features
 
 - **Curricula & tasks** — author curricula by hand or import them from CSV; each task is a
