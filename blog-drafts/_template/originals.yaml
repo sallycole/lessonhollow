@@ -1,0 +1,7 @@
+hero:
+  filename: null
+  generator: null
+  prompt_file: assets/hero-prompt.md
+  generated_at: null
+  webp_target: null
+infographics: []

@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Allow: /blog
+Allow: /discover
+Allow: /pricing
+Disallow: /dashboard
+Disallow: /players
+Disallow: /curriculums
+Disallow: /enrollments
+Disallow: /account
+Disallow: /today
+Disallow: /log
+Disallow: /fox
+Disallow: /promote
+Disallow: /progress
+Disallow: /player-login
+Disallow: /api/
+
+Sitemap: https://lessonhollow.com/sitemap.xml

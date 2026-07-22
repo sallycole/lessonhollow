@@ -1,0 +1,88 @@
+{
+  "slug": "greek-myths-week-1",
+  "learner": "Phoebe",
+  "title": "Greek Myths Week 1",
+  "strapline": "One startable day built from a creator-style curriculum stack",
+  "signal": "Guide view transformed into a clear Player day",
+  "sourceTitle": "Greek myths curriculum stack",
+  "sourceSubtitle": "A real-world pile of materials that becomes one clear day inside Lesson Hollow.",
+  "sourceItems": [
+    {
+      "label": "D'Aulaires' Book of Greek Myths",
+      "detail": "Pages 18 to 27 for the Minotaur and Theseus thread",
+      "type": "book"
+    },
+    {
+      "label": "YouTube explainer clip",
+      "detail": "One short overview of Theseus and the labyrinth",
+      "type": "video"
+    },
+    {
+      "label": "Sketchbook prompt",
+      "detail": "Draw the labyrinth with a thick marker and strong turns",
+      "type": "project"
+    },
+    {
+      "label": "Map prompt",
+      "detail": "Place Crete and Knossos on the world map",
+      "type": "map"
+    },
+    {
+      "label": "Narration note",
+      "detail": "Say one thing Theseus did before writing a sentence",
+      "type": "note"
+    }
+  ],
+  "tiktok": {
+    "hook": "Take this Greek myths stack and turn it into a day a kid can actually start.",
+    "beforeLabel": "Take this",
+    "afterLabel": "Turn it into this",
+    "caption": "The source materials are good. The missing piece is a clean Today page that tells the learner what to do next.",
+    "beats": [
+      "Show the book, video, and notebook prompts as a loose pile.",
+      "Cut to the Lesson Hollow Today page with a clear first task already marked done.",
+      "Slow-scroll the rest of the day so the viewer can feel the friction drop.",
+      "End on the line about turning a curriculum stack into a startable day."
+    ],
+    "cta": "Lesson Hollow turns a curriculum pile into a clear next step."
+  },
+  "tasks": [
+    {
+      "title": "Read the Minotaur chapter",
+      "note": "D'Aulaires, pages 18 to 27",
+      "duration": "18 min",
+      "kind": "read",
+      "done": true
+    },
+    {
+      "title": "Watch one short video clip",
+      "note": "12-minute overview of Theseus and the labyrinth",
+      "duration": "12 min",
+      "kind": "watch"
+    },
+    {
+      "title": "Sketch the labyrinth",
+      "note": "Use the notebook page with a thick black marker",
+      "duration": "15 min",
+      "kind": "make"
+    },
+    {
+      "title": "Label Crete on the map",
+      "note": "Add Knossos if there is time",
+      "duration": "8 min",
+      "kind": "map"
+    },
+    {
+      "title": "Narrate one thing Theseus did",
+      "note": "Say it out loud first, then write one sentence",
+      "duration": "6 min",
+      "kind": "narrate"
+    },
+    {
+      "title": "Choose tomorrow's myth trail",
+      "note": "Pick Medusa or Icarus based on what feels alive",
+      "duration": "4 min",
+      "kind": "reflect"
+    }
+  ]
+}

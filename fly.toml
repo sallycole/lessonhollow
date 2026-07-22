@@ -1,0 +1,36 @@
+app = "lessonhollow"
+primary_region = "dfw"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[build.args]
+  NEXT_PUBLIC_APP_URL = "https://lessonhollow.com"
+  NEXT_PUBLIC_SITE_URL = "https://lessonhollow.com"
+  NEXT_PUBLIC_SUPABASE_URL = "https://dgawnfeakgtyksdcgvil.supabase.co"
+  NEXT_PUBLIC_SUPABASE_ANON_KEY = "sb_publishable_KgIIpdRnLNByhsMkX49UIw_voWglc9a"
+  NEXT_PUBLIC_GA_MEASUREMENT_ID = "G-B8P27CFQDJ"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 1
+
+[[http_service.checks]]
+  interval = "15s"
+  timeout = "2s"
+  grace_period = "10s"
+  method = "GET"
+  path = "/"
+
+[http_service.http_options]
+  idle_timeout = 300
+
+[deploy]
+  strategy = "bluegreen"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1024mb"

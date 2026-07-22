@@ -1,0 +1,82 @@
+{
+  "slug": "rabbit-trails",
+  "learner": "Phoebe",
+  "title": "How to Organize Rabbit Trails Without Killing Them",
+  "strapline": "A day that keeps curiosity alive without turning it into chaos",
+  "signal": "Curiosity stack transformed into a guided next step",
+  "sourceTitle": "Rabbit-trail stack",
+  "sourceSubtitle": "A curious learner's real pile: books, clips, questions, and side paths that still need shape.",
+  "sourceItems": [
+    {
+      "label": "Bird migration article",
+      "detail": "The thing that started the curiosity detour in the first place",
+      "type": "book"
+    },
+    {
+      "label": "Two saved short videos",
+      "detail": "Helpful, but easy to overconsume without a clear stop point",
+      "type": "video"
+    },
+    {
+      "label": "Notebook page full of questions",
+      "detail": "Why do birds travel that far, and how do they know where to go?",
+      "type": "prompt"
+    },
+    {
+      "label": "Map idea",
+      "detail": "Track one migration route instead of trying to learn everything at once",
+      "type": "map"
+    },
+    {
+      "label": "Small output idea",
+      "detail": "Make one sketch or narration so the curiosity turns into a finished step",
+      "type": "project"
+    }
+  ],
+  "tiktok": {
+    "hook": "Take this rabbit trail and turn it into a day that keeps the curiosity alive.",
+    "beforeLabel": "Take this",
+    "afterLabel": "Turn it into this",
+    "caption": "Rabbit trails are not the problem. The problem is when they never get shaped into a doable next step.",
+    "beats": [
+      "Show the article, saved videos, and notebook questions as a curiosity pile.",
+      "Say that most systems either kill the rabbit trail or let it sprawl forever.",
+      "Cut to the Today page with one read, one map, one narration, and one next question.",
+      "End with the promise that the curiosity stayed alive but the learner still got a real day."
+    ],
+    "cta": "Lesson Hollow gives rabbit trails enough shape to move without flattening them."
+  },
+  "tasks": [
+    {
+      "title": "Read the migration article",
+      "note": "Focus on the part about how birds navigate",
+      "duration": "14 min",
+      "kind": "read",
+      "done": true
+    },
+    {
+      "title": "Watch one migration clip",
+      "note": "Use it to clarify the route, not replace the reading",
+      "duration": "7 min",
+      "kind": "watch"
+    },
+    {
+      "title": "Trace one migration path",
+      "note": "Draw the route from start to stop on the map",
+      "duration": "10 min",
+      "kind": "map"
+    },
+    {
+      "title": "Narrate the most surprising fact",
+      "note": "Say it out loud, then write one sentence",
+      "duration": "6 min",
+      "kind": "narrate"
+    },
+    {
+      "title": "Save tomorrow's next rabbit trail",
+      "note": "Write one question worth following next time",
+      "duration": "4 min",
+      "kind": "reflect"
+    }
+  ]
+}

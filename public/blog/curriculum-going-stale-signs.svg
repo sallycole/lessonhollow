@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Is it hard, stale, or just the wrong season?</title><desc id="desc">Four-card infographic distinguishing hard work, stale curriculum, wrong timing, and parent-heavy workload.</desc>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff7ed"/><stop offset="1" stop-color="#e0f2fe"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#334155" flood-opacity="0.14"/></filter></defs>
+<rect width="1200" height="675" fill="url(#bg)"/><circle cx="1040" cy="90" r="120" fill="#fed7aa" opacity="0.45"/><text x="70" y="78" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="38" font-weight="850" fill="#0f172a" text-anchor="start">
+<tspan x="70" dy="0">Is it hard, stale, or just the wrong season?</tspan>
+</text><text x="72" y="135" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="23" font-weight="520" fill="#475569" text-anchor="start">
+<tspan x="72" dy="0">Before you buy something new, name what kind of drag you are seeing.</tspan>
+</text><rect x="70" y="205" width="475" height="128" rx="26" fill="#dbeafe" filter="url(#shadow)"/>
+<text x="100" y="248" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="800" fill="#1d4ed8" text-anchor="start">
+<tspan x="100" dy="0">Hard but alive</tspan>
+</text>
+<text x="100" y="288" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="550" fill="#334155" text-anchor="start">
+<tspan x="100" dy="0">The child is stretching, and the work still</tspan>
+<tspan x="100" dy="25.0">has a clear place in the week.</tspan>
+</text>
+<rect x="605" y="205" width="475" height="128" rx="26" fill="#ffedd5" filter="url(#shadow)"/>
+<text x="635" y="248" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="800" fill="#c2410c" text-anchor="start">
+<tspan x="635" dy="0">Stale</tspan>
+</text>
+<text x="635" y="288" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="550" fill="#334155" text-anchor="start">
+<tspan x="635" dy="0">Setup keeps getting heavier, and nobody</tspan>
+<tspan x="635" dy="25.0">wants to reopen the plan.</tspan>
+</text>
+<rect x="70" y="385" width="475" height="128" rx="26" fill="#dcfce7" filter="url(#shadow)"/>
+<text x="100" y="428" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="800" fill="#15803d" text-anchor="start">
+<tspan x="100" dy="0">Wrong timing</tspan>
+</text>
+<text x="100" y="468" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="550" fill="#334155" text-anchor="start">
+<tspan x="100" dy="0">A clean pause may solve more than a new</tspan>
+<tspan x="100" dy="25.0">curriculum would.</tspan>
+</text>
+<rect x="605" y="385" width="475" height="128" rx="26" fill="#fae8ff" filter="url(#shadow)"/>
+<text x="635" y="428" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="28" font-weight="800" fill="#a21caf" text-anchor="start">
+<tspan x="635" dy="0">Too parent-heavy</tspan>
+</text>
+<text x="635" y="468" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="20" font-weight="550" fill="#334155" text-anchor="start">
+<tspan x="635" dy="0">The adult has to interpret the path before</tspan>
+<tspan x="635" dy="25.0">the child can begin.</tspan>
+</text></svg>

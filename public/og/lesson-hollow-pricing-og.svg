@@ -1,0 +1,28 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Lesson Hollow pricing Open Graph image</title>
+  <desc id="desc">Lesson Hollow pricing. First enrollment free. Then $0.50 per enrollment, with $10 top-ups, credits that never expire, and no subscription.</desc>
+  <rect width="1200" height="630" fill="#F6F0E5"/>
+  <rect x="64" y="64" width="1072" height="502" rx="24" fill="#FBF7EF" stroke="#1F2937" stroke-width="3"/>
+
+  <circle cx="142" cy="142" r="18" fill="#5C7F65"/>
+  <circle cx="190" cy="142" r="18" fill="#D7C8A1"/>
+  <circle cx="238" cy="142" r="18" fill="#1F2937"/>
+
+  <text x="104" y="230" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="82" font-weight="700">Lesson Hollow pricing</text>
+  <text x="104" y="304" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="600">First enrollment free. Then $0.50 per enrollment.</text>
+  <text x="104" y="356" fill="#4B5563" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">Pay-as-you-grow pricing for homeschool families, co-ops, and microschools</text>
+
+  <rect x="104" y="418" width="264" height="58" rx="29" fill="#EAD9B3" stroke="#1F2937" stroke-width="2"/>
+  <text x="236" y="454" text-anchor="middle" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">$10 top-ups</text>
+
+  <rect x="386" y="418" width="316" height="58" rx="29" fill="#DDE8DF" stroke="#1F2937" stroke-width="2"/>
+  <text x="544" y="454" text-anchor="middle" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">Credits never expire</text>
+
+  <rect x="720" y="418" width="258" height="58" rx="29" fill="#F4E2D7" stroke="#1F2937" stroke-width="2"/>
+  <text x="849" y="454" text-anchor="middle" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">No subscription</text>
+
+  <path d="M144 520C258 470 370 445 492 445C606 445 673 492 779 492C865 492 942 461 1020 404" stroke="#5C7F65" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="1020" cy="404" r="24" fill="#5C7F65"/>
+  <path d="M997 404H1043" stroke="#FBF7EF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1020 381V427" stroke="#FBF7EF" stroke-width="6" stroke-linecap="round"/>
+</svg>

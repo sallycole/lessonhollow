@@ -1,0 +1,16 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Lesson Hollow default Open Graph image</title>
+  <desc id="desc">Lesson Hollow. Turn mixed-format learning into a clear path. For homeschool families, co-ops, and self-directed learners.</desc>
+  <rect width="1200" height="630" fill="#F6F0E5"/>
+  <rect x="64" y="64" width="1072" height="502" rx="24" fill="#FBF7EF" stroke="#1F2937" stroke-width="3"/>
+  <circle cx="142" cy="142" r="18" fill="#5C7F65"/>
+  <circle cx="190" cy="142" r="18" fill="#D7C8A1"/>
+  <circle cx="238" cy="142" r="18" fill="#1F2937"/>
+  <path d="M144 478C246 404 332 370 432 370C547 370 617 435 731 435C828 435 908 391 1018 292" stroke="#5C7F65" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="1018" cy="292" r="26" fill="#5C7F65"/>
+  <path d="M994 292H1042" stroke="#FBF7EF" stroke-width="6" stroke-linecap="round"/>
+  <path d="M1018 268V316" stroke="#FBF7EF" stroke-width="6" stroke-linecap="round"/>
+  <text x="104" y="248" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="84" font-weight="700">Lesson Hollow</text>
+  <text x="104" y="334" fill="#1F2937" font-family="Inter, Arial, sans-serif" font-size="38" font-weight="500">Turn mixed-format learning into a clear path.</text>
+  <text x="104" y="520" fill="#4B5563" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="500">For homeschool families, co-ops, and self-directed learners</text>
+</svg>

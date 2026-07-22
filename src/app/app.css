@@ -1,0 +1,7105 @@
+/* ===========================================================================
+   Lesson Hollow consolidated stylesheet.
+   All rules live here — one file, one place to find any style.
+   Pico framework CSS is still imported separately from node_modules.
+   =========================================================================== */
+
+/* ===== Fonts (was: globals.css) ===== */
+/* Wordmark display fonts — used only on the Lesson Hollow logo
+ * (.wordmark selector, see pico.css). Pico's system font stack covers
+ * all body text; no other web fonts are loaded.
+ * Files in /public/fonts/ are committed to the branch so prod renders
+ * the same as dev with no third-party CDN dependency. */
+
+@font-face {
+  font-family: 'Carter One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/carter-one/CarterOne-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Changa One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/changa-one/ChangaOne-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Changa One';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/changa-one/ChangaOne-Italic.woff2') format('woff2');
+}
+
+/* ===== Pico overrides + chrome (was: pico.css) ===== */
+/* Global Pico overrides — applies to every route under the .pico wrapper.
+   Pico defaults rule; each rule here documents why a deviation is needed. */
+
+/* The conditional Pico build scopes component styles to .pico, but the
+   color-scheme custom properties live on :root / [data-theme]. The page
+   background is ours to wire — without this the canvas is unstyled once
+   Tailwind's base layer is gone. */
+html {
+  background-color: var(--pico-background-color);
+}
+
+/* Chrome container: small gutter so the wordmark, nav links, and footer
+   anchor near the viewport corners. This rule applies to
+   <nav.site-nav class="container">, <ul.container> inside player-tabs,
+   and <footer.site-footer class="container">. Main has a larger
+   padding-inline override below so body content sits further in than
+   chrome — the wordmark is then the leftmost visible element on the page. */
+.pico .container {
+  max-width: none;
+  padding-inline: 1.5rem;
+}
+
+.pico {
+  /* Tighten card density a notch */
+  --pico-block-spacing-vertical: 1rem;
+  --pico-block-spacing-horizontal: 1.25rem;
+  /* Match nav-link padding to form-element padding so nav items (including the
+     dropdown summary) end up the same height as buttons. Without this, Pico's
+     defaults put nav items at ~40px and buttons at ~50px. */
+  --pico-nav-link-spacing-vertical: 0.8125rem;
+  background: transparent;
+}
+
+/* ----------------------------------------------------------------------
+   Chrome: masquerade banner, header, nav tabs, footer
+   ---------------------------------------------------------------------- */
+
+/* Masquerade banner: uses Pico's native <mark> color tokens (amber-cream in
+   light, dark teal in dark) — the same palette Pico applies to <mark>
+   highlights, which is semantically what a "you're viewing as X" band is. */
+.pico .masquerade-banner {
+  background: var(--pico-mark-background-color);
+  color: var(--pico-mark-color);
+  padding: 0.5rem 1.5rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0;
+}
+.pico .masquerade-banner span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.pico .masquerade-banner button {
+  margin: 0;
+}
+
+/* Site header. The nav itself carries Pico's `.container` class for
+   width + horizontal padding (single shared column with main and footer);
+   this rule only adds vertical padding and the flex layout. */
+.pico .site-header > nav.site-nav {
+  padding-block: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.pico .site-header > nav.site-nav > ul {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  list-style: none;
+  /* Override Pico's `nav ul:first-of-type { margin-left: calc(...*-1) }`
+     and the matching :last-of-type margin-right: those compensate for
+     Pico's nav-li padding, which we zero in the rule below — so the
+     compensation would just pull our containers off-center. */
+  margin: 0;
+  padding: 0;
+}
+.pico .site-header > nav.site-nav > ul > li {
+  padding: 0;
+}
+
+/* Mobile vs desktop nav swap. Pico-friendly hamburger pattern:
+   - ≥769px: desktop ul visible, hamburger hidden
+   - ≤768px: hamburger visible, desktop ul hidden
+   Same nav content in both, no duplicate component tree.
+   Specificity matches the .pico .site-header > nav.site-nav ul rule above
+   plus one extra class so the hide wins the cascade. */
+@media (max-width: 768px) {
+  .pico .site-header > nav.site-nav ul.site-nav-desktop {
+    display: none;
+  }
+}
+@media (min-width: 769px) {
+  .pico .site-header > nav.site-nav details.site-nav-mobile {
+    display: none;
+  }
+}
+.pico details.dropdown.site-nav-mobile {
+  margin: 0;
+  position: relative;
+  /* Firefox quirk: position: relative on a display: inline element (Pico's
+     `nav details.dropdown` default) does NOT establish a containing block
+     for absolutely positioned children. The menu falls back to the body.
+     inline-block gives the details a real box AND has higher specificity
+     than Pico's `.pico nav details.dropdown { display: inline }` (matching
+     .dropdown.site-nav-mobile beats Pico's nav.dropdown). */
+  display: inline-block;
+}
+.pico details.site-nav-mobile > summary {
+  width: auto;
+  padding: 0.4rem 0.6rem;
+}
+.pico details.dropdown.site-nav-mobile > ul {
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  min-width: 220px;
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  list-style: none;
+  margin: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.pico details.dropdown.site-nav-mobile:not([open]) > ul {
+  display: none;
+}
+.pico details.dropdown.site-nav-mobile[open] > ul {
+  opacity: 1;
+}
+.pico details.dropdown.site-nav-mobile > ul > li {
+  padding: 0;
+  margin: 0;
+}
+.pico details.site-nav-mobile > ul > li > hr {
+  margin: 0.25rem 0;
+  border: none;
+  border-top: 1px solid var(--pico-card-border-color);
+}
+/* Override Pico's `details.dropdown > summary + ul li a` rule which pulls
+   anchors outward with form-element negative margins. Our selector needs
+   to match or exceed Pico's specificity (0,3,4) — adding the [role]
+   attribute selector pushes us to (0,4,4). */
+.pico details.site-nav-mobile > summary + ul li a,
+.pico details.site-nav-mobile > summary + ul li button,
+.pico details.site-nav-mobile > ul li a[role='button'],
+.pico details.site-nav-mobile > ul li a[href] {
+  margin: 0;
+}
+.pico details.site-nav-mobile > ul li > a[role='button'] {
+  width: 100%;
+  text-align: center;
+}
+/* Theme toggle is normally a 3rem square in the desktop chrome; in the
+   mobile dropdown it should stretch to the menu width like every other
+   item. Restore horizontal padding so the icon sits centered. */
+.pico details.site-nav-mobile > ul button.theme-toggle {
+  width: 100%;
+  padding-inline: var(--pico-form-element-spacing-horizontal);
+}
+
+/* Documented exception to "Pico defaults rule": the Lesson Hollow wordmark
+   uses a custom display font as the brand identity. Nothing else gets a
+   custom font. @font-face for Carter One / Changa One lives in globals.css. */
+.pico .site-header .wordmark {
+  font-family: 'Carter One', 'Changa One', system-ui, sans-serif;
+  font-size: 1.75rem;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--pico-color);
+  /* Pico's `nav li :where(a,[role=link]) { margin: -spacing }` pulls the
+     anchor to the left of its <li>; we zero it so the wordmark's box sits
+     at the container's left edge. The negative margin-left then pulls
+     the visual ink further left to compensate for Carter One's typographic
+     left-side bearing — without this the wordmark looks "tabbed in" next
+     to glyph-flush elements like the masquerade banner's eye icon, which
+     sit at the same box edge but have no bearing whitespace. */
+  margin: 0;
+  margin-left: -0.3em;
+}
+.pico .site-header a {
+  text-decoration: none;
+  color: var(--pico-color);
+  font-size: 0.9375rem;
+}
+.pico .site-header a:hover {
+  color: var(--pico-primary);
+}
+/* Desktop-nav text links (Discover, Pricing, Blog): lighter-blue text on
+   hover, no background change. Excludes role=button anchors (Sign Up /
+   Log In) since those are buttons and have Pico's own hover. */
+.pico .site-header ul.site-nav-desktop > li > a:not([role='button']):hover {
+  color: var(--pico-primary-hover);
+}
+/* Role-button anchors (Sign Up / Log In) in the logged-out desktop nav.
+   Override the inherited 0.9375rem font-size from `.site-header a` so they
+   match real <button> elements (1rem); zero the Pico nav-link negative
+   margin so they don't ride up above the theme toggle. */
+.pico .site-header ul.site-nav-desktop > li > a[role='button'] {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Theme toggle — a Pico outline icon button matching the view-switcher
+   ("Guide's View") trigger: same height, border, radius, and primary
+   color from Pico's outline-button rule. width: 3rem squares it off —
+   3rem is Pico's button border-box height (1.5rem line-height + 2×
+   ~0.69rem vertical padding + 2×border), so the icon button is as wide
+   as it is tall. Zeroed inline padding lets the icon center. */
+.pico button.theme-toggle {
+  margin: 0;
+  padding-inline: 0;
+  width: 3rem;
+}
+.pico button.theme-toggle > span {
+  vertical-align: middle;
+}
+
+/* View switcher dropdown — Pico styles <summary role="button"> inside
+   <details class="dropdown"> as a proper button trigger with caret and
+   open-state handling. Only the menu list below needs custom styles. */
+.pico details.dropdown.view-switcher {
+  margin: 0;
+  position: relative;
+  /* Firefox quirk: position: relative on a display: inline element (Pico's
+     `nav details.dropdown` default) does NOT establish a containing block
+     for absolutely positioned children. The menu falls back to the body.
+     inline-block gives the details a real box AND has higher specificity
+     than Pico's `.pico nav details.dropdown { display: inline }` (matching
+     .dropdown.view-switcher beats Pico's nav.dropdown). */
+  display: inline-block;
+}
+/* Pico applies line-height: 1rem to every <summary>, but buttons use
+   var(--pico-line-height) (1.5). Restore the button line-height on the
+   summary so it matches the button height of Start / Exit View / etc. */
+.pico details.view-switcher > summary[role='button'] {
+  line-height: var(--pico-line-height);
+}
+.pico details.dropdown.view-switcher > ul {
+  position: absolute;
+  left: auto;
+  right: 0;
+  top: calc(100% + 0.25rem);
+  min-width: 240px;
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 0.25rem;
+  list-style: none;
+  margin: 0;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.pico details.dropdown.view-switcher:not([open]) > ul {
+  display: none;
+}
+.pico details.dropdown.view-switcher[open] > ul {
+  opacity: 1;
+}
+.pico details.dropdown.view-switcher > ul > li {
+  padding: 0;
+  margin: 0;
+}
+.pico details.view-switcher > ul > li > hr {
+  margin: 0.25rem 0;
+  border: none;
+  border-top: 1px solid var(--pico-card-border-color);
+}
+/* menu-item color uses --pico-contrast, NOT --pico-color: Pico's button
+   rule locally shadows --pico-color with --pico-primary-inverse (white in
+   light mode), so var(--pico-color) on a <button> renders white-on-white.
+   --pico-contrast is defined on :root and never shadowed. */
+.pico details.view-switcher button.menu-item {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--pico-contrast);
+  padding: 0.5rem 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  font-size: 0.875rem;
+  border-radius: var(--pico-border-radius);
+}
+.pico details.view-switcher button.menu-item:hover:not(:disabled) {
+  background: var(--pico-card-sectioning-background-color);
+  color: var(--pico-contrast);
+}
+.pico details.view-switcher button.menu-item:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+.pico details.view-switcher .check-spacer {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+}
+
+/* Nav tabs.
+   The inner ul carries Pico's `.container` for the shared horizontal
+   column with header/main/footer. Tab links have no horizontal padding
+   so the first tab's text aligns flush with the wordmark and H1 above
+   and below it; tabs are spaced by `gap` instead. */
+.pico nav.player-tabs {
+  display: block;
+  margin: 0;
+  padding: 0;
+  overflow-x: auto;
+}
+.pico nav.player-tabs > ul {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 1.5rem;
+  list-style: none;
+  /* Restore Pico's .container auto-centering. Pico applies
+     `nav ul:first-of-type { margin-left: calc(... * -1) }` (and matching
+     :last-of-type margin-right) which clobbers .container's margin auto. */
+  margin: 0 auto;
+  /* Secondary nav lives in the chrome container (1.5rem gutter), aligning
+     its first tab with the wordmark above. Body content (<main>) stays
+     inset further at 4rem. */
+}
+.pico nav.player-tabs > ul > li {
+  padding: 0;
+}
+.pico nav.player-tabs a {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.75rem 0;
+  text-decoration: none;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+  border-bottom: 2px solid transparent;
+  /* Zero Pico's negative `nav li :where(a) { margin: -spacing }`
+     compensation; we want the first tab flush with the container edge.
+     margin-bottom keeps the active-tab underline atop the page border. */
+  margin: 0 0 -1px 0;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.pico nav.player-tabs a:hover {
+  color: var(--pico-color);
+  border-bottom-color: var(--pico-muted-border-color);
+}
+.pico nav.player-tabs a[aria-current='page'] {
+  color: var(--pico-primary);
+  font-weight: 500;
+  border-bottom-color: var(--pico-primary);
+}
+/* On narrow viewports the seven player tabs don't fit on one line.
+   Wrap onto extra rows so every option stays visible — no hidden
+   tabs behind a horizontal scroll. Tighter link padding keeps the
+   two-row nav from eating too much vertical space. (This block must
+   stay after the base rules above: same specificity, order decides.) */
+@media (max-width: 600px) {
+  .pico nav.player-tabs > ul {
+    flex-wrap: wrap;
+    column-gap: 1.25rem;
+    row-gap: 0;
+  }
+  .pico nav.player-tabs a {
+    padding: 0.5rem 0;
+  }
+}
+
+/* Main content inset — larger gutter than chrome so body content (H1,
+   cards, etc.) sits further in than the wordmark. The wordmark then
+   reads as the leftmost visible element at every viewport width.
+   Specificity (0,2,1) beats the base `.pico .container` (0,2,0), so this
+   override wins for padding-inline while chrome stays at 1.5rem. */
+.pico > main.container {
+  padding-block: 2rem;
+  padding-inline: 4rem;
+}
+.pico > main.container > * {
+  margin-top: 0;
+}
+/* On mobile viewports the 4rem inset eats too much horizontal space — a
+   typical post-card or article exceeds the remaining content width and
+   pushes the page into horizontal overflow. Drop main's inset to match
+   the chrome gutter on narrow screens so content uses the full width. */
+@media (max-width: 600px) {
+  .pico > main.container {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* Site footer — no background, no borders. Pico styles <footer> minimally.
+   Carries `.container` for shared width; this rule only adds the top
+   margin separating it from main and a small vertical padding. */
+.pico .site-footer {
+  margin-top: 2rem;
+  padding-block: 1.5rem;
+  text-align: center;
+}
+.pico .site-footer > p {
+  margin: 0;
+}
+/* Pico's `<nav>` is flex with `justify-content: space-between`; with a
+   single child <ul> that flex item just sits on the left. Override to
+   center the link row. */
+.pico .site-footer > nav {
+  justify-content: center;
+}
+.pico .site-footer nav ul {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  justify-content: center;
+}
+.pico .site-footer nav ul li {
+  padding: 0;
+}
+/* All four footer link slots — anchor links (Help / Privacy / Terms) and
+   the Feedback trigger button — share one rule so they look identical.
+   Pico's `nav li :where(a)` rule (only matches anchors) applies its own
+   padding/font-size; we zero those here and rely on the wrapping <small>
+   to set font-size uniformly across <a> and <button>. Specificity (0,3,2)
+   beats feedback-modal.css's `.pico button.feedback-trigger-link` (0,2,1). */
+.pico .site-footer nav a,
+.pico .site-footer nav button.feedback-trigger-link {
+  color: var(--pico-muted-color);
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.pico .site-footer nav a:hover,
+.pico .site-footer nav button.feedback-trigger-link:hover {
+  color: var(--pico-color);
+}
+
+/* Page hgroup */
+.pico hgroup {
+  margin-bottom: 1rem;
+}
+
+/* Error boundary fallback — shared by global-error and route-group error.tsx */
+.pico .error-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+  padding: 5rem 1rem;
+}
+.pico .error-view > svg {
+  color: var(--pico-del-color);
+}
+.pico .error-view > h1,
+.pico .error-view > h2 {
+  margin: 0;
+}
+.pico .error-view > p {
+  margin: 0;
+  max-width: 28rem;
+  color: var(--pico-muted-color);
+}
+.pico .error-view .error-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+.pico .error-view .error-actions > button,
+.pico .error-view .error-actions > a[role='button'] {
+  margin: 0;
+  padding: 0.5rem 1.1rem;
+  width: auto;
+  text-decoration: none;
+}
+
+/* ===== Component-colocated (dot-plot, feedback-modal, status-badge, reward-card) ===== */
+/* Dot plot — 7-day completion grid with drag-to-scroll. Co-located with
+   the component so it loads wherever DotPlot renders, not just on routes
+   whose page-level CSS happens to include it. */
+.pico .dot-plot {
+  background: var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem 0.75rem 0.75rem;
+  user-select: none;
+  cursor: grab;
+  touch-action: pan-x;
+}
+.pico .dot-plot:active {
+  cursor: grabbing;
+}
+.pico .dot-plot-row {
+  display: flex;
+}
+.pico .dot-plot-axis {
+  display: flex;
+  align-items: center;
+  margin-right: 0.5rem;
+}
+.pico .dot-plot-axis span {
+  font-size: 0.625rem;
+  color: var(--pico-muted-color);
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+.pico .dot-plot-cols {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+}
+.pico .dot-plot-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2px;
+}
+.pico .dot-plot-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 50%;
+  background: var(--pico-primary);
+}
+.pico .dot-plot-dot.skipped {
+  background: var(--pico-muted-color);
+  opacity: 0.5;
+}
+.pico .dot-plot-dot.clickable {
+  cursor: pointer;
+  transition: box-shadow 0.15s;
+}
+.pico .dot-plot-dot.clickable:hover {
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--pico-primary) 50%, transparent);
+}
+.pico .dot-plot-labels {
+  display: flex;
+  margin: 0.25rem 0 0 1.25rem;
+}
+.pico .dot-plot-labels span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.625rem;
+  color: var(--pico-muted-color);
+}
+
+/* Dot plot task-detail dialog */
+.pico dialog.dot-plot-dialog ul.dot-task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+.pico dialog.dot-plot-dialog ul.dot-task-list > li {
+  margin: 0;
+  padding: 0.75rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico dialog.dot-plot-dialog .dot-task-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+.pico dialog.dot-plot-dialog .dot-task-head strong {
+  font-size: 0.875rem;
+}
+.pico dialog.dot-plot-dialog .dot-task-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+}
+.pico dialog.dot-plot-dialog .action-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+  font-size: 0.6875rem;
+  font-weight: 500;
+}
+.pico dialog.dot-plot-dialog .action-badge.skipped {
+  background: transparent;
+  border: 1px solid var(--pico-card-border-color);
+}
+.pico dialog.dot-plot-dialog .copy-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 1rem 0 0;
+}
+.pico dialog.dot-plot-dialog .copy-row button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* FeedbackButton — trigger has three render modes; dialog is a native <dialog>. */
+
+/* Footer text-link mode */
+.pico button.feedback-trigger-link {
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  font-size: inherit;
+  text-decoration: none;
+}
+.pico button.feedback-trigger-link:hover {
+  color: var(--pico-contrast);
+}
+
+/* Mobile-nav menu-item mode */
+.pico button.feedback-trigger-menuitem {
+  margin: 0;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: var(--pico-contrast);
+  padding: var(--pico-nav-element-spacing-vertical) var(--pico-nav-element-spacing-horizontal);
+}
+.pico button.feedback-trigger-menuitem:hover {
+  background: var(--pico-card-sectioning-background-color);
+}
+
+/* Default outline-button mode */
+.pico button.feedback-trigger-button {
+  margin: 0;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* Dialog form */
+.pico dialog.feedback-dialog > article > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+.pico dialog.feedback-dialog > article > form > label {
+  margin: 0;
+}
+.pico dialog.feedback-dialog > article > form > header {
+  margin: 0;
+  padding: 0;
+}
+.pico dialog.feedback-dialog > article > form > header > h3 {
+  margin: 0;
+}
+.pico dialog.feedback-dialog > article > form > header > p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+.pico dialog.feedback-dialog > article > form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 0.25rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico dialog.feedback-dialog > article > form > footer > button {
+  margin: 0;
+  padding: 0.45rem 1rem;
+  width: auto;
+}
+.pico .feedback-error {
+  margin: 0;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+
+/* Success state */
+.pico .feedback-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 0;
+  text-align: center;
+}
+.pico .feedback-success > p {
+  margin: 0;
+}
+.pico .feedback-success > p > strong {
+  font-size: 1.0625rem;
+}
+.pico .feedback-success > p:last-child {
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+
+/* ProgressStatusBadge — pill with icon + label, tinted per pacing status
+   via Pico tonal tokens (no bespoke palette). */
+
+.pico .progress-status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 999px;
+}
+
+/* complete — primary/blue */
+.pico .progress-status-badge[data-status='complete'] {
+  background: color-mix(in oklab, var(--pico-primary) 14%, transparent);
+  color: var(--pico-primary);
+}
+
+/* ahead + on_track — positive/green */
+.pico .progress-status-badge[data-status='ahead'],
+.pico .progress-status-badge[data-status='on_track'] {
+  background: color-mix(in oklab, var(--pico-ins-color) 14%, transparent);
+  color: var(--pico-ins-color);
+}
+
+/* behind — caution/amber, matches the /progress rollup banner */
+.pico .progress-status-badge[data-status='behind'] {
+  background: color-mix(in oklab, var(--pico-mark-background-color) 35%, transparent);
+  color: var(--pico-mark-color);
+}
+
+/* overdue — negative/red */
+.pico .progress-status-badge[data-status='overdue'] {
+  background: color-mix(in oklab, var(--pico-del-color) 12%, transparent);
+  color: var(--pico-del-color);
+}
+
+/* RewardCard — 9:16 media viewer with hover-reveal controls and draggable lyrics.
+   The dark overlay scrims are functional (legible controls over arbitrary
+   imagery), not theme color — Pico has no media-overlay token. */
+
+.pico article.reward-card {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.pico article.reward-card[data-fullscreen] {
+  background: #000;
+  border: none;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.pico article.reward-card[data-fullscreen] .reward-card-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image area — fixed 9:16 aspect */
+.pico .reward-image {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  width: min(85vw, calc(70vh * 9 / 16));
+}
+.pico article.reward-card[data-fullscreen] .reward-image {
+  width: auto;
+  height: 100%;
+}
+.pico .reward-img-cover {
+  object-fit: cover;
+}
+.pico .reward-img-contain {
+  object-fit: contain;
+}
+.pico .reward-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background: var(--pico-card-sectioning-background-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pico .reward-image-placeholder > span {
+  font-size: 3.5rem;
+}
+
+/* Hover-reveal top bar */
+.pico .reward-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.pico .reward-topbar[data-visible] {
+  opacity: 1;
+}
+.pico .reward-topbar-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Round overlay buttons */
+.pico button.reward-overlay-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  color: #fff;
+  transition: background-color 0.15s;
+}
+.pico button.reward-overlay-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+.pico button.reward-overlay-btn:disabled {
+  opacity: 0.5;
+}
+
+/* Volume cluster */
+.pico .reward-volume {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+}
+.pico button.reward-volume-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #fff;
+}
+.pico button.reward-volume-btn:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+.pico input.reward-volume-slider {
+  width: 4rem;
+  height: 0.25rem;
+  margin: 0;
+  accent-color: #fff;
+}
+
+/* Draggable lyrics panel */
+.pico .reward-lyrics {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(12px);
+  color: #fff;
+}
+.pico .reward-lyrics-handle {
+  display: flex;
+  justify-content: center;
+  padding: 0.25rem 0;
+  cursor: row-resize;
+  user-select: none;
+  color: rgba(255, 255, 255, 0.7);
+}
+.pico .reward-lyrics-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0.75rem 0.25rem;
+}
+.pico .reward-lyrics-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pico .reward-lyrics-date {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.6);
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+.pico .reward-lyrics-body {
+  overflow-y: auto;
+  padding: 0 0.75rem 0.75rem;
+}
+.pico .reward-lyrics-body > p {
+  margin: 0;
+  font-size: 0.875rem;
+  white-space: pre-wrap;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.pico .reward-card .spin {
+  animation: reward-card-spin 0.8s linear infinite;
+}
+@keyframes reward-card-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== /(auth) ===== */
+/* Auth pages — centered single-column forms. Pico styles <form>, <input>,
+   <label>, <button> natively; this file just constrains width and adds
+   page-level spacing. */
+
+.pico article.auth-card {
+  max-width: 26rem;
+  margin: 4rem auto;
+}
+.pico article.auth-card > hgroup {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.pico article.auth-card > hgroup > h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+.pico article.auth-card > hgroup > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+.pico article.auth-card form {
+  margin: 0;
+}
+.pico article.auth-card form > button[type='submit'] {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+/* Status + alert lines */
+.pico article.auth-card .auth-status {
+  text-align: center;
+  margin: 0 0 1rem;
+  color: var(--pico-ins-color);
+  font-size: 0.9375rem;
+}
+.pico article.auth-card .auth-alert {
+  margin: 0.5rem 0;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+.pico article.auth-card .auth-alert-success {
+  margin: 0.5rem 0;
+  color: var(--pico-ins-color);
+  font-size: 0.875rem;
+}
+
+/* Inline secondary action (e.g. "Resend confirmation email") */
+.pico article.auth-card .auth-inline-action {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+  width: auto;
+  color: var(--pico-primary);
+  text-decoration: underline;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.pico article.auth-card .auth-inline-action:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Centered footer links beneath the form */
+.pico article.auth-card > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico article.auth-card > footer a {
+  color: var(--pico-primary);
+}
+
+/* ===== /home (was: home.css) ===== */
+/* Homepage layout. */
+
+/* Hero — large centered headline + CTAs. */
+.pico .hero {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+.pico .hero hgroup {
+  margin-bottom: 2rem;
+}
+.pico .hero h1 {
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  line-height: 1.1;
+}
+.pico .hero hgroup > p {
+  max-width: 40rem;
+  margin: 1rem auto 0;
+  font-size: 1.125rem;
+  color: var(--pico-muted-color);
+}
+.pico .hero .hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin: 0;
+}
+.pico .hero .hero-ctas > a {
+  margin: 0;
+}
+
+/* Features — responsive 1/2/3-column grid. Custom class name (not Pico's
+   `.grid`, which gives one column per child — would be 6 cramped columns). */
+.pico .features-section {
+  padding: 3rem 0;
+}
+.pico .features-section > hgroup {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.pico .features-section > hgroup > p {
+  max-width: 40rem;
+  margin: 0.75rem auto 0;
+  color: var(--pico-muted-color);
+}
+.pico .features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: 1.5rem;
+}
+.pico .features-grid > article {
+  margin: 0;
+}
+.pico .features-grid > article > svg {
+  color: var(--pico-primary);
+}
+.pico .features-grid > article > h3 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1.125rem;
+}
+.pico .features-grid > article > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+
+/* Audiences — uses Pico's native .grid for equal columns at large viewports,
+   stacks to 1 column on small. Three audience cards = three even columns. */
+.pico .audiences-section {
+  padding: 3rem 0;
+}
+.pico .audiences-section > h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.pico .audiences-section > .grid > article {
+  margin: 0;
+}
+.pico .audiences-section > .grid > article > h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.125rem;
+}
+.pico .audiences-section > .grid > article > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+
+/* Bottom CTA — centered article with a primary action. */
+.pico .home-cta {
+  padding: 3rem 0 4rem;
+}
+.pico .home-cta > article {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  margin: 0;
+}
+.pico .home-cta > article > hgroup > p {
+  max-width: 32rem;
+  margin: 1rem auto 0;
+  color: var(--pico-muted-color);
+}
+.pico .home-cta > article > p {
+  margin: 2rem 0 0;
+}
+.pico .home-cta > article > p > a {
+  margin: 0;
+}
+
+/* ===== /blog (list) ===== */
+/* /blog list page-specific layout. */
+
+/* Responsive post grid — auto-fills 1/2/3 columns based on viewport without
+   media queries. Bypasses Pico's `.grid` class (which gives one column per
+   child) by using a different class name. */
+.pico .blog-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+}
+
+/* Each post is an <article> wrapping a <Link>. Pico already gives articles
+   their card treatment; we just need to neutralize the link's underline and
+   make the whole tile clickable. */
+.pico .blog-list .post-card {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.pico .blog-list .post-card > a {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  height: 100%;
+  padding-bottom: var(--pico-block-spacing-vertical);
+}
+.pico .blog-list .post-card > a:hover h2 {
+  color: var(--pico-primary);
+}
+
+/* Featured image fills the top of the card; padding kicks in below. */
+.pico .blog-list .post-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+.pico .blog-list .post-card > a > * {
+  padding-left: var(--pico-block-spacing-horizontal);
+  padding-right: var(--pico-block-spacing-horizontal);
+}
+.pico .blog-list .post-card > a > img {
+  padding: 0;
+}
+.pico .blog-list .post-card > a > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0;
+  padding-top: var(--pico-block-spacing-vertical);
+  padding-bottom: 0;
+}
+.pico .blog-list .post-card > a > header small {
+  color: var(--pico-muted-color);
+}
+.pico .blog-list .post-card h2 {
+  margin: 0.5rem 0 0.5rem;
+  font-size: 1.25rem;
+  transition: color 0.15s;
+}
+.pico .blog-list .post-card p {
+  margin: 0 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* Search input + filter pill */
+.pico input[type='search'] {
+  margin-bottom: 1.5rem;
+}
+.pico .blog-filter {
+  margin-bottom: 1rem;
+  color: var(--pico-muted-color);
+}
+
+/* Empty state */
+.pico article.blog-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+/* ===== /blog/[slug] (post) ===== */
+/* Blog post detail layout. Pico styles markdown elements natively
+   (h1, h2, p, ul, blockquote, code, pre) — we only handle the page
+   chrome: header meta, hero image, post nav. */
+
+.pico article.blog-post {
+  max-width: 48rem;
+  margin: 2rem auto;
+}
+
+.pico article.blog-post > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+}
+.pico article.blog-post > header > h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+}
+.pico article.blog-post > header .post-meta {
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+  margin: 0;
+}
+.pico article.blog-post > header .post-categories {
+  margin: 0.75rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.pico article.blog-post > header .post-categories a {
+  display: inline-block;
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+.pico article.blog-post > header .post-categories a:hover {
+  background: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+}
+
+/* Hero image: full bleed inside the article, rounded. */
+.pico article.blog-post > .post-hero {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--pico-border-radius);
+  margin: 0 0 2rem;
+}
+
+/* Post navigation: prev | home | next. Stacks on mobile. */
+.pico article.blog-post > .post-nav {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: start;
+  margin: 3rem 0 0;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+.pico article.blog-post > .post-nav > .post-nav-prev {
+  text-align: left;
+}
+.pico article.blog-post > .post-nav > .post-nav-next {
+  text-align: right;
+}
+.pico article.blog-post > .post-nav a:not([role='button']) {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.pico article.blog-post > .post-nav a:not([role='button']) small {
+  color: var(--pico-muted-color);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+.pico article.blog-post > .post-nav a:not([role='button']):hover strong {
+  color: var(--pico-primary);
+}
+.pico article.blog-post > .post-nav [role='button'] {
+  margin: 0;
+  align-self: center;
+}
+
+@media (max-width: 599.98px) {
+  .pico article.blog-post > .post-nav {
+    grid-template-columns: 1fr;
+  }
+  .pico article.blog-post > .post-nav > .post-nav-next {
+    text-align: left;
+  }
+  .pico article.blog-post > .post-nav [role='button'] {
+    justify-self: start;
+  }
+}
+
+/* ===== /discover (list) ===== */
+/* /discover list layout. */
+
+.pico hgroup.discover-header {
+  text-align: center;
+  margin: 2rem 0 2rem;
+}
+.pico hgroup.discover-header > p {
+  color: var(--pico-muted-color);
+}
+
+/* Filter bar: search + grade + sort. Stacks on narrow viewports. */
+.pico .discover-filters {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.pico .discover-filters > input[type='search'] {
+  flex: 1 1 16rem;
+  margin: 0;
+}
+.pico .discover-filters > select {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+
+/* Responsive card grid. */
+.pico section.discover-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1.5rem;
+  margin: 0;
+}
+.pico article.discover-card {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+.pico article.discover-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.pico article.discover-card > a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+/* Hero image area: 5:3 ratio, fills the card width above the body. */
+.pico article.discover-card .discover-card-image {
+  aspect-ratio: 5 / 3;
+  width: 100%;
+  overflow: hidden;
+  background: var(--pico-card-sectioning-background-color);
+}
+.pico article.discover-card .discover-card-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.pico article.discover-card .discover-card-body {
+  padding: var(--pico-block-spacing-vertical) var(--pico-block-spacing-horizontal);
+}
+.pico article.discover-card .discover-card-body > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+.pico article.discover-card .discover-card-body > header > h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pico article.discover-card .discover-card-body > header > small {
+  color: var(--pico-muted-color);
+}
+.pico article.discover-card .discover-card-body > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pico article.discover-card > a:hover h3 {
+  color: var(--pico-primary);
+}
+
+/* Empty + load-more. */
+.pico article.discover-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin: 1.5rem 0;
+}
+.pico .discover-loadmore {
+  text-align: center;
+  margin: 2rem 0;
+}
+.pico .discover-loadmore > button {
+  margin: 0;
+}
+
+/* ===== /discover/[id] (landing) ===== */
+/* /discover/[id] curriculum landing — six stacked sections.
+   Pico styles sections, articles, lists, and blockquotes natively;
+   per-section overrides here just handle layout (centered text,
+   max-width reading columns, responsive grids). */
+
+/* ----- Hero ----- */
+.pico section.discover-hero {
+  text-align: center;
+  padding: 4rem 0 2rem;
+}
+.pico section.discover-hero hgroup {
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+}
+.pico section.discover-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+.pico section.discover-hero hgroup > p {
+  font-size: 1.0625rem;
+  color: var(--pico-muted-color);
+  margin: 0;
+}
+
+/* Hero with a backgroundImage: full-bleed cover-fill + 80% background-color
+   overlay so the painting reads through as warmth while the text stays
+   high-contrast. The `margin-inline: -4rem` breaks the section out of
+   `<main class="container">`'s body inset and lets the image span the full
+   viewport edge-to-edge; `padding-inline: 4rem` keeps the inner text safe
+   inside the same column. Headline gets a heavier weight and the subhead
+   bumps from muted to foreground to carry contrast over the scene. */
+.pico section.discover-hero.has-bg-image {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-inline: -4rem;
+  padding-inline: 4rem;
+  /* Uniform hero height across all four curriculum landings — varying stat
+     counts and headline lengths would otherwise yield 30-40px differences.
+     38rem clears the tallest natural content (~596px on the Banks landing)
+     so all four pages land on the same height. */
+  min-height: 30rem;
+}
+/* Mobile: main's padding-inline shrinks to 1.5rem, so the hero's bleed
+   margin needs to match or it'll cause horizontal overflow on the left. */
+@media (max-width: 600px) {
+  .pico section.discover-hero.has-bg-image {
+    margin-inline: -1.5rem;
+    padding-inline: 1.5rem;
+  }
+}
+.pico section.discover-hero.has-bg-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: color-mix(in oklab, var(--pico-background-color) 80%, transparent);
+  pointer-events: none;
+}
+.pico section.discover-hero.has-bg-image > * {
+  position: relative;
+}
+.pico section.discover-hero.has-bg-image h1 {
+  font-weight: 900;
+}
+.pico section.discover-hero.has-bg-image hgroup > p {
+  font-weight: 500;
+  color: var(--pico-color);
+}
+.pico section.discover-hero .hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin: 2rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+.pico section.discover-hero .hero-stats > span > strong {
+  color: var(--pico-color);
+  margin-right: 0.25rem;
+}
+.pico section.discover-hero .adopt-cta {
+  margin: 0;
+}
+.pico section.discover-hero .adopt-cta > p {
+  margin: 0.75rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+
+/* ----- Journey preview ----- */
+.pico section.journey-preview {
+  padding: 3rem 0;
+}
+.pico section.journey-preview > hgroup {
+  max-width: 48rem;
+  margin: 0 auto 2rem;
+}
+.pico section.journey-preview > hgroup > p {
+  color: var(--pico-muted-color);
+  margin: 0.25rem 0 0;
+}
+
+/* Browser frame around the task grid */
+.pico .journey-browser {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.pico .journey-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--pico-card-border-color);
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .pico .journey-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media (max-width: 599.98px) {
+  .pico .journey-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.pico .journey-grid .journey-card {
+  background: var(--pico-card-background-color);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.pico .journey-grid .journey-card .step-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+  margin-bottom: 0.75rem;
+}
+.pico .journey-grid .journey-card .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+  font-weight: 500;
+}
+.pico .journey-grid .journey-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9375rem;
+  line-height: 1.3;
+}
+.pico .journey-grid .journey-card p {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--pico-muted-color);
+}
+
+.pico .journey-nav {
+  border-top: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-sectioning-background-color);
+}
+.pico .journey-nav-progress {
+  height: 2px;
+  background: var(--pico-muted-border-color);
+}
+.pico .journey-nav-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--pico-primary);
+  transition: width 0.3s ease-out;
+}
+.pico .journey-nav-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+.pico .journey-nav-controls > span {
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+  font-variant-numeric: tabular-nums;
+}
+.pico .journey-nav-controls > button {
+  margin: 0;
+  padding: 0.25rem 0.5rem;
+  width: auto;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+}
+.pico .journey-nav-controls > button:hover:not(:disabled) {
+  color: var(--pico-contrast);
+  background: transparent;
+}
+.pico .journey-nav-controls > button:disabled {
+  opacity: 0.3;
+}
+
+/* ----- Desire bridge ----- */
+.pico section.desire-bridge {
+  padding: 3rem 0;
+  max-width: 56rem;
+  margin: 0 auto;
+}
+.pico section.desire-bridge > h2 {
+  margin: 0 0 2rem;
+}
+.pico .desire-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+.pico .desire-grid > article {
+  margin: 0;
+}
+.pico .desire-grid > article > svg {
+  color: var(--pico-primary);
+}
+.pico .desire-grid > article > h3 {
+  margin: 0.75rem 0 0.5rem;
+  font-size: 1rem;
+}
+.pico .desire-grid > article > p {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--pico-muted-color);
+}
+.pico section.desire-bridge > p.desire-summary {
+  text-align: center;
+  color: var(--pico-muted-color);
+  max-width: 36rem;
+  margin: 0 auto;
+}
+
+/* ----- Credibility band ----- */
+.pico section.credibility-band {
+  padding: 3rem 0;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+.pico section.credibility-band > h2 {
+  margin: 0 0 1.5rem;
+  font-size: 1.125rem;
+}
+.pico section.credibility-band ul.proof-items {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico section.credibility-band ul.proof-items > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+.pico section.credibility-band ul.proof-items > li > svg {
+  color: var(--pico-primary);
+  flex-shrink: 0;
+  margin-top: 0.125rem;
+}
+.pico section.credibility-band blockquote {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+
+/* ----- Reentry CTA ----- */
+.pico section.reentry-cta {
+  padding: 3rem 0;
+  text-align: center;
+}
+.pico section.reentry-cta > hgroup {
+  max-width: 36rem;
+  margin: 0 auto 1.5rem;
+}
+.pico section.reentry-cta > hgroup > h2 {
+  margin: 0 0 0.75rem;
+}
+.pico section.reentry-cta > hgroup > p {
+  color: var(--pico-muted-color);
+  margin: 0;
+}
+.pico section.reentry-cta > .adopt-cta {
+  margin: 0;
+}
+.pico section.reentry-cta .signup-funnel {
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+  margin: 1rem 0 0;
+}
+
+/* ----- Footer context ----- */
+.pico section.footer-context {
+  padding: 2rem 0 4rem;
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.pico section.footer-context > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+
+/* ----- Not found ----- */
+.pico .discover-notfound {
+  text-align: center;
+  padding: 6rem 1rem;
+  max-width: 36rem;
+  margin: 0 auto;
+}
+.pico .discover-notfound > h1 {
+  margin: 0 0 0.75rem;
+}
+.pico .discover-notfound > p {
+  margin: 0 0 1.5rem;
+  color: var(--pico-muted-color);
+}
+
+/* ----- Adopt CTA player picker (dialog) ----- */
+.pico .player-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.pico .player-picker label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.pico .player-picker label:hover {
+  background: var(--pico-card-sectioning-background-color);
+}
+.pico .player-picker label input[type='checkbox'] {
+  margin: 0;
+}
+.pico .player-switcher {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+.pico .player-switcher > .player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico .player-switcher > .player-row > button {
+  margin: 0;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* ===== /help ===== */
+/* /help layout — sidebar nav + content article. */
+
+.pico .help-shell {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: 2.5rem;
+  margin: 2rem 0;
+}
+@media (max-width: 767.98px) {
+  .pico .help-shell {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.pico .help-shell > aside {
+  margin: 0;
+  padding: 0;
+}
+.pico .help-shell > aside,
+.pico .help-shell > article {
+  min-width: 0;
+}
+.pico .help-shell > article {
+  margin: 0;
+}
+.pico .help-shell pre {
+  max-width: 100%;
+}
+
+/* Sidebar nav: vertical sections with headings. */
+.pico nav.help-nav h4 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pico-muted-color);
+  margin: 0 0 0.5rem;
+}
+.pico nav.help-nav > div {
+  margin-bottom: 1.5rem;
+}
+.pico nav.help-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.pico nav.help-nav li {
+  margin: 0;
+  padding: 0;
+}
+.pico nav.help-nav a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--pico-border-radius);
+  color: var(--pico-muted-color);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: background 0.15s, color 0.15s;
+  /* Override Pico's nav-link negative margin compensation
+     (`nav li :where(a) { margin: -spacing-vertical -spacing-horizontal }`)
+     so the highlighted current-page link doesn't ride up into the <h4>
+     section heading above it. See memory: pico-nav-margin-compensation. */
+  margin: 0;
+}
+.pico nav.help-nav a:hover {
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+}
+.pico nav.help-nav a[aria-current='page'] {
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+  font-weight: 500;
+}
+
+/* Help page actions row (LLM page) */
+.pico .help-page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+.pico .help-page-actions > button,
+.pico .help-page-actions > a {
+  margin: 0;
+}
+
+/* ===== /privacy + /terms (legal) ===== */
+/* Long-form legal documents (privacy, terms). Pico styles markdown elements
+   natively inside an <article>; we only constrain reading width and add a
+   little vertical breathing room. */
+.pico article.legal-doc {
+  max-width: 48rem;
+  margin: 2rem auto;
+}
+
+/* ===== /pricing ===== */
+/* /pricing page layout. */
+
+.pico .pricing-hero {
+  text-align: center;
+  padding: 4rem 0 3rem;
+}
+.pico .pricing-hero hgroup {
+  margin-bottom: 2rem;
+}
+.pico .pricing-hero h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+}
+.pico .pricing-hero hgroup > p {
+  max-width: 40rem;
+  margin: 1rem auto 0;
+  font-size: 1.0625rem;
+  color: var(--pico-muted-color);
+}
+.pico .pricing-hero-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+.pico .pricing-hero-cta > a {
+  margin: 0;
+}
+.pico .pricing-hero-cta > small {
+  color: var(--pico-muted-color);
+}
+
+/* How it works — 3-step ordered list rendered as cards. */
+.pico .pricing-steps {
+  padding: 2rem 0 3rem;
+  text-align: center;
+}
+.pico .pricing-steps > h2 {
+  margin-bottom: 2.5rem;
+}
+.pico .pricing-steps > ol {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 2rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pico .pricing-steps > ol > li {
+  margin: 0;
+  text-align: center;
+}
+.pico .pricing-steps .step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+}
+.pico .pricing-steps > ol > li > strong {
+  display: block;
+  font-size: 1.0625rem;
+}
+.pico .pricing-steps > ol > li > p {
+  margin: 0.5rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+
+/* Centered pricing card. */
+.pico .pricing-card-wrap {
+  padding: 2rem 0 3rem;
+  display: flex;
+  justify-content: center;
+}
+.pico article.pricing-card {
+  max-width: 28rem;
+  width: 100%;
+  margin: 0;
+}
+.pico article.pricing-card > hgroup {
+  text-align: center;
+}
+.pico article.pricing-card > dl {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico article.pricing-card > dl > div {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.pico article.pricing-card > dl > div > dt {
+  font-size: 1.25rem;
+  margin: 0;
+}
+.pico article.pricing-card > dl > div > dd {
+  margin: 0;
+}
+.pico article.pricing-card > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  text-align: center;
+}
+
+/* Payments accepted — inline list of payment pills. */
+.pico .pricing-payments {
+  padding: 2rem 0 3rem;
+  text-align: center;
+}
+.pico .pricing-payments > h2 {
+  margin-bottom: 2rem;
+}
+.pico .pricing-payments > ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+.pico .pricing-payments > ul > li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-background-color);
+}
+.pico .pricing-payments > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+}
+
+/* FAQ — definition list inside a max-width container. */
+.pico .pricing-faq {
+  padding: 2rem 0 3rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+.pico .pricing-faq > h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.pico .pricing-faq > dl {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 0;
+}
+.pico .pricing-faq > dl > div {
+  margin: 0;
+}
+.pico .pricing-faq > dl > div > dt {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+.pico .pricing-faq > dl > div > dd {
+  margin: 0;
+  color: var(--pico-muted-color);
+}
+
+/* Bottom CTA. */
+.pico .pricing-bottom-cta {
+  padding: 2rem 0 4rem;
+}
+.pico .pricing-bottom-cta > article {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  margin: 0;
+}
+.pico .pricing-bottom-cta > article > hgroup > p {
+  max-width: 32rem;
+  margin: 1rem auto 0;
+  color: var(--pico-muted-color);
+}
+.pico .pricing-bottom-cta > article > p > a {
+  margin: 0;
+}
+
+/* ===== /tools/staged-day-generator ===== */
+/* /tools/staged-day-generator — internal marketing-mockup renderer.
+   Styled with Pico tokens like the rest of the app. The phone-frame and
+   9:16 proportions are structural (Pico has no device-mockup component);
+   colors and surfaces are all Pico tokens — no bespoke palette. */
+
+.pico .sdg-page {
+  margin: 0;
+}
+.pico .sdg-shell {
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header */
+.pico .sdg-header {
+  margin: 0;
+}
+.pico .sdg-header-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.pico .sdg-header-desc {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+
+/* Two-column layout */
+.pico .sdg-layout {
+  display: grid;
+  gap: 1.5rem;
+  min-width: 0;
+}
+.pico .sdg-layout > * {
+  min-width: 0;
+}
+@media (min-width: 1280px) {
+  .pico .sdg-layout {
+    grid-template-columns: 0.95fr 1.05fr;
+  }
+}
+
+/* Eyebrow label — reused throughout */
+.pico .sdg-eyebrow {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-eyebrow-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* --- Controls panel --- */
+.pico .sdg-controls {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-background-color);
+  padding: 1.5rem;
+}
+.pico .sdg-controls-title {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.pico .sdg-controls-body {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  font-size: 0.875rem;
+}
+.pico .sdg-controls-body > p {
+  margin: 0;
+}
+
+.pico .sdg-info-box {
+  border: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-sectioning-background-color);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem;
+}
+.pico .sdg-mono {
+  margin: 0.5rem 0 0;
+  font-family: var(--pico-font-family-monospace);
+  font-size: 0.875rem;
+}
+.pico .sdg-info-text {
+  margin: 0.5rem 0 0;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-info-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+@media (min-width: 640px) {
+  .pico .sdg-info-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.pico .sdg-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .sdg-chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Pill links (scenario / output selectors) */
+.pico a.sdg-pill {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 999px;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--pico-color);
+  background: var(--pico-card-background-color);
+}
+.pico a.sdg-pill:hover {
+  border-color: var(--pico-primary);
+}
+.pico a.sdg-pill[data-active] {
+  background: var(--pico-primary);
+  border-color: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+}
+
+.pico .sdg-next-step {
+  border: 1px dashed var(--pico-card-border-color);
+  background: var(--pico-card-sectioning-background-color);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem;
+  color: var(--pico-muted-color);
+}
+
+/* Preview column */
+.pico .sdg-preview {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* --- Shared chips --- */
+.pico .sdg-chip-dark,
+.pico .sdg-chip-emerald,
+.pico .sdg-chip-outline {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.pico .sdg-chip-dark,
+.pico .sdg-chip-emerald {
+  padding: 0.125rem 0.625rem;
+  font-size: 0.75rem;
+}
+.pico .sdg-chip-dark {
+  background: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+}
+.pico .sdg-chip-emerald {
+  background: color-mix(in oklab, var(--pico-ins-color) 16%, transparent);
+  color: var(--pico-ins-color);
+}
+.pico .sdg-chip-outline {
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 400;
+  border: 1px solid var(--pico-card-border-color);
+  color: var(--pico-muted-color);
+}
+
+/* --- Phone mockup --- */
+.pico .sdg-phone {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(390px, 100%);
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 2.5rem;
+  background: var(--pico-card-sectioning-background-color);
+  padding: 0.75rem;
+}
+.pico .sdg-phone[data-compact] {
+  max-width: 330px;
+}
+.pico .sdg-phone-screen {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 2rem;
+  background: var(--pico-card-background-color);
+  overflow: hidden;
+}
+.pico .sdg-phone-header {
+  border-bottom: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-sectioning-background-color);
+  padding: 1.5rem 1.25rem 1.25rem;
+}
+.pico .sdg-phone-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-phone-title {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+.pico .sdg-phone-strapline {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.pico .sdg-phone-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem;
+}
+.pico .sdg-stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.pico .sdg-stat {
+  border: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-sectioning-background-color);
+  border-radius: 1rem;
+  padding: 0.75rem;
+  text-align: center;
+}
+.pico .sdg-stat-label {
+  margin: 0;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-stat-value {
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+/* Task cards inside the phone */
+.pico article.sdg-task {
+  margin: 0;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 1.5rem;
+  background: var(--pico-card-background-color);
+  padding: 1rem;
+}
+.pico article.sdg-task[data-done] {
+  border-color: color-mix(in oklab, var(--pico-ins-color) 35%, transparent);
+  background: color-mix(in oklab, var(--pico-ins-color) 8%, transparent);
+}
+.pico .sdg-task-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pico .sdg-task-main {
+  display: flex;
+  min-width: 0;
+  gap: 0.75rem;
+}
+.pico .sdg-task-icon {
+  flex-shrink: 0;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: var(--pico-card-sectioning-background-color);
+  color: var(--pico-muted-color);
+}
+.pico article.sdg-task[data-done] .sdg-task-icon {
+  background: var(--pico-ins-color);
+  color: var(--pico-primary-inverse);
+}
+.pico .sdg-task-text {
+  min-width: 0;
+}
+.pico .sdg-task-titlerow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico .sdg-task-title {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.pico .sdg-task-note {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-task-duration {
+  margin: 0;
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-task-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+}
+
+/* --- Source stack --- */
+.pico .sdg-source {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .sdg-source-title {
+  margin: 0.5rem 0 0;
+  font-size: 1.25rem;
+}
+.pico .sdg-source-subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .sdg-source-item {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 1.5rem;
+  background: var(--pico-card-background-color);
+  padding: 1rem;
+}
+.pico .sdg-source-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+.pico .sdg-source-icon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  background: var(--pico-card-sectioning-background-color);
+  color: var(--pico-muted-color);
+}
+.pico .sdg-source-label {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.pico .sdg-source-detail {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pico-muted-color);
+}
+
+/* --- TikTok template card --- */
+.pico .sdg-tiktok {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(430px, 100%);
+  margin: 0 auto;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 2.5rem;
+  background: var(--pico-card-background-color);
+  padding: 1rem;
+  overflow: hidden;
+}
+.pico .sdg-tiktok-inner {
+  border-radius: 2rem;
+  background: var(--pico-card-sectioning-background-color);
+  padding: 1rem;
+}
+.pico .sdg-tiktok-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-tiktok-hook {
+  margin-top: 1rem;
+  border-radius: 1.5rem;
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  padding: 1rem;
+}
+.pico .sdg-tiktok-hook-text {
+  margin: 0.5rem 0 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+.pico .sdg-tiktok-caption {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-tiktok-stack {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico .sdg-tiktok-before,
+.pico .sdg-tiktok-after {
+  border-radius: 1.5rem;
+  border: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-background-color);
+  padding: 1rem;
+}
+.pico .sdg-tiktok-before-body {
+  margin-top: 0.75rem;
+}
+.pico .sdg-tiktok-after > .sdg-eyebrow {
+  margin-bottom: 0.75rem;
+}
+.pico .sdg-tiktok-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-tiktok-shotlist {
+  margin-top: 1rem;
+  border-radius: 1.5rem;
+  background: var(--pico-card-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  padding: 1rem;
+}
+.pico ol.sdg-tiktok-beats {
+  margin: 0.75rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+.pico ol.sdg-tiktok-beats > li {
+  list-style: none;
+  margin: 0;
+  display: flex;
+  gap: 0.75rem;
+}
+.pico .sdg-tiktok-beat-num {
+  color: var(--pico-muted-color);
+}
+.pico .sdg-tiktok-cta {
+  margin: 1rem 0 0;
+  border-radius: 1rem;
+  background: var(--pico-card-sectioning-background-color);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* --- Scroll capture --- */
+.pico .sdg-scroll {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(520px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 2.5rem;
+  background: var(--pico-card-sectioning-background-color);
+  padding: 1rem;
+}
+.pico section.sdg-scroll-section {
+  margin: 0;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: 1.5rem;
+  background: var(--pico-card-background-color);
+  padding: 1.25rem;
+}
+.pico .sdg-scroll-hook {
+  margin: 0.5rem 0 0;
+  font-size: 1.875rem;
+  line-height: 1.15;
+}
+.pico .sdg-scroll-caption {
+  margin: 0.75rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: var(--pico-muted-color);
+}
+.pico .sdg-scroll-body {
+  margin-top: 1rem;
+}
+.pico .sdg-scroll-body-center {
+  display: flex;
+  justify-content: center;
+}
+.pico .sdg-scroll-beats {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .sdg-scroll-beat {
+  border: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-sectioning-background-color);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  color: var(--pico-color);
+}
+.pico .sdg-scroll-beat-num {
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+.pico .sdg-scroll-cta {
+  margin: 1rem 0 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ===== /(onboarding) ===== */
+/* Onboarding shell — vertical centered layout with step indicator
+   above the per-page card. */
+
+.pico .onboarding-shell {
+  max-width: 36rem;
+  margin: 3rem auto;
+  padding: 0 1rem;
+}
+
+/* Step progress indicator: 3 numbered/checked steps with connectors */
+.pico nav.onboarding-progress {
+  display: flex;
+  justify-content: center;
+  margin: 0 0 2rem;
+}
+.pico nav.onboarding-progress > ol {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pico nav.onboarding-progress > ol > li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+}
+/* Connector line between steps via ::after pseudo on each li except last */
+.pico nav.onboarding-progress > ol > li:not(:last-child) {
+  position: relative;
+  padding-right: 3.5rem;
+}
+.pico nav.onboarding-progress > ol > li:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 1rem;
+  left: 2.5rem;
+  width: 3rem;
+  height: 2px;
+  background: var(--pico-muted-border-color);
+}
+.pico nav.onboarding-progress > ol > li[data-state='completed']:not(:last-child)::after {
+  background: var(--pico-primary);
+}
+.pico nav.onboarding-progress .step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: 2px solid var(--pico-muted-border-color);
+  background: var(--pico-background-color);
+  color: var(--pico-muted-color);
+  transition: all 0.15s;
+}
+.pico nav.onboarding-progress > ol > li[data-state='active'] .step-num {
+  border-color: var(--pico-primary);
+  color: var(--pico-primary);
+}
+.pico nav.onboarding-progress > ol > li[data-state='completed'] .step-num {
+  border-color: var(--pico-primary);
+  background: var(--pico-primary);
+  color: var(--pico-primary-inverse);
+}
+.pico nav.onboarding-progress .step-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--pico-muted-color);
+}
+.pico nav.onboarding-progress > ol > li[data-state='active'] .step-label {
+  color: var(--pico-primary);
+}
+.pico nav.onboarding-progress > ol > li[data-state='completed'] .step-label {
+  color: var(--pico-color);
+}
+
+/* Per-step card */
+.pico article.onboarding-card {
+  margin: 0;
+}
+.pico article.onboarding-card > hgroup {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.pico article.onboarding-card > hgroup > h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.5rem;
+}
+.pico article.onboarding-card > hgroup > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+.pico article.onboarding-card form {
+  margin: 0;
+}
+.pico article.onboarding-card form > button[type='submit'] {
+  width: 100%;
+  margin-top: 1rem;
+}
+.pico article.onboarding-card .field-error {
+  margin: 0.25rem 0 0;
+  color: var(--pico-del-color);
+  font-size: 0.75rem;
+}
+.pico article.onboarding-card .field-hint {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.75rem;
+}
+.pico article.onboarding-card .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) {
+  .pico article.onboarding-card .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.pico article.onboarding-card .form-alert {
+  margin: 1rem 0 0;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+.pico article.onboarding-card .form-terms {
+  margin: 1rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.75rem;
+}
+.pico article.onboarding-card > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+
+/* /onboarding/players: branching UI (ask → count → form) */
+.pico article.onboarding-card .ask-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico article.onboarding-card .ask-choices > button {
+  width: 100%;
+  padding: 1rem;
+  margin: 0;
+}
+.pico article.onboarding-card .count-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.pico article.onboarding-card .count-stepper > button {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  margin: 0;
+  font-size: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.pico article.onboarding-card .count-stepper .count-value {
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  min-width: 3rem;
+  text-align: center;
+}
+.pico article.onboarding-card fieldset.player-fieldset {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem;
+  margin: 0 0 1rem;
+}
+.pico article.onboarding-card fieldset.player-fieldset > legend {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--pico-muted-color);
+  padding: 0 0.5rem;
+}
+.pico article.onboarding-card button.onboarding-skip {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+.pico article.onboarding-card button.onboarding-skip:hover {
+  color: var(--pico-contrast);
+  background: transparent;
+}
+
+/* /onboarding/curriculum: rich choice buttons (label + sub-text on two lines) */
+.pico article.onboarding-card .ask-choices.choice-rich > button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 0.25rem;
+  padding: 1rem;
+}
+.pico article.onboarding-card .ask-choices.choice-rich > button > strong {
+  font-size: 0.9375rem;
+}
+.pico article.onboarding-card .ask-choices.choice-rich > button > small {
+  color: var(--pico-muted-color);
+  font-weight: 400;
+}
+.pico article.onboarding-card .back-link {
+  margin: 0 0 0.5rem;
+  text-align: left;
+}
+
+/* Browse list — each curriculum option is a full-width left-aligned button */
+.pico article.onboarding-card ul.curriculum-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico article.onboarding-card ul.curriculum-list > li {
+  margin: 0;
+  padding: 0;
+}
+.pico article.onboarding-card ul.curriculum-list button {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--pico-card-border-color);
+  color: var(--pico-contrast);
+  padding: 1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  transition: border-color 0.15s, background 0.15s;
+}
+.pico article.onboarding-card ul.curriculum-list button:hover:not(:disabled) {
+  border-color: var(--pico-primary);
+  background: var(--pico-card-sectioning-background-color);
+  color: var(--pico-contrast);
+}
+.pico article.onboarding-card ul.curriculum-list button > strong {
+  font-size: 0.9375rem;
+}
+.pico article.onboarding-card ul.curriculum-list button > small {
+  color: var(--pico-muted-color);
+}
+.pico article.onboarding-card ul.curriculum-list button > p {
+  margin: 0.5rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ===== /oauth ===== */
+/* OAuth consent screen. Same centered-card pattern as auth pages,
+   plus a two-button row (Deny / Allow) that splits 50/50. */
+
+.pico article.oauth-card {
+  max-width: 28rem;
+  margin: 4rem auto;
+}
+.pico article.oauth-card > hgroup {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.pico article.oauth-card > hgroup > h1 {
+  margin: 0 0 0.5rem;
+  font-size: 1.5rem;
+}
+.pico article.oauth-card > hgroup > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+
+.pico article.oauth-card > details {
+  margin: 0 0 1.5rem;
+}
+.pico article.oauth-card > details > ul {
+  margin: 0.75rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+
+.pico article.oauth-card .auth-alert {
+  margin: 0 0 1rem;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+
+.pico article.oauth-card .oauth-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.pico article.oauth-card .oauth-actions form {
+  margin: 0;
+}
+.pico article.oauth-card .oauth-actions button {
+  width: 100%;
+  margin: 0;
+}
+
+/* ===== /player-login ===== */
+/* /player-login — kid-facing login: centered, slightly larger touch targets. */
+
+.pico .player-login-shell {
+  max-width: 24rem;
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.pico .player-login-header {
+  margin: 0;
+  text-align: center;
+}
+.pico .player-login-header > h2 {
+  margin: 0;
+}
+
+.pico article.player-login-card {
+  margin: 0;
+  width: 100%;
+}
+.pico article.player-login-card > form {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.pico article.player-login-card > form > label {
+  margin: 0;
+  font-size: 1rem;
+}
+.pico article.player-login-card > form > label > input {
+  margin-top: 0.4rem;
+  font-size: 1rem;
+  padding: 0.7rem 0.85rem;
+}
+.pico article.player-login-card > form > button[type='submit'] {
+  margin: 0;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.7rem 1rem;
+}
+.pico .player-login-error {
+  margin: 0;
+  text-align: center;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+
+/* ===== /(dashboard) — Guide surfaces ===== */
+/* --- /dashboard --- */
+/* /dashboard layout. Page renders a stack of:
+   - credit summary line OR low-balance banner
+   - enrollment requests section (when there are requests)
+   - welcome card (when no players yet)
+   - player cards (one per player) */
+
+.pico .dashboard-shell {
+  max-width: 64rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.pico .dashboard-shell > hgroup {
+  margin-bottom: 0;
+}
+
+.pico .dashboard-credit-line {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+
+/* Low-balance banner: attention-band variant */
+.pico aside.low-balance-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  margin: 0;
+  border: 1px solid var(--pico-del-color);
+  background: color-mix(in oklab, var(--pico-del-color) 10%, transparent);
+  border-radius: var(--pico-border-radius);
+}
+.pico aside.low-balance-banner p {
+  margin: 0;
+  font-size: 0.9375rem;
+}
+.pico aside.low-balance-banner button.dismiss {
+  background: transparent;
+  border: none;
+  padding: 0.25rem 0.5rem;
+  margin: 0;
+  color: var(--pico-muted-color);
+  cursor: pointer;
+  width: auto;
+}
+.pico aside.low-balance-banner button.dismiss:hover {
+  color: var(--pico-contrast);
+  background: transparent;
+}
+
+/* Enrollment requests section */
+.pico section.enrollment-requests {
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+}
+.pico section.enrollment-requests > article {
+  margin: 0;
+}
+.pico section.enrollment-requests h2 {
+  margin: 0 0 1rem;
+  font-size: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico section.enrollment-requests .request-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.pico .request-card {
+  padding: 1rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  margin: 0 0 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .request-card:last-child {
+  margin-bottom: 0;
+}
+.pico .request-card .request-summary {
+  font-size: 0.9375rem;
+  margin: 0;
+}
+.pico .request-card .request-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+  margin: 0.25rem 0 0;
+}
+.pico .request-card .request-cost {
+  margin: 0.25rem 0 0;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+}
+.pico .request-card .request-cost.free {
+  color: var(--pico-ins-color);
+}
+.pico .request-card .request-cost.unaffordable {
+  color: var(--pico-del-color);
+}
+.pico .request-card .request-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+.pico .request-card .request-actions > button,
+.pico .request-card .request-actions > a {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+.pico .request-card textarea {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* Player card */
+.pico article.player-card {
+  margin: 0;
+}
+.pico article.player-card.welcome,
+.pico article.player-card.first-time-guide {
+  border-left: 3px solid var(--pico-primary);
+  background: color-mix(in oklab, var(--pico-primary) 4%, var(--pico-card-background-color));
+}
+.pico article.player-card.standard {
+  border-left: 3px solid var(--pico-primary);
+}
+.pico article.player-card > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.pico article.player-card > header .player-id {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: 0;
+}
+.pico article.player-card > header .player-id .player-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--pico-primary) 12%, transparent);
+  color: var(--pico-primary);
+}
+.pico article.player-card > header h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.pico article.player-card > header h2 button.player-name {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+}
+.pico article.player-card > header h2 button.player-name:hover {
+  text-decoration: underline;
+  background: transparent;
+}
+.pico article.player-card > header .player-meta {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+.pico article.player-card > header .behind-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+
+.pico article.player-card .player-body p {
+  margin: 0 0 1rem;
+  font-size: 0.9375rem;
+}
+.pico article.player-card .player-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  margin: 1rem 0 0;
+}
+.pico article.player-card .player-actions > a,
+.pico article.player-card .player-actions > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+.pico article.player-card .enrollment-list {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico article.player-card .enrollment-list > .enrollment-row {
+  margin: 0;
+  padding: 0;
+}
+.pico article.player-card .curriculum-name {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  margin: 0 0 0.25rem;
+}
+.pico article.player-card .enrollment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+  margin: 0 0 0.5rem;
+}
+/* Each metric is a label + value pair. The inline-flex gap guarantees a
+   visible space after the colon — relying on a literal " " character was
+   reading too tight at this font size. */
+.pico article.player-card .enrollment-meta-item {
+  display: inline-flex;
+  gap: 0.4rem;
+}
+.pico article.player-card .status-behind {
+  color: var(--pico-del-color);
+}
+.pico article.player-card .status-on-track,
+.pico article.player-card .status-ahead {
+  color: var(--pico-ins-color);
+}
+.pico article.player-card .status-ongoing {
+  color: var(--pico-muted-color);
+}
+
+/* Dot-plot styles are co-located with the component in
+   src/components/dot-plot.css so they load on /progress too, not just here. */
+
+/* Empty-state copy in player card */
+.pico article.player-card.first-time-guide .icon-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+.pico article.player-card.first-time-guide .icon-row .player-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: color-mix(in oklab, var(--pico-primary) 12%, transparent);
+  color: var(--pico-primary);
+}
+.pico article.player-card.first-time-guide .icon-row hgroup {
+  margin: 0;
+}
+.pico article.player-card.first-time-guide .icon-row hgroup > h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.125rem;
+}
+.pico article.player-card.first-time-guide .icon-row hgroup > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+
+/* --- /players --- */
+/* /players (Manage Players) — list of guide's player accounts. */
+
+.pico .players-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.pico .players-header > hgroup {
+  margin: 0;
+}
+.pico .players-header > button {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.pico .players-shell {
+  max-width: 64rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Empty state */
+.pico article.players-empty {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+.pico article.players-empty > svg {
+  color: var(--pico-muted-color);
+  opacity: 0.5;
+  margin: 0 auto 1rem;
+}
+.pico article.players-empty > h2 {
+  margin: 0 0 0.25rem;
+  font-size: 1.125rem;
+}
+.pico article.players-empty > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.9375rem;
+}
+
+/* Player row card */
+.pico article.player-row {
+  margin: 0;
+}
+.pico article.player-row > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 0.5rem;
+  padding: 0;
+}
+.pico article.player-row > header > h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.pico article.player-row .row-meta {
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+  margin: 0 0 1rem;
+}
+.pico article.player-row dl.player-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1.5rem;
+  background: var(--pico-card-sectioning-background-color);
+  padding: 0.75rem 1rem;
+  border-radius: var(--pico-border-radius);
+  margin: 0 0 1rem;
+}
+.pico article.player-row dl.player-facts > div {
+  margin: 0;
+}
+.pico article.player-row dl.player-facts dt {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--pico-muted-color);
+  margin: 0 0 0.25rem;
+}
+.pico article.player-row dl.player-facts dd {
+  margin: 0;
+  font-size: 0.875rem;
+}
+.pico article.player-row dl.player-facts code {
+  font-size: 0.875rem;
+}
+.pico article.player-row > footer {
+  background: transparent;
+  border-top: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico article.player-row > footer > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Player form */
+.pico form .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) {
+  .pico form .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.pico form .field-error {
+  display: block;
+  color: var(--pico-del-color);
+  margin-top: 0.25rem;
+}
+.pico form .form-alert {
+  margin: 0 0 1rem;
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+.pico form .password-row {
+  position: relative;
+}
+.pico form .password-row > input {
+  padding-right: 2.5rem;
+  margin: 0;
+}
+.pico form .password-toggle {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0.25rem;
+  margin: 0;
+  color: var(--pico-muted-color);
+  cursor: pointer;
+  width: auto;
+}
+.pico form .password-toggle:hover {
+  color: var(--pico-color);
+  background: transparent;
+}
+
+/* Password reveal dialog */
+.pico dialog .credential-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--pico-card-sectioning-background-color);
+  border-radius: var(--pico-border-radius);
+  margin: 0 0 0.5rem;
+}
+.pico dialog .credential-row > div {
+  flex: 1;
+  min-width: 0;
+}
+.pico dialog .credential-row small {
+  display: block;
+  color: var(--pico-muted-color);
+  margin: 0 0 0.25rem;
+  font-size: 0.75rem;
+}
+.pico dialog .credential-row code {
+  font-size: 0.875rem;
+  word-break: break-all;
+}
+.pico dialog .copy-btn {
+  background: transparent;
+  border: none;
+  padding: 0.4rem;
+  margin: 0;
+  width: auto;
+  color: var(--pico-muted-color);
+  cursor: pointer;
+  border-radius: var(--pico-border-radius);
+  flex-shrink: 0;
+}
+.pico dialog .copy-btn:hover {
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+}
+
+/* --- /account --- */
+/* /account (Manage Account) — stacked cards, each section in an <article>. */
+
+/* Account page wrapper — stretches to the shared Pico container width like
+   every other Guide page; no per-page max-width override. Forms inside can
+   constrain themselves if a narrower reading width is wanted. */
+.pico .account-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Standard account card */
+.pico article.account-card {
+  margin: 0;
+}
+.pico article.account-card > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.pico article.account-card > header hgroup {
+  margin: 0;
+}
+.pico article.account-card > header h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+.pico article.account-card > header > hgroup > p {
+  margin: 0.25rem 0 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico article.account-card > header > button {
+  margin: 0;
+  padding: 0.35rem 0.9rem;
+  font-size: 0.8125rem;
+  width: auto;
+  white-space: nowrap;
+}
+
+/* Field grid for read-only display */
+.pico article.account-card .field-readonly {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico article.account-card .field-readonly > div > small {
+  display: block;
+  color: var(--pico-muted-color);
+  font-size: 0.8125rem;
+}
+.pico article.account-card .field-readonly > div > p,
+.pico article.account-card .field-readonly > div > code {
+  margin: 0.125rem 0 0;
+  font-size: 0.875rem;
+}
+
+/* Form rows inside edit mode */
+.pico article.account-card form {
+  margin: 0;
+}
+.pico article.account-card form .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+@media (max-width: 480px) {
+  .pico article.account-card form .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+.pico article.account-card form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+.pico article.account-card form > footer button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Two-column field+control grid (rewards toggle, tasks input) */
+.pico .account-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem 1.25rem;
+  align-items: start;
+}
+.pico .account-grid .label-cell strong {
+  display: block;
+  font-size: 0.875rem;
+}
+.pico .account-grid .label-cell small {
+  display: block;
+  color: var(--pico-muted-color);
+  margin-top: 0.25rem;
+}
+.pico .account-grid .control-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico .account-grid .control-cell input[type='text'],
+.pico .account-grid .control-cell input[type='number'] {
+  margin: 0;
+  width: 6rem;
+  text-align: center;
+}
+
+/* Switch label row */
+.pico .switch-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico .switch-row label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+}
+.pico .switch-row input[type='checkbox'][role='switch'] {
+  margin: 0;
+}
+
+/* Separator section (e.g. fal.ai key below rewards toggle) */
+.pico .section-divider {
+  border-top: 1px solid var(--pico-card-border-color);
+  padding-top: 1rem;
+  margin-top: 1rem;
+}
+.pico .section-divider > p {
+  margin: 0 0 0.75rem;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico .section-divider .inline-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.pico .section-divider .inline-row input {
+  margin: 0;
+  max-width: 18rem;
+}
+.pico .section-divider .inline-row button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Newly-generated key callout (amber attention band) */
+.pico .key-callout {
+  border: 1px solid var(--pico-mark-background-color);
+  background: color-mix(in oklab, var(--pico-mark-background-color) 30%, transparent);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .key-callout > strong {
+  color: var(--pico-mark-color);
+  font-size: 0.875rem;
+}
+.pico .key-callout .code-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+}
+.pico .key-callout .code-row > code {
+  flex: 1;
+  background: var(--pico-card-sectioning-background-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--pico-border-radius);
+  font-size: 0.75rem;
+  word-break: break-all;
+}
+.pico .key-callout .code-row > button {
+  margin: 0;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* Danger zone — used by parental-consent revoke and delete-account */
+.pico .danger-zone {
+  border: 1px solid color-mix(in oklab, var(--pico-del-color) 30%, transparent);
+  background: color-mix(in oklab, var(--pico-del-color) 6%, transparent);
+  border-radius: var(--pico-border-radius);
+  padding: 1rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .danger-zone > strong {
+  color: var(--pico-del-color);
+  font-size: 0.875rem;
+}
+.pico .danger-zone p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico .danger-zone ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico .danger-zone .danger-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.pico .danger-zone .danger-actions > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+.pico .danger-zone input {
+  margin: 0;
+}
+
+/* --- /credits --- */
+/* /credits — three stacked cards: balance, top-up, history. */
+
+.pico .credits-shell {
+  max-width: 56rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pico article.credits-balance,
+.pico article.credits-topup,
+.pico article.credits-history {
+  margin: 0;
+}
+
+.pico article.credits-balance > header,
+.pico article.credits-topup > header,
+.pico article.credits-history > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+.pico article.credits-balance > header h2,
+.pico article.credits-topup > header h2,
+.pico article.credits-history > header h2 {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+/* Balance card */
+.pico article.credits-balance .balance-amount {
+  margin: 0;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+.pico article.credits-balance .balance-sub {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+.pico article.credits-balance .balance-free {
+  margin: 0.5rem 0 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+.pico article.credits-balance.is-highlight {
+  box-shadow: 0 0 0 2px var(--pico-ins-color);
+  transition: box-shadow 0.3s;
+}
+.pico article.credits-balance.is-low {
+  border-color: color-mix(in oklab, var(--pico-del-color) 40%, transparent);
+}
+
+/* Top-up card */
+.pico article.credits-topup .topup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 0.75rem;
+}
+.pico article.credits-topup .topup-grid > button {
+  margin: 0;
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  height: auto;
+}
+.pico article.credits-topup .topup-grid > button > strong {
+  font-size: 1.125rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.pico article.credits-topup .topup-grid > button > small {
+  opacity: 0.8;
+}
+.pico article.credits-topup .topup-note {
+  margin: 0;
+  color: var(--pico-muted-color);
+}
+.pico article.credits-topup.is-low {
+  border-color: color-mix(in oklab, var(--pico-del-color) 40%, transparent);
+}
+.pico article.credits-topup.is-low > header h2 {
+  color: var(--pico-del-color);
+}
+
+/* History card */
+.pico article.credits-history .history-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+.pico article.credits-history .history-empty p {
+  margin: 0.5rem 0 0;
+  color: var(--pico-muted-color);
+}
+.pico article.credits-history figure {
+  margin: 0;
+}
+.pico article.credits-history table {
+  font-size: 0.875rem;
+  margin: 0;
+}
+.pico article.credits-history th {
+  font-weight: 500;
+  color: var(--pico-muted-color);
+}
+.pico article.credits-history td.tx-desc {
+  max-width: 14rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pico article.credits-history .tx-amount.positive {
+  color: var(--pico-ins-color);
+}
+.pico article.credits-history .tx-amount.free {
+  font-style: italic;
+  color: var(--pico-muted-color);
+}
+.pico article.credits-history .history-more {
+  text-align: center;
+  margin: 1rem 0 0;
+}
+.pico article.credits-history .history-more > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Transaction type badges */
+.pico .tx-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--pico-border-radius);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+.pico .tx-badge.tx-deposit {
+  background: color-mix(in oklab, var(--pico-ins-color) 15%, transparent);
+  color: var(--pico-ins-color);
+}
+.pico .tx-badge.tx-free {
+  border: 1px solid var(--pico-primary);
+  color: var(--pico-primary);
+}
+.pico .tx-badge.tx-enrollment,
+.pico .tx-badge.tx-refund {
+  border: 1px solid var(--pico-card-border-color);
+  color: var(--pico-color);
+}
+
+/* ===== /(player) — Player surfaces ===== */
+/* --- /today --- */
+/* /today page-specific layout. Loaded by the today layout only. */
+
+/* Header strip: title + edit mode + icon key */
+.pico .today-header-strip {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+@media (min-width: 768px) {
+  .pico .today-header-strip {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .pico .today-header-strip > hgroup {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  .pico .today-header-strip > .strip-right {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+}
+
+.pico .edit-mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+  margin: 0;
+}
+.pico .edit-mode-toggle input[type='checkbox'] {
+  margin: 0;
+}
+
+/* Icon key panel */
+.pico aside.icon-key {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+  background: var(--pico-card-background-color);
+}
+.pico aside.icon-key strong {
+  display: block;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  color: var(--pico-muted-color);
+}
+.pico aside.icon-key dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.15rem 0.5rem;
+  align-items: center;
+}
+.pico aside.icon-key dt {
+  display: inline-flex;
+  align-items: center;
+}
+.pico aside.icon-key dd {
+  margin: 0;
+}
+/* Hide the icon key on mobile — drag-to-reorder doesn't work via touch
+   and open-resource is self-explanatory once you tap a task. */
+@media (max-width: 600px) {
+  .pico aside.icon-key {
+    display: none;
+  }
+}
+
+/* Stat cards */
+.pico section.stat-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.pico section.stat-cards article {
+  margin: 0;
+  padding: 1rem 1.25rem;
+}
+.pico section.stat-cards article hgroup {
+  margin: 0;
+}
+.pico section.stat-cards article hgroup h4 {
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+  font-weight: 500;
+  margin: 0 0 0.5rem 0;
+}
+.pico section.stat-cards article hgroup p {
+  margin: 0;
+  color: var(--pico-color);
+}
+.pico section.stat-cards article hgroup p strong {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+/* Task list */
+.pico ol.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico ol.task-list > li {
+  margin: 0;
+  padding: 0;
+}
+.pico ol.task-list > li > article {
+  margin: 0;
+}
+
+/* Task card. Two anchored zones plus content flow:
+   - .card-controls-top is pinned absolute to the top-right (drag, up/down, edit).
+   - .card-action-bottom sits at the bottom-right in normal flow (Start, or
+     Pause/Finish/Unpause + timer for live tasks).
+   - .card-content flows naturally in between; description wraps freely
+     because right-padding on the content keeps it clear of the corner cluster. */
+.pico ol.task-list article {
+  position: relative;
+  padding: 1rem 1.25rem;
+}
+/* Reserve room for the top-right drag/edit cluster on only the rows that
+   sit at the top of the card. The bottom row (description + action buttons)
+   uses full card width so the Start button hits the right edge. */
+.pico ol.task-list article .card-content .curriculum-name,
+.pico ol.task-list article .card-content .task-title-row {
+  padding-right: 4.5rem;
+}
+.pico ol.task-list article[data-status='active'] {
+  border-left: 3px solid var(--pico-ins-color);
+}
+.pico ol.task-list article[data-status='completed'] {
+  opacity: 0.65;
+}
+
+/* Top-right controls cluster */
+.pico .card-controls-top {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.125rem;
+  z-index: 1;
+}
+
+/* Content zone: curriculum name → title row → description, in natural flow */
+.pico .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+/* Curriculum kicker: <h4>, sized by Pico's h4 token. No font-size override.
+   Generalized — used on both /today task cards and /log feed items. */
+.pico .curriculum-name {
+  margin: 0;
+}
+
+/* Action badge + task title + open-resource icon on one line */
+.pico .task-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.pico .task-title-row .action-badge {
+  flex: 0 0 auto;
+  /* Pull the badge box left by its own horizontal padding so the badge TEXT
+     aligns flush with the curriculum-name above and the task-description
+     below — not the badge's rounded box edge. Matches the same offset on
+     /plan's task rows. */
+  margin-left: -0.5rem;
+}
+.pico .task-title-row .task-title {
+  flex: 0 1 auto;
+  min-width: 0;
+}
+.pico .task-title-row .task-resource {
+  flex: 0 0 auto;
+}
+
+/* Task description: <p> at body size, no margin. Generalized — used on both
+   /today task cards and /log feed items. */
+.pico .task-description {
+  margin: 0;
+}
+
+/* Bottom row: description (bottom-left quadrant) + action buttons (bottom-right
+   quadrant) share one horizontal row. The button column is sized to its content
+   and aligned to the right; description fills the remaining width and wraps
+   freely. Buttons don't claim their own band — the row is only as tall as the
+   taller of (description, buttons). */
+.pico .card-body-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1rem;
+  align-items: stretch;
+}
+.pico .card-body-description {
+  min-width: 0;
+  align-self: start;
+}
+.pico .card-body-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-self: end;
+}
+/* Force margin: 0 + width: auto on every button so disabled / outline /
+   primary variants all align at the same right edge of the actions cell.
+   Without this, Pico's default `<button> { margin-bottom: var(--pico-spacing) }`
+   plus auto-width quirks can shift a disabled outline button (e.g.
+   "Completed ✓") inward from the card edge that a primary button (Start)
+   sits flush against. */
+.pico .card-body-actions > button {
+  margin: 0;
+  width: auto;
+}
+/* On narrow viewports, stack: description on top, buttons below stretched */
+@media (max-width: 599.98px) {
+  .pico .card-body-row {
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+  .pico .card-body-actions {
+    justify-content: stretch;
+  }
+}
+
+/* Action-type badge — uses Pico's muted tokens for a neutral pill */
+.pico .action-badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-muted-border-color);
+  color: var(--pico-color);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Drag handle — auto-width inline pill that lives in task-list rows. The
+   `.icon-button` class is defined globally (32×32 square); .drag-handle is
+   the smaller inline variant. */
+.pico button.drag-handle {
+  width: auto;
+  padding: 0.25rem 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  margin: 0;
+  min-height: 0;
+}
+.pico button.drag-handle:hover {
+  color: var(--pico-contrast);
+  background: transparent;
+}
+.pico button.drag-handle:disabled {
+  opacity: 0.3;
+}
+
+/* Viewport-conditional visibility for drag controls */
+@media (max-width: 767.98px) {
+  .pico button[data-viewport='desktop'] {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .pico button[data-viewport='mobile'] {
+    display: none;
+  }
+}
+
+/* External-link icon next to task title */
+.pico .task-resource {
+  display: inline-flex;
+  align-items: center;
+  color: var(--pico-primary);
+  text-decoration: none;
+  transform: translateY(2px);
+  flex: 0 0 auto;
+}
+.pico .task-resource:hover {
+  color: var(--pico-primary-hover);
+}
+
+/* Timer — uses Pico's semantic ins/muted tokens */
+.pico time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  font-size: 0.9375rem;
+}
+.pico time[data-status='active'] {
+  color: var(--pico-ins-color);
+}
+.pico time[data-status='paused'] {
+  color: var(--pico-muted-color);
+}
+
+/* Saving indicator */
+.pico .saving-indicator {
+  text-align: center;
+  color: var(--pico-muted-color);
+  font-size: 0.8125rem;
+  margin: 0;
+}
+
+/* Finished-for-today CTA — button sizes to its content via Pico defaults */
+.pico .finished-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+  padding-top: 1rem;
+}
+
+/* Dialog action row. Pico's `article > footer` rule applies negative
+   horizontal margins to make footers extend to the article's edges (so a
+   muted-bg footer can pull off the look). We're keeping a transparent
+   footer here, so zero the inline margins so the buttons sit inside the
+   article's normal horizontal padding instead of jamming against the
+   modal's right edge. */
+.pico dialog article > footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  background: transparent;
+  border-top: none;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+
+/* Form inputs inside task edit mode */
+.pico article form label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico article form input,
+.pico article form textarea {
+  margin-top: 0.25rem;
+}
+.pico article form > footer {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+  background: transparent;
+  border-top: none;
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+}
+
+/* --- /plan --- */
+/* /plan — filter bar + collapsible enrollment cards with nested task rows. */
+
+/* Mirror /curriculums' shell so the page-header-with-action → filters →
+   list spacing is structurally identical (flex column with 1rem gap). */
+.pico .plan-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pico .plan-filters {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.pico .plan-filters > input[type='search'] {
+  flex: 1 1 16rem;
+  margin: 0;
+}
+.pico .plan-filters > select {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+
+.pico .plan-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Enrollment card */
+.pico article.plan-enrollment {
+  margin: 0;
+  padding: 0;
+}
+.pico article.plan-enrollment > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+/* Enrollment header is an <hgroup> with an <h4> (curriculum name, links to
+   the curriculum) and optional <p> subtitle lines (Pico styles hgroup > p
+   as muted subtitle automatically — no font-size override needed here). */
+.pico .enrollment-title {
+  min-width: 0;
+  flex: 1;
+  margin: 0;
+}
+.pico .enrollment-title > h4 {
+  margin: 0;
+}
+.pico .enrollment-title > h4 > a {
+  text-decoration: none;
+  color: inherit;
+}
+.pico .enrollment-title > h4 > a:hover {
+  text-decoration: underline;
+}
+.pico .enrollment-title .next-task-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pico .enrollment-title .promoted-line,
+.pico .enrollment-title .all-done-line {
+  color: var(--pico-ins-color);
+}
+.pico .enrollment-title .starts-date-line {
+  color: var(--pico-muted-color);
+  font-weight: 500;
+}
+.pico .enrollment-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.pico .enrollment-actions > button {
+  margin: 0;
+  width: auto;
+}
+/* Expand/collapse toggle: Pico outline button. Same height as the Promote
+   button (both use Pico's default button vertical padding), so it doesn't
+   bounce vertically when the collapsed-state subtitle adds a line to the
+   header. Padding-inline zeroed and width set so the icon sits centered
+   in a square that's as wide as the button is tall. */
+.pico .enrollment-actions > .enrollment-toggle {
+  padding-inline: 0;
+  width: 3rem;
+}
+.pico .enrollment-actions > .all-done-line {
+  color: var(--pico-ins-color);
+  font-weight: 500;
+}
+
+/* Progress row inside expanded enrollment */
+.pico .plan-progress-row {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--pico-card-border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .plan-progress-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.pico .plan-progress-meta small {
+  color: var(--pico-muted-color);
+}
+.pico .plan-progress-row > progress {
+  width: 100%;
+  height: 6px;
+  margin: 0;
+}
+
+/* Enrollment body — task rows */
+.pico .enrollment-body {
+  padding: 0.75rem 1rem 1rem;
+  border-top: 1px solid var(--pico-card-border-color);
+}
+.pico .task-row-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.pico .task-row-list > li {
+  margin: 0;
+  padding: 0;
+  /* Pico's `ul li { list-style: square }` wins over the ul-level reset; must
+     be suppressed at the <li> level. See memory: pico-li-list-style. */
+  list-style: none;
+}
+
+/* Individual task row */
+.pico article.plan-task-row {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pico .plan-task-content {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.pico .plan-task-title {
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+/* Pull the action-badge box left by its own horizontal padding so the badge
+   TEXT (not its boundary) aligns with the task-description text below. */
+.pico .plan-task-title > .action-badge {
+  margin-left: -0.5rem;
+}
+/* Task title is <strong>; default Pico body weight + size. */
+.pico .plan-task-desc {
+  margin: 0;
+}
+.pico .plan-task-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.pico .plan-task-actions > button {
+  margin: 0;
+  width: auto;
+}
+.pico .plan-task-actions > .icon-button {
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  padding: 0.25rem 0.5rem;
+}
+.pico .plan-task-actions > .icon-button:hover {
+  color: var(--pico-contrast);
+  background: transparent;
+}
+
+.pico .show-more-row {
+  text-align: center;
+  margin: 0.75rem 0 0;
+}
+.pico .show-more-row > button {
+  margin: 0;
+  width: auto;
+}
+.pico .no-upcoming {
+  text-align: center;
+  color: var(--pico-muted-color);
+  padding: 0.75rem 0;
+  margin: 0;
+}
+
+/* Empty state */
+.pico article.plan-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  margin: 0;
+}
+.pico article.plan-empty > svg {
+  color: var(--pico-muted-color);
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.pico article.plan-empty > p {
+  margin: 0 0 1rem;
+  color: var(--pico-muted-color);
+}
+.pico article.plan-empty > a,
+.pico article.plan-empty > button {
+  margin: 0;
+}
+
+/* --- /log --- */
+/* /log — feed tabs (daily / weekly / monthly / yearly), inline edit, native dialog. */
+
+.pico .log-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Outer feed-tabs card */
+.pico article.feed-tabs-card {
+  margin: 0;
+  padding: 0;
+}
+.pico article.feed-tabs-card > header {
+  background: transparent;
+  border-bottom: 1px solid var(--pico-card-border-color);
+  margin: 0;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+/* Tablist */
+.pico nav.feed-tabs {
+  display: flex;
+  gap: 0.25rem;
+}
+.pico nav.feed-tabs > button {
+  margin: 0;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* Edit mode switch */
+.pico .edit-mode-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  white-space: nowrap;
+}
+.pico .edit-mode-switch > small {
+  color: var(--pico-muted-color);
+}
+.pico .edit-mode-switch > input[type='checkbox'][role='switch'] {
+  margin: 0;
+}
+
+/* Feed list inside the card body */
+.pico .feed-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+/* Day card (collapsible) */
+.pico details.feed-day {
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-sectioning-background-color);
+  margin: 0;
+}
+.pico details.feed-day > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  line-height: var(--pico-line-height);
+}
+.pico details.feed-day > summary::-webkit-details-marker {
+  display: none;
+}
+.pico details.feed-day > summary::before {
+  content: '›';
+  flex: 0 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: var(--pico-muted-color);
+  transition: transform 0.15s ease;
+  transform: rotate(0deg);
+}
+.pico details.feed-day[open] > summary::before {
+  transform: rotate(90deg);
+}
+.pico details.feed-day > .feed-day-body {
+  padding: 0.5rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid var(--pico-card-border-color);
+}
+
+/* Day label + stats (shared with summary cards) */
+.pico .feed-day-label {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+}
+.pico .feed-day-label > span {
+  color: var(--pico-muted-color);
+}
+.pico .feed-day-stats {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+.pico .feed-day-stats > span > span {
+  color: var(--pico-muted-color);
+}
+
+/* Summary card (week / month / year) */
+.pico article.feed-summary {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* Individual feed item */
+.pico article.feed-item {
+  margin: 0;
+  padding: 0.75rem 1rem;
+}
+.pico .feed-item-grid {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}
+@media (max-width: 600px) {
+  .pico .feed-item-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  .pico .feed-item-date-col,
+  .pico .feed-item-actions-col {
+    display: none;
+  }
+}
+.pico .feed-item-date-col {
+  border-right: 1px solid var(--pico-card-border-color);
+  padding-right: 1rem;
+}
+.pico .feed-item-actions-col {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+.pico .feed-item-duration {
+  width: 72px;
+  text-align: right;
+}
+
+/* Mobile-only header row inside a feed item */
+.pico .feed-item-mobile-row {
+  display: none;
+}
+@media (max-width: 600px) {
+  .pico .feed-item-mobile-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    color: var(--pico-muted-color);
+  }
+}
+.pico .feed-item-mobile-date {
+  display: flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.pico .feed-item-mobile-date > strong {
+  color: var(--pico-color);
+}
+.pico .feed-item-mobile-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Date column display (vertical stack) */
+.pico .feed-item-date {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+.pico .feed-item-date > span {
+  color: var(--pico-muted-color);
+}
+.pico .feed-item-date > span:last-of-type {
+  opacity: 0.7;
+}
+
+/* Content column. Same flex-column + gap as /today's .card-content so the
+   curriculum-name → task-title-row → task-description spacing is uniform
+   across both surfaces. */
+.pico .feed-item-content {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .feed-item-notes {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-style: italic;
+}
+
+/* .action-badge is defined globally (today.css canonical: muted-border bg,
+   normal-case 0.75rem pill). */
+
+/* Duration label, used multiple places */
+.pico .duration-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--pico-color);
+  white-space: nowrap;
+}
+.pico .duration-label.as-button,
+.pico button.duration-label.as-button {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  color: var(--pico-contrast);
+  text-decoration: none;
+  cursor: pointer;
+}
+.pico button.duration-label.as-button:hover {
+  color: var(--pico-primary-hover);
+  text-decoration: underline;
+}
+
+/* Icon button — neutral square 32px, transparent until hover */
+.pico button.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico button.icon-button:hover {
+  color: var(--pico-contrast);
+  background: var(--pico-card-sectioning-background-color);
+}
+.pico button.icon-button.danger {
+  color: var(--pico-del-color);
+}
+.pico button.icon-button.danger:hover {
+  color: var(--pico-del-color);
+  background: color-mix(in oklab, var(--pico-del-color) 10%, transparent);
+}
+.pico button.icon-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* CopyButton state colors */
+.pico button.copy-button.copy-success {
+  color: var(--pico-ins-color);
+}
+.pico button.copy-button.copy-error {
+  color: var(--pico-del-color);
+}
+.pico .spin {
+  animation: log-spin 0.8s linear infinite;
+}
+@keyframes log-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Inline time edit */
+.pico .inline-time-edit {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+.pico .inline-time-edit > input {
+  width: 2.5rem;
+  margin: 0;
+  padding: 0.15rem 0.25rem;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+.pico .inline-time-edit > span {
+  color: var(--pico-muted-color);
+}
+
+/* Inline notes edit */
+.pico textarea.notes-edit {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--pico-muted-color);
+  resize: vertical;
+}
+.pico button.notes-display.as-button {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  text-align: left;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--pico-muted-color);
+  cursor: pointer;
+}
+.pico button.notes-display.as-button:hover {
+  color: var(--pico-contrast);
+}
+.pico button.notes-placeholder {
+  background: transparent;
+  border: 1px dashed var(--pico-card-border-color);
+  margin: 0;
+  padding: 0.3rem 0.5rem;
+  width: 100%;
+  text-align: left;
+  font-size: 0.8125rem;
+  color: var(--pico-muted-color);
+  border-radius: var(--pico-border-radius);
+  cursor: text;
+}
+.pico button.notes-placeholder:hover {
+  border-style: solid;
+  color: var(--pico-contrast);
+}
+
+/* Inline datetime edit */
+.pico input.datetime-edit {
+  margin: 0;
+  padding: 0.2rem 0.4rem;
+  font-size: 0.75rem;
+  width: auto;
+}
+.pico button.feed-item-date.as-button {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  cursor: pointer;
+}
+/* Pico shadows --pico-color to --pico-primary-inverse (white) on every
+   <button>, which would render "Mon" / "Sat" invisibly. Force the strong
+   to use --pico-contrast so the day-of-week label shows in edit mode the
+   same as in read mode. */
+.pico button.feed-item-date.as-button > strong {
+  color: var(--pico-contrast);
+}
+.pico button.feed-item-date.as-button:hover strong {
+  color: var(--pico-primary-hover);
+}
+
+/* Empty state */
+.pico .feed-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+}
+.pico .feed-empty > svg {
+  color: var(--pico-muted-color);
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.pico .feed-empty > p {
+  margin: 0 0 1rem;
+  color: var(--pico-muted-color);
+}
+.pico .feed-empty > button {
+  margin: 0;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* Spontaneous entry dialog form spacing */
+.pico dialog > article > form > label {
+  margin-top: 1rem;
+}
+.pico dialog > article > form > label:first-of-type {
+  margin-top: 0;
+}
+.pico dialog > article > form > fieldset {
+  margin: 1rem 0 0;
+  border: none;
+  padding: 0;
+}
+.pico dialog > article > form > fieldset > legend {
+  padding: 0;
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+}
+.pico .time-spent-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.pico .time-spent-row > input {
+  width: 4.5rem;
+  margin: 0;
+  text-align: center;
+}
+.pico .time-spent-row > small {
+  color: var(--pico-muted-color);
+}
+.pico dialog > article > form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1.25rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico dialog > article > form > footer button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  width: auto;
+}
+
+/* Mobile: feed-tabs card header stacks */
+@media (max-width: 600px) {
+  .pico article.feed-tabs-card > header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .pico nav.feed-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+  .pico nav.feed-tabs > button {
+    flex: 0 0 auto;
+  }
+  .pico .edit-mode-switch {
+    justify-content: flex-end;
+  }
+}
+
+/* --- /enrollments --- */
+/* /enrollments — filter bar + per-enrollment card with inline settings form and native dialogs. */
+
+.pico .enrollments-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pico .enrollments-header {
+  margin: 0;
+}
+.pico .enrollments-header h1 {
+  margin: 0;
+}
+.pico .enrollments-header p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* Filter bar */
+.pico .enrollments-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pico .enrollments-filters > select {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+.pico .search-wrap {
+  position: relative;
+  flex: 1 1 16rem;
+  min-width: 12rem;
+  display: flex;
+  align-items: center;
+}
+.pico .search-wrap > input[type='search'] {
+  margin: 0;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+.pico .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pico-muted-color);
+  pointer-events: none;
+  z-index: 1;
+}
+.pico .search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0.2rem;
+  width: auto;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico .search-clear:hover {
+  color: var(--pico-color);
+  background: var(--pico-card-sectioning-background-color);
+}
+
+/* List wrapper */
+.pico .enrollments-list > ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .enrollments-list > ul > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* No-match empty within filtered list */
+.pico article.enrollments-no-match {
+  text-align: center;
+  margin: 0;
+  padding: 2rem 1rem;
+}
+.pico article.enrollments-no-match > p {
+  margin: 0 0 0.75rem;
+  color: var(--pico-muted-color);
+}
+.pico article.enrollments-no-match > button {
+  margin: 0;
+  width: auto;
+}
+
+/* Enrollment row card */
+.pico article.enrollment-row {
+  margin: 0;
+  padding: 1rem;
+}
+.pico article.enrollment-row[data-status='finished'] {
+  opacity: 0.85;
+}
+.pico .enrollment-row-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .pico .enrollment-row-grid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.pico .enrollment-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.pico .enrollment-name {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pico .enrollment-name:hover {
+  text-decoration: underline;
+}
+.pico .enrollment-name.unavailable {
+  color: var(--pico-muted-color);
+  font-style: italic;
+}
+.pico .enrollment-info > .enrollment-meta-line {
+  margin: 0;
+  color: var(--pico-muted-color);
+}
+
+/* Action button cluster */
+.pico .enrollment-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  flex-shrink: 0;
+}
+.pico .enrollment-actions > button,
+.pico .enrollment-actions > [role='button'] {
+  margin: 0;
+  width: auto;
+}
+.pico .enrollment-actions > a[role='button'] {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* .finished-badge is gone — Finished status renders as a disabled outline
+   button "Finished ✓" matching /today's "Completed ✓" pattern. */
+
+.pico p.row-error {
+  display: block;
+  margin: 0.5rem 0 0;
+  color: var(--pico-del-color);
+}
+
+/* Inline settings form */
+.pico form.enrollment-settings-form {
+  margin: 0.75rem 0 0;
+  padding: 1rem;
+  background: var(--pico-card-sectioning-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico form.enrollment-settings-form > label {
+  margin: 0;
+}
+.pico form.enrollment-settings-form .required-marker {
+  color: var(--pico-del-color);
+}
+.pico form.enrollment-settings-form p.field-error {
+  color: var(--pico-del-color);
+  margin: 0.25rem 0 0;
+}
+.pico form.enrollment-settings-form p.form-error {
+  margin: 0;
+  color: var(--pico-del-color);
+}
+.pico form.enrollment-settings-form .form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.25rem;
+}
+.pico form.enrollment-settings-form .form-actions > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* Empty state (no enrollments at all) */
+.pico article.enrollments-empty {
+  text-align: center;
+  margin: 0;
+  padding: 3rem 1rem;
+}
+.pico article.enrollments-empty > svg {
+  color: var(--pico-muted-color);
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.pico article.enrollments-empty > p {
+  margin: 0 0 1rem;
+  color: var(--pico-muted-color);
+}
+.pico article.enrollments-empty .empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.pico article.enrollments-empty .empty-actions > a[role='button'] {
+  margin: 0;
+  width: auto;
+  text-decoration: none;
+}
+
+/* Dialog form-error reuse */
+.pico dialog p.form-error {
+  margin: 0;
+  color: var(--pico-del-color);
+}
+.pico dialog > article > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico dialog > article > footer > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  width: auto;
+}
+
+/* --- /progress --- */
+/* /progress — pacing rollup banner + per-enrollment rows with dot plot. */
+
+.pico .progress-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pico .progress-header {
+  margin: 0;
+}
+.pico .progress-header h1 {
+  margin: 0;
+}
+.pico .progress-header p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* Filter bar — same shape as /enrollments and /curriculums */
+.pico .progress-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pico .progress-filters > select {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+.pico .progress-filters .search-wrap {
+  position: relative;
+  flex: 1 1 16rem;
+  min-width: 12rem;
+  display: flex;
+  align-items: center;
+}
+.pico .progress-filters .search-wrap > input[type='search'] {
+  margin: 0;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+.pico .progress-filters .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pico-muted-color);
+  pointer-events: none;
+  z-index: 1;
+}
+.pico .progress-filters .search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0.2rem;
+  width: auto;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico .progress-filters .search-clear:hover {
+  color: var(--pico-color);
+  background: var(--pico-card-sectioning-background-color);
+}
+
+/* Rollup banner */
+.pico article.rollup-banner {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid color-mix(in oklab, var(--pico-mark-background-color) 50%, transparent);
+  background: color-mix(in oklab, var(--pico-mark-background-color) 25%, transparent);
+  color: var(--pico-mark-color);
+}
+.pico article.rollup-banner > svg {
+  flex-shrink: 0;
+}
+
+/* Enrollment list */
+.pico ul.progress-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico ul.progress-list > li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.pico article.progress-row {
+  margin: 0;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico article.progress-row[data-status='finished'] {
+  opacity: 0.85;
+}
+
+/* Title + meta on the left, Manage button on the right. Mirrors
+   /enrollments' .enrollment-row-grid pattern so the title's vertical
+   breathing room matches that page. */
+.pico .progress-row-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+@media (min-width: 768px) {
+  .pico .progress-row-grid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+.pico .progress-info {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.pico .progress-row-grid > a[role='button'] {
+  margin: 0;
+  width: auto;
+  text-decoration: none;
+}
+.pico .progress-row-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  color: var(--pico-muted-color);
+}
+
+/* Pacing color tokens — reuse Pico's tonal palette */
+.pico .pacing-behind {
+  color: var(--pico-mark-color);
+}
+.pico .pacing-ontrack,
+.pico .pacing-ahead {
+  color: var(--pico-ins-color);
+}
+.pico .pacing-ongoing {
+  color: var(--pico-muted-color);
+}
+
+
+/* No-match message */
+.pico .progress-no-match {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--pico-muted-color);
+  margin: 0;
+}
+
+/* Empty state (no enrollments at all) */
+.pico article.progress-empty {
+  text-align: center;
+  margin: 0;
+  padding: 3rem 1rem;
+}
+.pico article.progress-empty > svg {
+  color: var(--pico-muted-color);
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.pico article.progress-empty > p {
+  margin: 0 0 1rem;
+  color: var(--pico-muted-color);
+}
+.pico article.progress-empty > a[role='button'] {
+  margin: 0;
+  width: auto;
+  text-decoration: none;
+}
+
+/* --- /rewards --- */
+/* /rewards — generate panel (pickers + button + progress) and the reward feed. */
+
+.pico .rewards-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pico .rewards-header {
+  margin: 0;
+}
+.pico .rewards-header h1 {
+  margin: 0;
+}
+.pico .rewards-header p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* Generate panel */
+.pico article.rewards-generate {
+  margin: 0;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico .rewards-pickers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 600px) {
+  .pico .rewards-pickers {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.pico .rewards-pickers > select {
+  margin: 0;
+}
+
+.pico button.rewards-generate-btn {
+  margin: 0;
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pico .rewards-status {
+  margin: 0;
+  text-align: center;
+  color: var(--pico-muted-color);
+}
+
+/* Locked state with progress bar */
+.pico .rewards-locked {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .rewards-locked > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+}
+.pico .rewards-progress {
+  max-width: 18rem;
+  margin: 0 auto;
+}
+.pico .rewards-progress > progress {
+  margin: 0;
+  width: 100%;
+  height: 0.5rem;
+}
+.pico .rewards-progress > span {
+  display: block;
+  margin-top: 0.25rem;
+  color: var(--pico-muted-color);
+}
+
+/* Reward feed */
+.pico .rewards-feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* "Still generating" placeholder card */
+.pico article.reward-generating {
+  margin: 0;
+  width: 100%;
+  max-width: 28rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+.pico article.reward-generating > svg {
+  color: var(--pico-muted-color);
+}
+.pico .reward-generating-title {
+  margin: 0;
+  font-weight: 500;
+}
+.pico article.reward-generating > p {
+  margin: 0;
+  color: var(--pico-muted-color);
+}
+
+/* Pagination */
+.pico nav.rewards-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.pico nav.rewards-pagination > a[role='button'],
+.pico nav.rewards-pagination > button {
+  margin: 0;
+  width: auto;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+.pico .rewards-page-label {
+  color: var(--pico-muted-color);
+}
+
+/* Spinner */
+.pico .spin {
+  animation: rewards-spin 0.8s linear infinite;
+}
+@keyframes rewards-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- /curriculums (list) --- */
+/* /curriculums — list page (filter bar + 2-col card grid) + per-curriculum subroutes. */
+
+.pico .curriculums-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Page header with title + action button on the right. Shared pattern —
+   currently used by /curriculums (Create Curriculum) and /log (Log
+   Activity). Button takes Pico's default outline-button sizing. */
+.pico header.page-header-with-action {
+  background: transparent;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.pico header.page-header-with-action > hgroup {
+  margin: 0;
+}
+.pico header.page-header-with-action h1 {
+  margin: 0;
+}
+.pico header.page-header-with-action hgroup > p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+.pico header.page-header-with-action > a[role='button'],
+.pico header.page-header-with-action > button {
+  margin: 0;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: auto;
+  white-space: nowrap;
+}
+@media (max-width: 600px) {
+  .pico header.page-header-with-action > a[role='button'],
+  .pico header.page-header-with-action > button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Filter bar — same pattern as /enrollments */
+.pico .curriculums-filters {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pico .curriculums-filters > select {
+  flex: 0 0 auto;
+  width: auto;
+  margin: 0;
+}
+.pico .curriculums-filters .search-wrap {
+  position: relative;
+  flex: 1 1 16rem;
+  min-width: 12rem;
+  display: flex;
+  align-items: center;
+}
+.pico .curriculums-filters .search-wrap > input[type='search'] {
+  margin: 0;
+  padding-left: 2.25rem;
+  padding-right: 2.25rem;
+}
+.pico .curriculums-filters .search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--pico-muted-color);
+  pointer-events: none;
+  z-index: 1;
+}
+.pico .curriculums-filters .search-clear {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 0;
+  padding: 0.2rem;
+  width: auto;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico .curriculums-filters .search-clear:hover {
+  color: var(--pico-color);
+  background: var(--pico-card-sectioning-background-color);
+}
+
+/* No-match state */
+.pico article.curriculums-no-match {
+  text-align: center;
+  margin: 0;
+  padding: 2rem 1rem;
+}
+.pico article.curriculums-no-match > p {
+  margin: 0 0 0.75rem;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+.pico article.curriculums-no-match > button {
+  margin: 0;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+/* Curriculum card grid */
+.pico .curriculums-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .pico .curriculums-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Individual curriculum card */
+.pico article.curriculum-card {
+  margin: 0;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+/* Curriculum name uses the global .curriculum-name <h4> rule (no override).
+   Description, publisher, and grade-level lines all use .task-description
+   <p>, also defined globally. Each gets its own line; tight vertical
+   rhythm comes from the card's flex column. */
+.pico article.curriculum-card > .curriculum-name + .task-description,
+.pico article.curriculum-card > .task-description + .task-description {
+  margin-top: 0.25rem;
+}
+.pico article.curriculum-card > footer {
+  background: transparent;
+  border-top: none;
+  /* margin-top: auto pushes the footer to the bottom of the card so the
+     View / Enrolled buttons sit at the same y position across the row,
+     regardless of whether the card has a Grade Levels meta row. Works
+     because .curriculum-card is display:flex column and .curriculums-grid
+     uses default align-items: stretch (equal-height cards per row). */
+  margin: auto 0 0;
+  padding: 1rem 0 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico article.curriculum-card > footer > a[role='button'] {
+  margin: 0;
+  width: auto;
+  text-decoration: none;
+}
+
+/* "Enrolled" pill — green confirmation chip. Sized to match the adjacent
+   View button (Pico's default form-element padding) so the two read as a
+   balanced pair in the card footer. */
+.pico .enrolled-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: var(--pico-form-element-spacing-vertical) var(--pico-form-element-spacing-horizontal);
+  font-weight: 500;
+  border: 1px solid color-mix(in oklab, var(--pico-ins-color) 40%, transparent);
+  background: color-mix(in oklab, var(--pico-ins-color) 12%, transparent);
+  color: var(--pico-ins-color);
+  border-radius: var(--pico-border-radius);
+}
+
+/* Empty state (no curriculums at all) */
+.pico article.curriculums-empty {
+  text-align: center;
+  margin: 0;
+  padding: 3rem 1rem;
+}
+.pico article.curriculums-empty > svg {
+  color: var(--pico-muted-color);
+  opacity: 0.5;
+  margin-bottom: 0.75rem;
+}
+.pico article.curriculums-empty > p {
+  margin: 0 0 1rem;
+  color: var(--pico-muted-color);
+}
+.pico article.curriculums-empty > a[role='button'] {
+  margin: 0;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  width: auto;
+  text-decoration: none;
+}
+
+/* --- /curriculums/new --- */
+/* /curriculums/new — create a curriculum (manual entry tab + CSV upload tab). */
+
+.pico .new-curriculum-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pico .new-curriculum-header {
+  margin: 0;
+}
+.pico .new-curriculum-header h1 {
+  margin: 0;
+}
+.pico .new-curriculum-header p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* Onboarding banner */
+.pico article.onboarding-banner {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  background: color-mix(in oklab, var(--pico-primary) 6%, transparent);
+  border: 1px solid color-mix(in oklab, var(--pico-primary) 25%, transparent);
+}
+.pico article.onboarding-banner > p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+/* Tab nav */
+.pico .creation-method {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico nav.creation-method-tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.pico nav.creation-method-tabs > button {
+  flex: 1;
+  margin: 0;
+  padding: 0.5rem 0.85rem;
+  font-size: 0.875rem;
+  width: auto;
+}
+
+/* Manual entry form card */
+.pico article.curriculum-form-card {
+  margin: 0;
+  padding: 1.5rem;
+}
+.pico article.curriculum-form-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin: 0;
+}
+.pico article.curriculum-form-card > form > label {
+  margin: 0;
+}
+.pico article.curriculum-form-card > form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.pico article.curriculum-form-card > form > footer > button {
+  margin: 0;
+  padding: 0.55rem 1.25rem;
+  width: auto;
+}
+
+/* Form helpers — kept here so this route is standalone */
+.pico .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 600px) {
+  .pico .form-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.pico .required-marker {
+  color: var(--pico-del-color);
+}
+.pico p.field-error {
+  display: block;
+  color: var(--pico-del-color);
+  margin-top: 0.25rem;
+}
+.pico p.form-error {
+  margin: 0;
+  color: var(--pico-del-color);
+}
+
+/* CSV upload card */
+.pico article.csv-upload-card {
+  margin: 0;
+  padding: 1.5rem;
+}
+
+/* Dropzone */
+.pico .csv-dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  border: 2px dashed color-mix(in oklab, var(--pico-muted-color) 35%, transparent);
+  border-radius: var(--pico-border-radius);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.pico .csv-dropzone:hover {
+  border-color: color-mix(in oklab, var(--pico-primary) 50%, transparent);
+}
+.pico .csv-dropzone[data-dragover] {
+  border-color: var(--pico-primary);
+  background: color-mix(in oklab, var(--pico-primary) 6%, transparent);
+}
+.pico .csv-dropzone > svg {
+  color: var(--pico-muted-color);
+  margin-bottom: 0.75rem;
+}
+.pico .csv-dropzone > p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+.pico .csv-dropzone > small {
+  margin-top: 0.25rem;
+  color: var(--pico-muted-color);
+  font-size: 0.75rem;
+}
+.pico input.csv-file-input {
+  display: none;
+}
+
+/* Template + help links row */
+.pico .csv-template-links {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  font-size: 0.875rem;
+}
+.pico .csv-template-links > a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+}
+
+/* Preview state */
+.pico .csv-upload-card > .preview-header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pico .csv-upload-card > .preview-header > h3 {
+  margin: 0;
+  font-size: 0.875rem;
+}
+.pico .csv-upload-card > .preview-header > button {
+  margin: 0;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8125rem;
+  width: auto;
+}
+
+.pico .preview-section {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico .preview-section > h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pico-muted-color);
+}
+.pico .preview-section dl {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.pico .preview-row {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+.pico .preview-row > dt {
+  margin: 0;
+  font-weight: 500;
+}
+.pico .preview-row > dd {
+  margin: 0;
+}
+.pico .preview-row > dd.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.pico .preview-row > dd.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pico .muted-text {
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+  margin: 0;
+}
+
+.pico ol.preview-task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+}
+.pico ol.preview-task-list > li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+}
+.pico ol.preview-task-list > li.preview-task-more {
+  padding-left: 1.75rem;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+}
+.pico ol.preview-task-list .task-index {
+  width: 1.5rem;
+  text-align: right;
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+  flex-shrink: 0;
+}
+.pico ol.preview-task-list .task-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+/* .action-badge is defined globally (today.css canonical). */
+
+/* Preview errors block */
+.pico .preview-errors {
+  margin: 0 0 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in oklab, var(--pico-del-color) 50%, transparent);
+  background: color-mix(in oklab, var(--pico-del-color) 5%, transparent);
+  border-radius: var(--pico-border-radius);
+}
+.pico .preview-errors > h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--pico-del-color);
+}
+.pico .preview-errors > ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--pico-del-color);
+}
+.pico .preview-errors > ul > li {
+  list-style: disc;
+  margin: 0.15rem 0;
+}
+
+/* Preview footer with cancel + submit */
+.pico .csv-upload-card > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+.pico .csv-upload-card > footer > button,
+.pico .csv-upload-card > footer > form > button {
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  width: auto;
+}
+.pico .csv-upload-card > footer > form {
+  margin: 0;
+}
+
+/* --- /curriculums/[id] (details) --- */
+/* /curriculums/[id] — detail view: metadata card + drag-orderable task list + dialogs. */
+
+.pico .curriculum-detail-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Top header with title left, enroll/Enrolled chip right */
+.pico header.detail-header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+@media (min-width: 600px) {
+  .pico header.detail-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+.pico header.detail-header > hgroup {
+  margin: 0;
+}
+.pico header.detail-header > hgroup > h1 {
+  margin: 0;
+}
+.pico .detail-header-actions > button,
+.pico .detail-header-actions > .enrolled-badge {
+  margin: 0;
+  min-width: 8rem;
+  width: auto;
+}
+.pico .detail-header-actions > button {
+  padding: 0.4rem 1rem;
+}
+
+/* Metadata view-mode card */
+.pico article.metadata-card {
+  margin: 0;
+  padding: 1.25rem;
+}
+.pico article.metadata-card > dl {
+  margin: 0;
+}
+.pico article.metadata-card .metadata-row {
+  margin: 0 0 0.75rem;
+}
+.pico article.metadata-card .metadata-row > dt {
+  font-weight: 500;
+  color: var(--pico-muted-color);
+  margin: 0;
+}
+.pico article.metadata-card .metadata-row > dd {
+  margin: 0.25rem 0 0;
+}
+.pico article.metadata-card .metadata-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0;
+}
+@media (min-width: 600px) {
+  .pico article.metadata-card .metadata-foot {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+.pico article.metadata-card .metadata-foot-cell {
+  flex: 1;
+  min-width: 0;
+}
+.pico article.metadata-card .metadata-foot-cell > dt {
+  font-weight: 500;
+  color: var(--pico-muted-color);
+  margin: 0;
+}
+.pico article.metadata-card .metadata-foot-cell > dd {
+  margin: 0.25rem 0 0;
+}
+.pico article.metadata-card .edit-details-btn {
+  margin: 0;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+.pico .dash {
+  color: var(--pico-muted-color);
+}
+
+/* Edit metadata article */
+.pico article.metadata-edit-card {
+  margin: 0;
+  padding: 1.25rem;
+}
+.pico article.metadata-edit-card > header {
+  background: transparent;
+  border-bottom: 1px solid var(--pico-card-border-color);
+  margin: 0 0 1rem;
+  padding: 0 0 0.75rem;
+}
+.pico article.metadata-edit-card > header > h3 {
+  margin: 0;
+}
+.pico article.metadata-edit-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+.pico article.metadata-edit-card > form > footer,
+.pico form.task-edit-form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico article.metadata-edit-card > form > footer > button,
+.pico form.task-edit-form > footer > button {
+  margin: 0;
+  padding: 0.45rem 1rem;
+  width: auto;
+}
+
+/* Inline task edit form */
+.pico form.task-edit-form {
+  margin: 0;
+  padding: 1rem;
+  background: var(--pico-card-sectioning-background-color);
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.pico .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 600px) {
+  .pico .form-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.pico .required-marker {
+  color: var(--pico-del-color);
+}
+.pico p.field-error {
+  display: block;
+  color: var(--pico-del-color);
+  margin-top: 0.25rem;
+}
+.pico p.form-error {
+  margin: 0;
+  color: var(--pico-del-color);
+}
+.pico p.form-success {
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.85rem;
+  background: color-mix(in oklab, var(--pico-ins-color) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--pico-ins-color) 30%, transparent);
+  border-radius: var(--pico-border-radius);
+  color: var(--pico-ins-color);
+  font-size: 0.875rem;
+}
+
+/* Task list card */
+.pico article.tasks-card {
+  margin: 0;
+  padding: 0;
+}
+.pico article.tasks-card > header {
+  background: transparent;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+.pico .tasks-card-title > h3 {
+  margin: 0;
+}
+.pico .tasks-card-title > span {
+  display: block;
+  color: var(--pico-muted-color);
+  margin-top: 0.25rem;
+}
+.pico .tasks-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico .tasks-card-actions > span {
+  color: var(--pico-muted-color);
+}
+.pico .tasks-card-actions > button {
+  margin: 0;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico .tasks-empty {
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  color: var(--pico-muted-color);
+}
+
+/* Task list */
+.pico ol.task-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--pico-card-border-color);
+}
+.pico ol.task-list > li.task-row {
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--pico-card-border-color);
+}
+.pico ol.task-list > li.task-row:last-child {
+  border-bottom: none;
+}
+.pico ol.task-list > li.task-row[data-dragging] {
+  z-index: 10;
+  position: relative;
+  opacity: 0.8;
+  background: var(--pico-card-sectioning-background-color);
+}
+.pico ol.task-list > li.task-row.editing {
+  display: block;
+  padding: 1rem 1.25rem;
+}
+.pico .drag-handle {
+  flex-shrink: 0;
+  cursor: grab;
+  touch-action: none;
+}
+/* Left-side icon cluster (drag handle + status dot). Mirrors
+   .task-row-actions on the right so both clusters share the same
+   gap and top-align with the title row. */
+.pico .task-row-leading {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+/* Status dot sized like a 32×32 icon-button so it visually aligns with
+   the drag handle to its left and the edit / delete buttons on the
+   right side of the row. */
+.pico .task-status {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+}
+.pico .status-completed { color: var(--pico-ins-color); }
+.pico .status-promoted { color: var(--pico-primary); }
+.pico .status-skipped,
+.pico .status-pending { color: var(--pico-muted-color); }
+
+/* Task body uses the global .task-title-row + .task-description pattern
+   (same as /today and /plan). Extra horizontal + vertical padding gives
+   the action badge / title / description group breathing room from the
+   leading and trailing icon clusters. */
+.pico .task-row-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0.75rem;
+}
+.pico .task-row-actions {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+/* .pico button.icon-button is defined globally (32×32 transparent square). */
+
+/* .enrolled-badge is defined globally (matches Pico form-element sizing). */
+
+/* Bottom actions row */
+.pico .detail-bottom-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico .detail-bottom-actions > a[role='button'],
+.pico .detail-bottom-actions > button {
+  margin: 0;
+  width: auto;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pico button.danger-button {
+  color: var(--pico-del-color);
+  border-color: color-mix(in oklab, var(--pico-del-color) 35%, transparent);
+}
+.pico button.danger-button:hover {
+  color: var(--pico-del-color);
+  background: color-mix(in oklab, var(--pico-del-color) 8%, transparent);
+  border-color: var(--pico-del-color);
+}
+
+.pico .visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Dialog content layout */
+.pico dialog > article > ul {
+  margin: 0.5rem 0;
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+}
+.pico dialog > article > ul > li {
+  list-style: disc;
+  margin: 0.2rem 0;
+}
+.pico dialog > article > footer {
+  background: transparent;
+  border-top: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico dialog > article > footer > button,
+.pico dialog > article > footer > form > button {
+  margin: 0;
+  padding: 0.4rem 1rem;
+  width: auto;
+}
+.pico dialog > article > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico dialog > article > form > label {
+  margin: 0;
+}
+
+/* --- /curriculums/[id]/enroll --- */
+/* /curriculums/[id]/enroll — enrollment form with radio-card type selector + notices. */
+
+.pico .enroll-shell {
+  max-width: 42rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.pico .enroll-header {
+  margin: 0;
+}
+.pico .enroll-header h1 {
+  margin: 0;
+}
+.pico .enroll-header p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* Outer form card */
+.pico article.enroll-card {
+  margin: 0;
+  padding: 1.5rem;
+}
+.pico article.enroll-card > form {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.pico article.enroll-card > form > label {
+  margin: 0;
+}
+.pico article.enroll-card > form > label > input,
+.pico article.enroll-card > form > label > select {
+  margin-top: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+.pico article.enroll-card > form > label > small {
+  color: var(--pico-muted-color);
+  font-size: 0.75rem;
+}
+.pico article.enroll-card .required-marker {
+  color: var(--pico-del-color);
+}
+.pico p.field-error {
+  display: block;
+  color: var(--pico-del-color);
+  margin-top: 0.25rem;
+}
+.pico p.form-error {
+  color: var(--pico-del-color);
+  margin: 0;
+}
+
+/* Fieldset of radio-card options */
+.pico fieldset.radio-card-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico fieldset.radio-card-group > legend {
+  padding: 0;
+  margin: 0 0 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Each radio-card: hidden native input + clickable styled label */
+.pico label.radio-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.pico label.radio-card:hover {
+  border-color: var(--pico-primary);
+}
+.pico label.radio-card[data-selected='true'] {
+  border-color: var(--pico-primary);
+  background: color-mix(in oklab, var(--pico-primary) 6%, transparent);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--pico-primary) 20%, transparent);
+}
+.pico label.radio-card > input[type='radio'] {
+  margin: 0.25rem 0 0;
+  flex-shrink: 0;
+}
+.pico label.radio-card > .radio-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.pico label.radio-card > .radio-card-body > strong {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.pico label.radio-card > .radio-card-body > small {
+  color: var(--pico-muted-color);
+  font-size: 0.75rem;
+}
+
+/* Inline notices */
+.pico article.enroll-notice {
+  margin: 0;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.pico article.enroll-notice > strong {
+  font-size: 0.875rem;
+}
+.pico article.enroll-notice > p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--pico-muted-color);
+}
+.pico article.enroll-notice.success {
+  border: 1px solid color-mix(in oklab, var(--pico-ins-color) 30%, transparent);
+  background: color-mix(in oklab, var(--pico-ins-color) 8%, transparent);
+}
+.pico article.enroll-notice.success > strong {
+  color: var(--pico-ins-color);
+}
+.pico article.enroll-notice.warning {
+  border: 1px solid color-mix(in oklab, var(--pico-mark-background-color) 50%, transparent);
+  background: color-mix(in oklab, var(--pico-mark-background-color) 25%, transparent);
+}
+.pico article.enroll-notice.warning > strong {
+  color: var(--pico-mark-color);
+}
+.pico article.enroll-notice.danger {
+  border: 1px solid color-mix(in oklab, var(--pico-del-color) 30%, transparent);
+  background: color-mix(in oklab, var(--pico-del-color) 6%, transparent);
+}
+.pico article.enroll-notice.danger > p {
+  margin: 0;
+  font-size: 0.875rem;
+}
+.pico article.enroll-notice.danger > a[role='button'] {
+  margin: 0.5rem 0 0;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  width: auto;
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+/* Submit area */
+.pico .enroll-submit {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+}
+.pico .enroll-submit > button {
+  margin: 0;
+  padding: 0.55rem 1.25rem;
+  width: auto;
+}
+
+/* Standalone Back button in pending/denied views */
+.pico article.enroll-card > a[role='button'] {
+  margin: 1rem 0 0;
+  padding: 0.45rem 1rem;
+  font-size: 0.8125rem;
+  width: auto;
+  text-decoration: none;
+  align-self: flex-start;
+}
+.pico article.enroll-card > hgroup {
+  margin: 0 0 0.5rem;
+}
+.pico article.enroll-card > hgroup > h3 {
+  margin: 0;
+}
+.pico article.enroll-card > hgroup > p {
+  margin: 0.4rem 0 0;
+  color: var(--pico-muted-color);
+}
+
+/* --- /curriculums/[id]/enrolled --- */
+/* Confirmation card shared by /curriculums/[id]/enrolled and /request-sent. */
+
+.pico article.confirmation-card {
+  max-width: 28rem;
+  margin: 3rem auto;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.pico article.confirmation-card .confirmation-icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+.pico article.confirmation-card > hgroup {
+  margin: 0;
+}
+.pico article.confirmation-card > hgroup > h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+.pico article.confirmation-card > hgroup > p {
+  margin: 0.5rem 0 0;
+  color: var(--pico-muted-color);
+}
+.pico article.confirmation-card > hgroup > p > strong {
+  color: var(--pico-color);
+  font-weight: 500;
+}
+.pico .confirmation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .confirmation-actions > a[role='button'] {
+  margin: 0;
+  width: 100%;
+  text-decoration: none;
+}
+
+/* --- /curriculums/[id]/tasks/new --- */
+/* /curriculums/[id]/tasks/new — Finalize Upload page (metadata form + sortable task list + add-task dialog).
+   Also covers the standalone TaskForm used elsewhere. */
+
+.pico .finalize-shell,
+.pico .task-form-shell {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Finalize header */
+.pico header.finalize-header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+@media (min-width: 600px) {
+  .pico header.finalize-header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}
+.pico header.finalize-header > hgroup {
+  margin: 0;
+}
+.pico header.finalize-header > hgroup > h1 {
+  margin: 0;
+}
+.pico header.finalize-header > hgroup > p {
+  margin: 0.25rem 0 0;
+  color: var(--pico-muted-color);
+}
+.pico header.finalize-header > button {
+  margin: 0;
+  min-width: 6rem;
+  padding: 0.55rem 1.25rem;
+  width: auto;
+}
+
+/* Editable metadata form (live block on the finalize page) */
+.pico form.finalize-meta-form {
+  margin: 0;
+  padding: 1.25rem;
+  border: 1px solid var(--pico-card-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-background-color);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico form.finalize-meta-form > label {
+  margin: 0;
+}
+
+/* Standalone TaskForm card */
+.pico article.task-form-card {
+  margin: 0;
+  padding: 1.25rem;
+}
+.pico article.task-form-card > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0;
+}
+.pico article.task-form-card > form > label {
+  margin: 0;
+}
+.pico article.task-form-card > form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+}
+.pico article.task-form-card > form > footer > button {
+  margin: 0;
+  padding: 0.5rem 1.25rem;
+  width: auto;
+}
+
+/* Sortable task list (Finalize page) */
+.pico .finalize-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.pico .finalize-task-list > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.pico .finalize-task-list .task-list-title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+.pico .finalize-task-list .task-list-title > h3 {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--pico-muted-color);
+}
+.pico .finalize-task-list .task-list-title > small {
+  font-size: 0.75rem;
+  color: var(--pico-muted-color);
+}
+.pico .finalize-task-list > header > button {
+  margin: 0;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8125rem;
+  width: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pico .finalize-task-list > ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.pico .finalize-task-list > ol > li.finalize-task-row {
+  list-style: none;
+  margin: 0;
+  padding: 0.55rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 1px solid var(--pico-card-border-color);
+  background: var(--pico-card-background-color);
+  border-radius: var(--pico-border-radius);
+  font-size: 0.875rem;
+}
+.pico .finalize-task-list > ol > li.finalize-task-row[data-dragging] {
+  z-index: 10;
+  position: relative;
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--pico-color) 12%, transparent);
+}
+
+.pico .finalize-task-list .drag-handle {
+  cursor: grab;
+  touch-action: none;
+  flex-shrink: 0;
+}
+.pico .finalize-task-list .task-index {
+  color: var(--pico-muted-color);
+  font-variant-numeric: tabular-nums;
+  margin-right: 0.25rem;
+}
+.pico .finalize-task-list .task-title-text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pico .finalize-task-list .action-badge {
+  flex-shrink: 0;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-sectioning-background-color);
+  color: var(--pico-muted-color);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.pico .finalize-task-list .task-move-actions {
+  display: flex;
+  flex-shrink: 0;
+  gap: 0.15rem;
+}
+
+/* Reused icon-button — local copy so this page is self-contained */
+.pico .finalize-task-list button.icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border: none;
+  color: var(--pico-muted-color);
+  border-radius: var(--pico-border-radius);
+}
+.pico .finalize-task-list button.icon-button:hover {
+  color: var(--pico-contrast);
+  background: var(--pico-card-sectioning-background-color);
+}
+.pico .finalize-task-list button.icon-button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* Form helpers shared inside this route */
+.pico .form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 600px) {
+  .pico .form-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.pico .required-marker {
+  color: var(--pico-del-color);
+}
+.pico p.field-error {
+  display: block;
+  color: var(--pico-del-color);
+  margin-top: 0.25rem;
+}
+.pico p.form-error {
+  margin: 0;
+  color: var(--pico-del-color);
+}
+.pico p.form-success {
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.85rem;
+  background: color-mix(in oklab, var(--pico-ins-color) 10%, transparent);
+  border: 1px solid color-mix(in oklab, var(--pico-ins-color) 30%, transparent);
+  border-radius: var(--pico-border-radius);
+  color: var(--pico-ins-color);
+  font-size: 0.875rem;
+}
+
+/* Dialog form layout */
+.pico dialog > article > form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.pico dialog > article > form > label {
+  margin: 0;
+}
+.pico dialog > article > form > footer {
+  background: transparent;
+  border-top: none;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+.pico dialog > article > form > footer > button {
+  margin: 0;
+  padding: 0.45rem 1rem;
+  width: auto;
+}
+
+/* Inactive creation-method tab panel is fully removed from layout, so the
+   active panel (e.g. the CSV dropzone) gets full width and a clean hit area. */
+.pico .creation-method-panels > [hidden] {
+  display: none !important;
+}
+
+/* Improved dropzone for better click target */
+.pico .csv-dropzone {
+  width: 100% !important;
+  min-height: 180px;
+  padding: 2.5rem 1.5rem;
+  box-sizing: border-box;
+}
+
+/* Browse button inside dropzone */
+.pico .csv-dropzone button.secondary {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8125rem;
+  padding: 0.4rem 0.9rem;
+  width: auto;
+}
+
+/* ---------------------------------------------------------------------------
+   Tailwind-compat utility shims.
+   A few components were authored with Tailwind utility class names, but this
+   project ships Pico CSS with no Tailwind build step, so those classes would
+   otherwise resolve to nothing. Define only the utilities actually in use so
+   the markup works without pulling in Tailwind. Kept unscoped (not under
+   .pico) because the Sonner toaster renders in a portal outside the .pico
+   wrapper.
+   --------------------------------------------------------------------------- */
+
+/* space-y-6: vertical gap between stacked children (Tailwind scale: 1.5rem) */
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+/* size-4: 1rem square box (Sonner toast icons) */
+.size-4 {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* animate-spin: continuous rotation (Sonner loading icon) */
+.animate-spin {
+  animation: lh-spin 1s linear infinite;
+}
+@keyframes lh-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

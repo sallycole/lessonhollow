@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <rect width="1080" height="1350" fill="#f8f4ee"/>
+  <text x="540" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="50" font-weight="700" fill="#3b322c">Light personal curriculum card</text>
+  <rect x="180" y="210" width="720" height="930" rx="34" fill="#fffaf4" stroke="#d9cbb8" stroke-width="4"/>
+  <g font-family="Arial, sans-serif">
+    <text x="240" y="320" font-size="34" font-weight="700" fill="#6c553a">Path</text>
+    <text x="240" y="370" font-size="28" fill="#4b433d">Greek myths and the ancient world</text>
+    <text x="240" y="470" font-size="34" font-weight="700" fill="#6c553a">Why now</text>
+    <text x="240" y="520" font-size="28" fill="#4b433d">High interest and strong cross-subject pull</text>
+    <text x="240" y="620" font-size="34" font-weight="700" fill="#6c553a">Active materials</text>
+    <text x="240" y="670" font-size="28" fill="#4b433d">Read-aloud, map, sketchbook, clips, clay</text>
+    <text x="240" y="770" font-size="34" font-weight="700" fill="#6c553a">Next step</text>
+    <text x="240" y="820" font-size="28" fill="#4b433d">Read one story, map the place, narrate one idea</text>
+    <text x="240" y="920" font-size="34" font-weight="700" fill="#6c553a">Signs of progress</text>
+    <text x="240" y="970" font-size="28" fill="#4b433d">Learner starts connecting ideas without prompting</text>
+  </g>
+</svg>

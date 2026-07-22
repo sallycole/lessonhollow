@@ -1,0 +1,76 @@
+{
+  "slug": "personal-curriculum-overplanning",
+  "learner": "Phoebe",
+  "title": "How to Start a Personal Curriculum Without Overplanning",
+  "strapline": "A first day that feels calm enough to start, not heavy enough to avoid",
+  "signal": "Messy planning pile transformed into a clear next step",
+  "sourceTitle": "Overplanning stack",
+  "sourceSubtitle": "Good intentions, too many tabs, too many options, not enough clear next steps.",
+  "sourceItems": [
+    {
+      "label": "Five bookmarked curriculum links",
+      "detail": "Each one looks promising, but none tells the learner what to do today",
+      "type": "note"
+    },
+    {
+      "label": "A big planning notebook",
+      "detail": "Three pages of goals, categories, and future ideas",
+      "type": "note"
+    },
+    {
+      "label": "One strong article to read",
+      "detail": "The first piece that could actually anchor today's work",
+      "type": "book"
+    },
+    {
+      "label": "A short related video",
+      "detail": "Useful support, but only after the first task is clear",
+      "type": "video"
+    },
+    {
+      "label": "A simple make-something prompt",
+      "detail": "A small output that proves the day is moving",
+      "type": "project"
+    }
+  ],
+  "tiktok": {
+    "hook": "Take this overplanned personal curriculum and turn it into one clear day.",
+    "beforeLabel": "Take this",
+    "afterLabel": "Turn it into this",
+    "caption": "The problem is not lack of good ideas. The problem is starting with too many of them at once.",
+    "beats": [
+      "Open on the tabs, notes, and planning clutter.",
+      "Say that this is where a lot of self-directed learning dies before it starts.",
+      "Cut to the Today page with one reading task, one small output, and one reflection step.",
+      "End on the line about turning overplanning into a clear next step."
+    ],
+    "cta": "Lesson Hollow helps you start with a day, not drown in a plan."
+  },
+  "tasks": [
+    {
+      "title": "Read one article that actually matters",
+      "note": "Start with the piece that best matches today's interest",
+      "duration": "15 min",
+      "kind": "read",
+      "done": true
+    },
+    {
+      "title": "Watch one short supporting clip",
+      "note": "Only one clip, only after the reading is grounded",
+      "duration": "8 min",
+      "kind": "watch"
+    },
+    {
+      "title": "Make a one-page idea map",
+      "note": "Pull out the three ideas worth keeping from today's material",
+      "duration": "12 min",
+      "kind": "make"
+    },
+    {
+      "title": "Pick tomorrow's next thread",
+      "note": "Choose one direction instead of planning six",
+      "duration": "5 min",
+      "kind": "reflect"
+    }
+  ]
+}

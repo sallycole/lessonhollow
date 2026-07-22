@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <rect width="1080" height="1350" fill="#fbf7f1"/>
+  <text x="540" y="120" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#3d342d">A personal curriculum has 4 simple layers</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="170" y="220" width="740" height="180" rx="30" fill="#dbe8f6"/>
+    <text x="540" y="295" text-anchor="middle" font-size="40" font-weight="700" fill="#2d425d">1. Learner</text>
+    <text x="540" y="345" text-anchor="middle" font-size="30" fill="#44586f">Interests, energy, strengths, formats that click</text>
+    <rect x="210" y="450" width="660" height="180" rx="30" fill="#f6e3bf"/>
+    <text x="540" y="525" text-anchor="middle" font-size="40" font-weight="700" fill="#5d4728">2. Theme or path</text>
+    <text x="540" y="575" text-anchor="middle" font-size="30" fill="#6b5a44">One coherent world the learner can enter</text>
+    <rect x="250" y="680" width="580" height="180" rx="30" fill="#dceee4"/>
+    <text x="540" y="755" text-anchor="middle" font-size="40" font-weight="700" fill="#365845">3. Mixed materials</text>
+    <text x="540" y="805" text-anchor="middle" font-size="30" fill="#4e6f5c">Books, projects, videos, field notes, conversation</text>
+    <rect x="290" y="910" width="500" height="180" rx="30" fill="#efd8e3"/>
+    <text x="540" y="985" text-anchor="middle" font-size="40" font-weight="700" fill="#654255">4. Visible next step</text>
+    <text x="540" y="1035" text-anchor="middle" font-size="30" fill="#755769">A startable move the learner can do now</text>
+  </g>
+  <path d="M540 400 v40" stroke="#8f7c66" stroke-width="12" stroke-linecap="round"/>
+  <path d="M540 630 v40" stroke="#8f7c66" stroke-width="12" stroke-linecap="round"/>
+  <path d="M540 860 v40" stroke="#8f7c66" stroke-width="12" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,124 @@
+name: Blog post
+description: Track a Lesson Hollow blog post from idea through publish
+title: "Blog: <working title>"
+labels:
+  - blog
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this issue to track one blog post end-to-end. The slug below is the canonical key — the asset pack at `blog-drafts/<slug>/` and `meta.yaml` must match it. Update the status checklist as the post moves through the lifecycle.
+
+  - type: input
+    id: slug
+    attributes:
+      label: Slug
+      description: Kebab-case, must match the directory name at `blog-drafts/<slug>/` and `meta.yaml:slug`.
+      placeholder: start-learning-before-you-finish-planning
+    validations:
+      required: true
+
+  - type: input
+    id: working_title
+    attributes:
+      label: Working title
+      description: May change before publish — the slug is what's stable.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: audience
+    attributes:
+      label: Primary audience
+      options:
+        - Homeschool parents
+        - Microschool facilitators
+        - Self-directed learning advocates
+        - Curriculum designers
+        - Other (note in description)
+    validations:
+      required: true
+
+  - type: textarea
+    id: organic_search_angle
+    attributes:
+      label: Organic-search angle
+      description: What query is this post the answer to? One or two sentences.
+      placeholder: "How to organize a homeschool curriculum without losing the plot"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: hero_aesthetic
+    attributes:
+      label: Hero aesthetic
+      description: Cross-reference the `image-aesthetic` skill for the A1–A10 game families and other named aesthetics.
+      options:
+        - A1
+        - A2
+        - A3
+        - A4
+        - A5
+        - A6
+        - A7
+        - A8
+        - A9
+        - A10
+        - aurora
+        - editorial
+        - other (note in description)
+    validations:
+      required: false
+
+  - type: input
+    id: target_publish_date
+    attributes:
+      label: Target publish date
+      description: YYYY-MM-DD. Soft deadline.
+      placeholder: 2026-05-15
+    validations:
+      required: false
+
+  - type: input
+    id: asset_pack_path
+    attributes:
+      label: Asset-pack path
+      description: |
+        Repo-relative. Standard layout is `blog-drafts/<slug>/`.
+        Must contain `meta.yaml`, `originals.yaml`, and the subfolders defined in `blog-drafts/_template/`.
+      placeholder: "blog-drafts/<slug>/"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: status
+    attributes:
+      label: Status checklist
+      description: |
+        14-state lifecycle + 2 terminal states, mirrored from `blog-drafts/README.md#status-enum`.
+        Check each box as the post advances. Terminal states (rejected, archived) close the issue.
+      options:
+        - label: "suggested"
+        - label: "researching"
+        - label: "interviewing"
+        - label: "outlining"
+        - label: "drafting"
+        - label: "self-reviewed"
+        - label: "ready-for-review"
+        - label: "revising"
+        - label: "hero-pending"
+        - label: "infographics-pending"
+        - label: "ready-to-publish"
+        - label: "scheduled"
+        - label: "published"
+        - label: "needs-update"
+        - label: "TERMINAL: rejected"
+        - label: "TERMINAL: archived"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Anything that doesn't fit a field above. Cross-link related issues here.
+    validations:
+      required: false

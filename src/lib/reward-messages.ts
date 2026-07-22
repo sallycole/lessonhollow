@@ -1,0 +1,31 @@
+export const REWARD_MESSAGES = [
+  'You earned it! Time to celebrate!',
+  'Ready to sing your praises!',
+  'Amazing work — you unlocked a new song!',
+  'Hard work pays off — reward time!',
+  'You crushed it! Incredible effort!',
+  'Look at you go! Reward unlocked!',
+  'Stellar effort — this is going to be great!',
+  'Something special is being made just for you!',
+  'Your dedication just earned something special!',
+  'Way to go — time to celebrate!',
+  'Outstanding! Your reward awaits!',
+  'You made it happen! Reward time!',
+  'Tuning up something just for you!',
+  'Incredible progress — you deserve this!',
+  'You did the work, now enjoy the reward!',
+  'Time to celebrate with a special serenade!',
+  'Can hardly wait to play this for you!',
+  'Bravo! Your hard work has been noticed!',
+  'Achievement unlocked: Reward Song!',
+  'The stage is set and your reward is ready!',
+] as const
+
+export const LOADING_MESSAGES = [
+  'Composing your song...',
+  'Warming up the vocals...',
+  'Finding the perfect beat...',
+  'Writing the lyrics...',
+  'Mixing your track...',
+  'Painting a masterpiece...',
+] as const

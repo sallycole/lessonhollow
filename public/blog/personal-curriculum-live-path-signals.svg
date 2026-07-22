@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <rect width="1080" height="1350" fill="#fbf8f3"/>
+  <text x="540" y="115" text-anchor="middle" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#352f2a">How to tell if a curriculum path is alive</text>
+  <rect x="90" y="210" width="400" height="930" rx="32" fill="#f1ddd8"/>
+  <rect x="590" y="210" width="400" height="930" rx="32" fill="#dceee4"/>
+  <text x="290" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#7a3f38">Dragging path</text>
+  <text x="790" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#2f5a45">Live path</text>
+  <g font-family="Arial, sans-serif" font-size="30" fill="#4b4139">
+    <text x="140" y="390">• hard to restart</text>
+    <text x="140" y="480">• next step is fuzzy</text>
+    <text x="140" y="570">• adult must reconstruct plan</text>
+    <text x="140" y="660">• materials keep piling up</text>
+    <text x="140" y="750">• learner feels detached</text>
+    <text x="140" y="840">• documentation grows, momentum drops</text>
+    <text x="640" y="390">• easy to re-enter</text>
+    <text x="640" y="480">• next step is obvious</text>
+    <text x="640" y="570">• learner can start with less prompting</text>
+    <text x="640" y="660">• materials fit the current path</text>
+    <text x="640" y="750">• curiosity creates side quests</text>
+    <text x="640" y="840">• progress is visible without bureaucracy</text>
+  </g>
+  <line x1="540" y1="240" x2="540" y2="1110" stroke="#b6a997" stroke-width="6"/>
+</svg>
