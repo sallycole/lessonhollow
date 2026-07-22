@@ -3,11 +3,29 @@ import type { SupabaseClient } from '@supabase/supabase-js'
 export function createTasksDb(getClient: () => SupabaseClient) {
   return {
     async getTasksByCurriculum(curriculumId: string) {
-      return getClient()
+      const client = getClient()
+
+      // Supabase caps at 1000 rows per request — count first, then paginate
+      // so curricula with >1000 tasks come back complete (mirrors discovery.ts).
+      const { count } = await client
         .from('tasks')
-        .select('*')
+        .select('id', { count: 'exact', head: true })
         .eq('curriculum_id', curriculumId)
-        .order('position')
+
+      const PAGE = 1000
+      const pages = Math.max(1, Math.ceil((count ?? 0) / PAGE))
+      const fetches = Array.from({ length: pages }, (_, i) =>
+        client
+          .from('tasks')
+          .select('*')
+          .eq('curriculum_id', curriculumId)
+          .order('position')
+          .range(i * PAGE, (i + 1) * PAGE - 1)
+      )
+      const results = await Promise.all(fetches)
+      const firstError = results.find((r) => r.error)?.error ?? null
+      const data = firstError ? null : results.flatMap((r) => r.data ?? [])
+      return { data, error: firstError }
     },
 
     async getTaskCountByCurriculum(curriculumId: string) {
