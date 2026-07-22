@@ -1,0 +1,31 @@
+﻿Name,The Standard Algorithms: Arithmetic to Mastery
+Description,"A procedure-first sequence that teaches the four standard arithmetic algorithms (addition, subtraction, long multiplication, long division) to mastery. Each unit pairs a short Math Antics explainer video with its free companion worksheet, then Khan Academy practice drilled until mastered."
+Publisher,Math Antics & Khan Academy
+Grade Level,Any
+Link,https://mathantics.com
+
+Title,Description,Action,URL
+Watch: Multi-Digit Addition,Math Antics explainer for the column-addition algorithm with carrying.,Watch,https://www.youtube.com/watch?v=mAvuom42NyY
+Worksheet: Multi-Digit Addition,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_MultiDigitAddition_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_MultiDigitAddition.pdf
+Multi-digit addition,Drill Khan's multi-digit addition exercise until it reads Mastered.,Do,https://www.khanacademy.org/math/arithmetic/arith-review-add-subtract/x18ca194a:adding-within-1-000-000/e/multi-digit-addition
+Watch: Multi-Digit Subtraction,Math Antics explainer for the column-subtraction algorithm with borrowing.,Watch,https://www.youtube.com/watch?v=Y6M89-6106I
+Worksheet: Multi-Digit Subtraction,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_MultiDigitSubtraction_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_MultiDigitSubtraction.pdf
+Multi-digit subtraction,Drill Khan's multi-digit subtraction exercise until it reads Mastered. Push hard on the borrowing-across-zeros problems (e.g. 7000 minus 2384) - that is the case that trips up remediation learners.,Do,https://www.khanacademy.org/math/arithmetic/arith-review-add-subtract/x18ca194a:subtracting-within-1-000-000/e/multi-digit-subtraction
+Watch: Multi-Digit Multiplication Pt.1,Math Antics: multiplying a multi-digit number by a single-digit number (first stage of long multiplication). Note: shaky times-tables will stall this unit and long division - firm up facts first if needed.,Watch,https://www.youtube.com/watch?v=FJ5qLWP3Fqo
+Worksheet: Multi-Digit Multiplication Pt.1,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_MultiDigitMultiplicationPart1_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_MultiDigitMultiplicationPart1.pdf
+Watch: Multi-Digit Multiplication Pt.2,Math Antics: the full long-multiplication algorithm with partial products and the placeholder zero.,Watch,https://www.youtube.com/watch?v=RVYwunbpMHA
+Worksheet: Multi-Digit Multiplication Pt.2,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_MultiDigitMultiplicationPart2_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_MultiDigitMultiplicationPart2.pdf
+Multiply 2-digit numbers,Drill Khan's 2-digit multiplication exercise (partial products) until it reads Mastered.,Do,https://www.khanacademy.org/math/grade-4-math-tx/x5ff7ebd8e2c0fc69:multiplication-of-whole-numbers/x5ff7ebd8e2c0fc69:multiply-2-digit-numbers-with-partial-products/e/multiplication_3
+Multiply 3-digit by 2-digit whole numbers,Drill Khan's 3-digit by 2-digit multiplication exercise until it reads Mastered.,Do,https://www.khanacademy.org/math/grade-5-math-tx/x630b35db1de6a0df:extending-whole-number-operations/x630b35db1de6a0df:multi-digit-multiplication/e/multiply-3-digit-by-2-digit-whole-numbers
+Watch: Basic Division,"Math Antics: what division is, the vocabulary (dividend, divisor, quotient), and remainders - the concept before the algorithm.",Watch,https://www.youtube.com/watch?v=KGMf314LUc0
+Worksheet: Basic Division,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_BasicDivision_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_BasicDivision.pdf
+Watch: Long Division,"Math Antics: the long-division algorithm (divide, multiply, subtract, bring down) with a single-digit divisor.",Watch,https://www.youtube.com/watch?v=LGqBQrUYua4
+Worksheet: Long Division,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_LongDivision_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_LongDivision.pdf
+Watch: Long Division with 2-Digit Divisors,"Math Antics: extending long division to two-digit divisors, including estimating each quotient digit.",Watch,https://www.youtube.com/watch?v=HdU_rf7eMTI
+Worksheet: Long Division with 2-Digit Divisors,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_LongDivisionWith2DigitDivisors_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_LongDivisionWith2DigitDivisors.pdf
+"Divide multi-digit numbers by 2, 3, 4, and 5 (remainders)","Drill dividing by single-digit divisors 2-5, with remainders, until it reads Mastered.",Do,https://www.khanacademy.org/math/grade-4-math-tx/x5ff7ebd8e2c0fc69:division-of-whole-numbers/x5ff7ebd8e2c0fc69:multi-digit-division-with-partial-quotients/e/division_1.5
+"Divide multi-digit numbers by 6, 7, 8, and 9 (remainders)","Drill dividing by the harder single-digit divisors 6-9, with remainders, until it reads Mastered.",Do,https://www.khanacademy.org/math/grade-4-math-tx/x5ff7ebd8e2c0fc69:division-of-whole-numbers/x5ff7ebd8e2c0fc69:multi-digit-division-with-partial-quotients/e/division_2
+Basic multi-digit division,Drill Khan's basic multi-digit division exercise until it reads Mastered.,Do,https://www.khanacademy.org/math/grade-5-math-tx/x630b35db1de6a0df:extending-whole-number-operations/x630b35db1de6a0df:multi-digit-division/e/basic-multi-digit-division
+Division by 2-digits,Drill dividing by 2-digit divisors - the hardest case - until it reads Mastered.,Do,https://www.khanacademy.org/math/grade-5-math-tx/x630b35db1de6a0df:extending-whole-number-operations/x630b35db1de6a0df:multi-digit-division/e/division_3
+Watch: Decimal Arithmetic,Math Antics: applying all four algorithms to decimal numbers by lining up the decimal point. Proves the algorithms transfer.,Watch,https://www.youtube.com/watch?v=kwh4SD1ToFc
+Worksheet: Decimal Arithmetic,Work every problem. Self-check with the answer key: https://mathantics.com/files/pdfs/Worksheets_DecimalArithmetic_Answers.pdf,Do,https://mathantics.com/files/pdfs/Worksheets_DecimalArithmetic.pdf
