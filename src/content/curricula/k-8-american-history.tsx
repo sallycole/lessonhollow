@@ -24,7 +24,7 @@ export const k8AmericanHistory: CurriculumLanding = {
   ],
   proofItems: [
     <span key="companion">
-      Companion map and book list live at{' '}
+      Companion book list live at{' '}
       {link('chiefclanker.com/american-history', 'https://chiefclanker.com/american-history/')}
     </span>,
     'Starts with Columbus in 1492 and ends with driverless cabs and reusable rockets in 2026. Every task sits on a real date.',
@@ -53,7 +53,7 @@ export const k8AmericanHistory: CurriculumLanding = {
       },
     ],
   },
-  ctaLabel: 'Start With Columbus',
+  ctaLabel: 'Start this Curriculum',
   ctaSubtext:
     'We will preload all 214 tasks in chronological order, beginning with Peter Sís on Columbus in 1492.',
   footerReassurance:
