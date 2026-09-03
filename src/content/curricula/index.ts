@@ -6,10 +6,12 @@ import { iainBanksGalacticCivilizationStarterPack } from './iain-banks-galactic-
 import { fiftyTwoLibraryVisitsIn52Weeks } from './52-library-visits-in-52-weeks'
 import { computerSkillsForKids } from './computer-skills-for-kids'
 import { standardAlgorithms } from './standard-algorithms'
+import { k8AmericanHistory } from './k-8-american-history'
 
 export type { CurriculumLanding }
 
 const registry: CurriculumLanding[] = [
+  k8AmericanHistory,
   fiftyTwoLibraryVisitsIn52Weeks,
   greatAmericans37,
   augmentedRealityQuestsMetaQuest3,
