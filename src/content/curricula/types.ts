@@ -8,6 +8,8 @@ export type CurriculumLanding = {
     subhead: string
     backgroundImage?: string
   }
+  /** Optional /discover grid thumbnail. Falls back to hero.backgroundImage. */
+  cardImage?: string
   stats?: { label: ReactNode; value: ReactNode }[]
   proofItems?: ReactNode[]
   proofQuote?: { text: string; attribution?: string }

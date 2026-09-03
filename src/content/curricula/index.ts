@@ -32,7 +32,7 @@ export function getDiscoverOverrides(): Map<string, { title: string; slug: strin
     map.set(entry.curriculumId, {
       title: entry.hero.headline,
       slug: entry.slug,
-      backgroundImage: entry.hero.backgroundImage,
+      backgroundImage: entry.cardImage ?? entry.hero.backgroundImage,
     })
   }
   return map
