@@ -10,9 +10,9 @@ export const k8AmericanHistory: CurriculumLanding = {
     headline: 'K-8 American History',
     subhead:
       'A chronological path through American history in 214 hand-picked picture books and videos, from first contact to the present day.',
-    backgroundImage: '/discover/k-8-american-history-hero-v2.webp',
+    backgroundImage: '/discover/k-8-american-history-hero-v3.webp',
   },
-  ogImage: '/discover/k-8-american-history-hero-v2.webp',
+  ogImage: '/discover/k-8-american-history-hero-v3.webp',
   ogTitle: 'K-8 American History',
   ogDescription:
     'A chronological path through American history in 214 hand-picked picture books and videos, from first contact to the present day.',
