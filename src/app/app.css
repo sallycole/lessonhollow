@@ -1483,12 +1483,14 @@ html {
   margin: 0 auto 2rem;
 }
 .pico section.discover-hero h1 {
-  font-size: clamp(1.75rem, 4vw, 2.75rem);
-  line-height: 1.15;
+  font-size: clamp(2.15rem, 5.2vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.12;
   margin: 0 0 1rem;
 }
 .pico section.discover-hero hgroup > p {
-  font-size: 1.0625rem;
+  font-size: clamp(1.125rem, 2vw, 1.35rem);
+  font-weight: 600;
   color: var(--pico-muted-color);
   margin: 0;
 }
@@ -1531,11 +1533,7 @@ html {
 .pico section.discover-hero.has-bg-image > * {
   position: relative;
 }
-.pico section.discover-hero.has-bg-image h1 {
-  font-weight: 900;
-}
 .pico section.discover-hero.has-bg-image hgroup > p {
-  font-weight: 500;
   color: var(--pico-color);
 }
 .pico section.discover-hero .hero-stats {
@@ -1545,7 +1543,7 @@ html {
   justify-content: center;
   margin: 2rem 0 0;
   color: var(--pico-muted-color);
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 .pico section.discover-hero .hero-stats > span > strong {
   color: var(--pico-color);
