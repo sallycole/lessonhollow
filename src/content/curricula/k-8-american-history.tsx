@@ -20,7 +20,7 @@ export const k8AmericanHistory: CurriculumLanding = {
   stats: [
     { value: '214', label: 'tasks' },
     { value: 'K-8', label: 'grade span' },
-    { value: '1492-2026', label: 'years covered' },
+    { value: 'covers', label: '1492-2026' },
   ],
   proofItems: [
     <span key="companion">
