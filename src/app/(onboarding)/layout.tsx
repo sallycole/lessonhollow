@@ -1,4 +1,12 @@
+import type { Metadata } from 'next'
 import { OnboardingProgressWrapper } from './onboarding-progress-wrapper'
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+}
 
 export default function OnboardingLayout({
   children,

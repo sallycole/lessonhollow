@@ -5,7 +5,10 @@ import {
   ENROLLMENT_COST_DISPLAY,
   MINIMUM_TOPUP_DISPLAY,
 } from '@/lib/pricing'
+import { SITE_URL, SITE_NAME } from '@/lib/seo'
+import { SoftwareApplicationJsonLd } from '@/components/json-ld'
 
+const PRICING_URL = `${SITE_URL}/pricing`
 const title = 'Lesson Hollow Pricing | First enrollment free, then $0.50 per enrollment'
 const description =
   'Simple pay-as-you-grow pricing for homeschool groups, co-ops, and microschools. First enrollment free. $0.50 per enrollment. $10 top-ups.'
@@ -13,12 +16,15 @@ const description =
 export const metadata: Metadata = {
   title,
   description,
+  alternates: {
+    canonical: PRICING_URL,
+  },
   openGraph: {
     title,
     description,
     type: 'website',
-    siteName: 'Lesson Hollow',
-    url: 'https://lessonhollow.com/pricing',
+    siteName: SITE_NAME,
+    url: PRICING_URL,
     images: [{ url: '/og/lesson-hollow-collage-og.png', width: 1200, height: 630, alt: title }],
   },
   twitter: {
@@ -26,9 +32,6 @@ export const metadata: Metadata = {
     title,
     description,
     images: ['/og/lesson-hollow-collage-og.png'],
-  },
-  alternates: {
-    canonical: 'https://lessonhollow.com/pricing',
   },
 }
 
@@ -41,6 +44,11 @@ export default async function PricingPage() {
 
   return (
     <>
+      <SoftwareApplicationJsonLd
+        description="A curriculum-building and progress-tracking app for homeschool families, microschool guides, and self-directed learners. First enrollment free, then $0.50 per enrollment."
+        price="0.50"
+        priceCurrency="USD"
+      />
       <section className="pricing-hero">
         <hgroup>
           <h1>

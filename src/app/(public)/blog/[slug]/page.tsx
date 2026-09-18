@@ -4,6 +4,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getPostBySlug, getAllPosts } from '@/lib/blog'
 import { MarkdownContent } from '@/components/markdown-content'
+import { SITE_URL, SITE_NAME } from '@/lib/seo'
+import { BlogPostingJsonLd } from '@/components/json-ld'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -22,14 +24,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const socialTitle = post.socialTitle || post.title
   const socialDescription = post.socialDescription || description
+  const canonicalUrl = `${SITE_URL}/blog/${slug}`
 
   return {
     title: `${post.title} — Lesson Hollow Blog`,
     description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
     openGraph: {
       title: socialTitle,
       description: socialDescription,
       type: 'article',
+      siteName: SITE_NAME,
+      url: canonicalUrl,
       publishedTime: post.date,
       images: post.featuredImage
         ? [{ url: post.featuredImage, alt: post.featuredImageAlt || post.title }]
@@ -66,11 +74,21 @@ export default async function BlogPostPage({ params }: Props) {
   const currentIndex = allPosts.findIndex((p) => p.slug === slug)
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null
+  const canonicalUrl = `${SITE_URL}/blog/${slug}`
 
   return (
-    <article className="blog-post">
-      <header>
-        <h1>{post.title}</h1>
+    <>
+      <BlogPostingJsonLd
+        headline={post.title}
+        datePublished={post.date}
+        author={post.author}
+        image={post.featuredImage}
+        url={canonicalUrl}
+        description={post.excerpt}
+      />
+      <article className="blog-post">
+        <header>
+          <h1>{post.title}</h1>
         <p className="post-meta">
           {post.author && (
             <>
@@ -136,6 +154,7 @@ export default async function BlogPostPage({ params }: Props) {
           )}
         </div>
       </nav>
-    </article>
+      </article>
+    </>
   )
 }

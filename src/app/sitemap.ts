@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/blog'
+import { getLandingContent, getRegisteredCurriculumIds } from '@/content/curricula'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://lessonhollow.com'
 
@@ -19,5 +20,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }))
 
-  return [...staticRoutes, ...blogRoutes]
+  const registeredIds = getRegisteredCurriculumIds()
+  const discoverRoutes: MetadataRoute.Sitemap = Array.from(registeredIds)
+    .map((id) => {
+      const landing = getLandingContent(id)
+      if (!landing) return null
+      return {
+        url: `${SITE_URL}/discover/${landing.slug}`,
+        changeFrequency: 'monthly' as const,
+        priority: 0.6,
+      }
+    })
+    .filter((route): route is NonNullable<typeof route> => route !== null)
+
+  return [...staticRoutes, ...blogRoutes, ...discoverRoutes]
 }

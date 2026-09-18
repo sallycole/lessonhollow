@@ -14,6 +14,9 @@ Disallow: /fox
 Disallow: /promote
 Disallow: /progress
 Disallow: /player-login
+Disallow: /login
+Disallow: /signup
+Disallow: /onboarding
 Disallow: /api/
 
 Sitemap: https://lessonhollow.com/sitemap.xml

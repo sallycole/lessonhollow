@@ -2,17 +2,26 @@ import type { Metadata } from 'next'
 import { db } from '@/lib/db'
 import { getDiscoverOverrides, getRegisteredCurriculumIds } from '@/content/curricula'
 import { DiscoverFeed } from './discover-feed'
+import { SITE_URL, SITE_NAME } from '@/lib/seo'
 
 export const dynamic = 'force-dynamic'
+
+const DISCOVER_URL = `${SITE_URL}/discover`
 
 export const metadata: Metadata = {
   title: 'Discover Curriculums — Lesson Hollow',
   description:
     'Browse curated learning paths on Lesson Hollow. Find curriculums for any subject.',
+  alternates: {
+    canonical: DISCOVER_URL,
+  },
   openGraph: {
     title: 'Discover Curriculums — Lesson Hollow',
     description:
       'Browse curated learning paths on Lesson Hollow. Find curriculums for any subject.',
+    type: 'website',
+    siteName: SITE_NAME,
+    url: DISCOVER_URL,
     images: [
       {
         url: '/og/lesson-hollow-default-og.png',
