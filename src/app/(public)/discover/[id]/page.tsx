@@ -5,6 +5,8 @@ import { getLandingContent, getRegisteredCurriculumIds } from '@/content/curricu
 import { getEffectiveUser } from '@/lib/masquerade'
 import { createClient } from '@/lib/supabase/server'
 import { CurriculumLanding } from './curriculum-landing'
+import { SITE_URL, SITE_NAME } from '@/lib/seo'
+import { CourseJsonLd } from '@/components/json-ld'
 
 export const dynamic = 'force-dynamic'
 
@@ -20,6 +22,9 @@ function resolveId(idOrSlug: string): string {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id: rawId } = await params
   const id = resolveId(rawId)
+  const landing = getLandingContent(id)
+  const slug = landing?.slug ?? rawId
+  const canonicalUrl = `${SITE_URL}/discover/${slug}`
 
   try {
     const { curriculum: { data: curriculum } } = await db.getPublicCurriculumWithTasks(id)
@@ -27,7 +32,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       return { title: 'Not Found | Lesson Hollow' }
     }
 
-    const landing = getLandingContent(id)
     const title = landing?.hero.headline ?? curriculum.public_title ?? curriculum.name
     const taskCount = (curriculum.tasks as { count: number }[])?.[0]?.count ?? 0
     const description =
@@ -45,11 +49,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {
       title: fullTitle,
       description,
+      alternates: {
+        canonical: canonicalUrl,
+      },
       openGraph: {
         title: socialTitle,
         description: socialDescription,
         type: 'article',
-        siteName: 'Lesson Hollow',
+        siteName: SITE_NAME,
+        url: canonicalUrl,
         ...(ogImages && { images: ogImages }),
       },
       ...(landing?.ogImage && {
@@ -113,21 +121,35 @@ export default async function DiscoverDetailPage({ params }: Props) {
     }
   }
 
+  const slug = landing?.slug ?? rawId
+  const courseTitle = landing?.hero.headline ?? (curriculum.public_title as string | null) ?? (curriculum.name as string)
+  const courseDescription = landing?.hero.subhead ?? (curriculum.public_description as string | null) ?? ''
+  const courseUrl = `${SITE_URL}/discover/${slug}`
+
   return (
-    <CurriculumLanding
-      isAuthenticated={isAuthenticated}
-      players={players}
-      curriculum={{
-        id: curriculum.id as string,
-        public_title: curriculum.public_title as string | null,
-        name: curriculum.name as string,
-        public_description: curriculum.public_description as string | null,
-        publisher_name: curriculum.publisher_name as string | null,
-        published_at: curriculum.published_at as string | null,
-        grade_level: curriculum.grade_level as string | null,
-      }}
-      tasks={tasks}
-      landing={landing}
-    />
+    <>
+      {courseDescription && (
+        <CourseJsonLd
+          name={courseTitle}
+          description={courseDescription}
+          url={courseUrl}
+        />
+      )}
+      <CurriculumLanding
+        isAuthenticated={isAuthenticated}
+        players={players}
+        curriculum={{
+          id: curriculum.id as string,
+          public_title: curriculum.public_title as string | null,
+          name: curriculum.name as string,
+          public_description: curriculum.public_description as string | null,
+          publisher_name: curriculum.publisher_name as string | null,
+          published_at: curriculum.published_at as string | null,
+          grade_level: curriculum.grade_level as string | null,
+        }}
+        tasks={tasks}
+        landing={landing}
+      />
+    </>
   )
 }

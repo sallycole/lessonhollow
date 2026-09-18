@@ -1,13 +1,21 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { hero, features, audiences, cta } from '@/content/homepage'
+import { SITE_URL, SITE_NAME } from '@/lib/seo'
+import { SoftwareApplicationJsonLd } from '@/components/json-ld'
 
 export const metadata: Metadata = {
   title: 'Lesson Hollow | Build your curriculum. Track your progress.',
   description: 'At Lesson Hollow, lifelong learners step up to be guides and their crew steps up to be players on a learning journey. Build curriculums together, knock out daily tasks, and watch the progress stack up.',
+  alternates: {
+    canonical: SITE_URL,
+  },
   openGraph: {
     title: 'Lesson Hollow | Your curriculum. Your pace.',
     description: 'Build your curriculum. Track your progress. Share your path.',
+    type: 'website',
+    siteName: SITE_NAME,
+    url: SITE_URL,
     images: [
       {
         url: '/og/lesson-hollow-collage-og.png',
@@ -28,6 +36,7 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
+      <SoftwareApplicationJsonLd />
       <section className="hero">
         <hgroup>
           <h1>

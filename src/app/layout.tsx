@@ -9,6 +9,7 @@ import { PicoMasquerade } from '@/components/chrome/pico-masquerade'
 import { PicoHeader } from '@/components/chrome/pico-header'
 import { PicoNavTabs } from '@/components/chrome/pico-nav-tabs'
 import { PicoFooter } from '@/components/chrome/pico-footer'
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld'
 import '@picocss/pico/css/pico.conditional.css'
 import './app.css'
 
@@ -59,6 +60,8 @@ export default async function RootLayout({
           title="Lesson Hollow Blog"
           href="/feed.xml"
         />
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
       </head>
       <body>
         <ThemeProvider>
