@@ -1911,6 +1911,14 @@ html {
   padding: 0;
   padding-inline-start: 0;
 }
+/* Kill Pico's `:where(nav li)::before { float:left; content:"​" }` which floats
+   a zero-width space left on every li, causing single-line vs wrapping titles
+   to sit at different left edges. */
+.pico nav.help-nav li::before {
+  content: none;
+  float: none;
+  display: none;
+}
 .pico nav.help-nav a {
   display: block;
   padding: 0.4rem 0.75rem;
