@@ -1889,13 +1889,25 @@ html {
   list-style: none;
   padding: 0;
   padding-inline-start: 0;
+  /* Override Pico's nav ul:first-of-type / :last-of-type negative margins
+     (margin-left: calc(var(--pico-nav-element-spacing-horizontal) * -1))
+     which pull the list left to compensate for nav-link padding—but we're
+     setting our own padding on links so this compensation misaligns items. */
   margin: 0;
+  margin-left: 0;
+  margin-right: 0;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
 .pico nav.help-nav li {
+  /* Override Pico's nav li { display: inline-block } which can cause
+     uneven spacing; we want a clean vertical stack of block items. */
+  display: block;
   margin: 0;
+  /* Override Pico's aside li { padding: ... var(--pico-nav-element-spacing-horizontal) }
+     which adds horizontal padding to li elements inside aside; we handle
+     spacing via the anchor padding instead. */
   padding: 0;
   padding-inline-start: 0;
 }
