@@ -8,13 +8,14 @@ const SECTIONS = [
     heading: 'Tips for You',
     items: [
       { label: 'Building a Curriculum File', href: '/help/tips/building-a-curriculum-file' },
+      { label: 'Forking the Lesson Hollow Repo', href: '/help/tips/forking-the-lesson-hollow-repo' },
     ],
   },
   {
     heading: 'Tips for Your LLM',
     items: [
       { label: 'Building a Curriculum File', href: '/help/llm/building-a-curriculum-file' },
-      { label: 'Accessing the Open Source Files', href: '/help/llm/accessing-the-open-source-files' },
+      { label: 'Using Open Source Curriculum Files', href: '/help/llm/using-open-source-curriculum-files' },
     ],
   },
 ]
