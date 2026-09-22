@@ -14,6 +14,7 @@ const SECTIONS = [
     heading: 'Tips for Your LLM',
     items: [
       { label: 'Building a Curriculum File', href: '/help/llm/building-a-curriculum-file' },
+      { label: 'Accessing the Open Source Files', href: '/help/llm/accessing-the-open-source-files' },
     ],
   },
 ]
