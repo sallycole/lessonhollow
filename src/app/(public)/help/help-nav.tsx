@@ -8,6 +8,7 @@ const SECTIONS = [
     heading: 'Tips for You',
     items: [
       { label: 'Building a Curriculum File', href: '/help/tips/building-a-curriculum-file' },
+      { label: 'Forking the Lesson Hollow Repo', href: '/help/tips/forking-the-lesson-hollow-repo' },
     ],
   },
   {
