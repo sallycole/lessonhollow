@@ -1898,6 +1898,11 @@ html {
   margin-right: 0;
   display: flex;
   flex-direction: column;
+  /* Override Pico's `nav ul { align-items: center }` which centers narrow
+     single-line items while wider wrapping items stretch to full width,
+     causing misaligned left edges. Stretch ensures all items share the
+     same left edge regardless of content length. */
+  align-items: stretch;
   gap: 0.25rem;
 }
 .pico nav.help-nav li {
