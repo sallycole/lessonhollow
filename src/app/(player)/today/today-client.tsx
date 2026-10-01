@@ -81,6 +81,14 @@ function formatDateForPrint(): string {
   })
 }
 
+function formatDateIso(): string {
+  const d = new Date()
+  const year = d.getFullYear()
+  const month = String(d.getMonth() + 1).padStart(2, '0')
+  const day = String(d.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 function formatTimeForPrint(isoString: string | null): string {
   if (!isoString) return ''
   const d = new Date(isoString)
@@ -954,10 +962,33 @@ export function TodayClient({
   }
 
   function handlePrintLogSheet() {
+    const originalTitle = document.title
+    const dateStr = formatDateIso()
+    const printTitle = playerFirstName
+      ? `${dateStr} - ${playerFirstName} - To Do Today - Lesson Hollow`
+      : `${dateStr} - To Do Today - Lesson Hollow`
+
+    let titleRestored = false
+    const restoreTitle = () => {
+      if (!titleRestored) {
+        titleRestored = true
+        document.title = originalTitle
+      }
+    }
+
+    const afterPrintHandler = () => {
+      restoreTitle()
+      window.removeEventListener('afterprint', afterPrintHandler)
+    }
+
+    window.addEventListener('afterprint', afterPrintHandler)
+    document.title = printTitle
+
     setPrintMode(true)
     setTimeout(() => {
       window.print()
       setPrintMode(false)
+      setTimeout(restoreTitle, 1000)
     }, 100)
   }
 
