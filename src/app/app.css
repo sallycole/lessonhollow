@@ -4386,6 +4386,22 @@ html {
   padding: 0;
 }
 
+/* Print log sheet button */
+.pico .print-log-sheet-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--pico-border-radius);
+}
+
+/* Log sheet print layout (hidden on screen, shown when printing) */
+.pico .log-sheet-print {
+  display: none;
+}
+
 /* --- /plan --- */
 /* /plan — filter bar + collapsible enrollment cards with nested task rows. */
 
@@ -7162,5 +7178,159 @@ html {
 @keyframes lh-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print styles — Log Sheet for To Do Today
+   --------------------------------------------------------------------------- */
+
+@media print {
+  /* Hide all chrome, nav, footer, and dialogs */
+  .pico .site-header,
+  .pico .site-footer,
+  .pico .player-tabs,
+  .pico .masquerade-banner,
+  .pico dialog {
+    display: none !important;
+  }
+
+  /* Hide the screen-only content when printing */
+  .pico .today-screen-content {
+    display: none !important;
+  }
+
+  /* Show and style the log sheet */
+  .pico .log-sheet-print {
+    display: block !important;
+  }
+
+  /* Page setup */
+  @page {
+    size: portrait;
+    margin: 0.75in;
+  }
+
+  /* Log sheet header */
+  .pico .log-sheet-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #333;
+  }
+  .pico .log-sheet-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.5rem 0;
+    color: #000;
+  }
+  .pico .log-sheet-meta {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+  .pico .log-sheet-player {
+    font-weight: 600;
+  }
+
+  /* Log sheet table */
+  .pico .log-sheet-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    color: #000;
+  }
+  .pico .log-sheet-table th,
+  .pico .log-sheet-table td {
+    border: 1px solid #333;
+    padding: 0.5rem 0.75rem;
+    text-align: left;
+    vertical-align: top;
+  }
+  .pico .log-sheet-table thead th {
+    background: #f0f0f0;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+  }
+  .pico .log-sheet-table tbody tr:nth-child(even) {
+    background: #fafafa;
+  }
+  .pico .log-sheet-table tbody tr[data-status='completed'] {
+    background: #f0fff0;
+  }
+  .pico .log-sheet-table tfoot td {
+    border-top: 2px solid #333;
+    font-weight: 600;
+  }
+
+  /* Column widths */
+  .pico .log-sheet-table .col-task {
+    width: 50%;
+  }
+  .pico .log-sheet-table .col-time {
+    width: 15%;
+    text-align: center;
+  }
+  .pico .log-sheet-table .col-duration {
+    width: 20%;
+    text-align: center;
+  }
+
+  /* Task cell content */
+  .pico .log-sheet-table .task-action-type {
+    display: inline-block;
+    background: #e0e0e0;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+  }
+  .pico .log-sheet-table .task-title {
+    font-weight: 600;
+  }
+  .pico .log-sheet-table .task-curriculum {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 0.25rem;
+  }
+
+  /* Time fields — empty boxes for handwriting */
+  .pico .log-sheet-table .time-blank,
+  .pico .log-sheet-table .duration-blank {
+    display: inline-block;
+    width: 100%;
+    min-height: 1.5rem;
+    border-bottom: 1px dashed #999;
+  }
+  .pico .log-sheet-table .time-value,
+  .pico .log-sheet-table .duration-value {
+    display: block;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Footer instructions */
+  .pico .log-sheet-footer {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ccc;
+    font-size: 0.8rem;
+    color: #666;
+    text-align: center;
+  }
+  .pico .log-sheet-footer p {
+    margin: 0;
+  }
+
+  /* Ensure good contrast and prevent break inside rows */
+  .pico .log-sheet-table tr {
+    page-break-inside: avoid;
   }
 }
