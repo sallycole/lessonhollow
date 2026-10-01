@@ -21,7 +21,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { GripVertical, ExternalLink, BookOpen, Pencil } from 'lucide-react'
+import { GripVertical, ExternalLink, BookOpen, Pencil, Printer } from 'lucide-react'
 import {
   reorderTodayTasksAction,
   finishedForTodayAction,
@@ -70,6 +70,35 @@ function formatElapsed(totalSeconds: number): string {
   const ss = String(seconds).padStart(2, '0')
   if (hours > 0) return `${hours}:${mm}:${ss}`
   return `${mm}:${ss}`
+}
+
+function formatDateForPrint(): string {
+  return new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
+}
+
+function formatTimeForPrint(isoString: string | null): string {
+  if (!isoString) return ''
+  const d = new Date(isoString)
+  const hours = d.getHours()
+  const minutes = d.getMinutes()
+  const ampm = hours >= 12 ? 'PM' : 'AM'
+  const h = hours % 12 || 12
+  const mm = String(minutes).padStart(2, '0')
+  return `${h}:${mm} ${ampm}`
+}
+
+function formatDurationForPrint(minutes: number | null): string {
+  if (minutes == null || minutes === 0) return ''
+  const h = Math.floor(minutes / 60)
+  const m = Math.round(minutes % 60)
+  if (h === 0) return `${m}m`
+  if (m === 0) return `${h}h`
+  return `${h}h ${m}m`
 }
 
 function useNativeDialog(open: boolean, onClose: () => void) {
@@ -488,6 +517,91 @@ function SortableTaskCard({
   )
 }
 
+function LogSheetPrint({
+  tasks,
+  playerFirstName,
+}: {
+  tasks: TodayTask[]
+  playerFirstName: string
+}) {
+  const dateStr = formatDateForPrint()
+
+  return (
+    <div className="log-sheet-print">
+      <header className="log-sheet-header">
+        <h1>To Do Today — Log Sheet</h1>
+        <div className="log-sheet-meta">
+          {playerFirstName && <span className="log-sheet-player">{playerFirstName}</span>}
+          <span className="log-sheet-date">{dateStr}</span>
+        </div>
+      </header>
+
+      <table className="log-sheet-table">
+        <thead>
+          <tr>
+            <th className="col-task">Task</th>
+            <th className="col-time">Start</th>
+            <th className="col-time">Stop</th>
+            <th className="col-duration">Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tasks.map((task) => {
+            const isCompleted = task.status === 'completed'
+            const hasStartTime = task.startedAt != null
+            const hasDuration = isCompleted && task.timeSpentMinutes != null && task.timeSpentMinutes > 0
+
+            return (
+              <tr key={task.id} data-status={task.status}>
+                <td className="col-task">
+                  <span className="task-action-type">{task.actionType}</span>
+                  <strong className="task-title">{task.title}</strong>
+                  <span className="task-curriculum">{task.curriculumName}</span>
+                </td>
+                <td className="col-time">
+                  {hasStartTime ? (
+                    <span className="time-value">{formatTimeForPrint(task.startedAt)}</span>
+                  ) : (
+                    <span className="time-blank" aria-label="Start time (fill in)"></span>
+                  )}
+                </td>
+                <td className="col-time">
+                  {isCompleted && hasStartTime ? (
+                    <span className="time-value">{formatTimeForPrint(task.promotedAt)}</span>
+                  ) : (
+                    <span className="time-blank" aria-label="Stop time (fill in)"></span>
+                  )}
+                </td>
+                <td className="col-duration">
+                  {hasDuration ? (
+                    <span className="duration-value">{formatDurationForPrint(task.timeSpentMinutes)}</span>
+                  ) : (
+                    <span className="duration-blank" aria-label="Duration (fill in or calculate)"></span>
+                  )}
+                </td>
+              </tr>
+            )
+          })}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td className="col-task"><strong>Total</strong></td>
+            <td className="col-time"></td>
+            <td className="col-time"></td>
+            <td className="col-duration">
+              <span className="duration-blank" aria-label="Total duration"></span>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
+
+      <footer className="log-sheet-footer">
+        <p>Fill in start and stop times as you work. Calculate duration or use timer data if available.</p>
+      </footer>
+    </div>
+  )
+}
+
 function EmptyState({
   hasActiveEnrollments,
   onAutoPopulate,
@@ -521,8 +635,6 @@ export function TodayClient({
   hasActiveEnrollments: boolean
   isGuide: boolean
 }) {
-  void playerFirstName // currently unused in the render layer; kept for parity with server contract
-
   const [tasks, setTasks] = useState<TodayTask[]>(initialTasks)
   const stableTasksRef = useRef<TodayTask[]>(initialTasks)
   const [saving, setSaving] = useState(false)
@@ -541,6 +653,7 @@ export function TodayClient({
   const [autoPopulating, setAutoPopulating] = useState(false)
   const [removing, setRemoving] = useState(false)
   const [editMode, setEditMode] = useState(false)
+  const [printMode, setPrintMode] = useState(false)
   const router = useRouter()
 
   const sensors = useSensors(
@@ -840,31 +953,54 @@ export function TodayClient({
     }
   }
 
+  function handlePrintLogSheet() {
+    setPrintMode(true)
+    setTimeout(() => {
+      window.print()
+      setPrintMode(false)
+    }, 100)
+  }
+
   return (
     <>
-      <div className="today-header-strip">
-        <hgroup>
-          <h1>To Do Today</h1>
-          <p>Your to do list for today.</p>
-        </hgroup>
-        {hasTasks && (
-          <div className="strip-right">
-            {isGuide && (
-              <label className="edit-mode-toggle">
-                <input
-                  type="checkbox"
-                  role="switch"
-                  checked={editMode}
-                  onChange={(e) => setEditMode(e.target.checked)}
-                  aria-label="Toggle edit mode"
-                />
-                Edit Mode
-              </label>
+      <div className="today-page-wrapper" data-print-mode={printMode ? 'true' : undefined}>
+        {/* Print-only log sheet */}
+        <LogSheetPrint tasks={tasks} playerFirstName={playerFirstName} />
+
+        {/* Screen-only content */}
+        <div className="today-screen-content">
+          <div className="today-header-strip">
+            <hgroup>
+              <h1>To Do Today</h1>
+              <p>Your to do list for today.</p>
+            </hgroup>
+            {hasTasks && (
+              <div className="strip-right">
+                <button
+                  type="button"
+                  className="outline icon-button print-log-sheet-btn"
+                  onClick={handlePrintLogSheet}
+                  aria-label="Print log sheet"
+                  title="Print log sheet"
+                >
+                  <Printer size={16} />
+                </button>
+                {isGuide && (
+                  <label className="edit-mode-toggle">
+                    <input
+                      type="checkbox"
+                      role="switch"
+                      checked={editMode}
+                      onChange={(e) => setEditMode(e.target.checked)}
+                      aria-label="Toggle edit mode"
+                    />
+                    Edit Mode
+                  </label>
+                )}
+                <IconKey />
+              </div>
             )}
-            <IconKey />
           </div>
-        )}
-      </div>
 
       {hasTasks ? (
         <>
@@ -925,6 +1061,8 @@ export function TodayClient({
           onAutoPopulate={() => setAutoPopulateOpen(true)}
         />
       )}
+        </div>{/* end .today-screen-content */}
+      </div>{/* end .today-page-wrapper */}
 
       {/* Duration Confirmation Dialog */}
       <dialog ref={durationDialogRef}>

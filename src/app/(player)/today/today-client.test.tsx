@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import { describe, it, expect, beforeEach, vi } from 'vitest'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { TodayClient, type TodayTask } from './today-client'
 
 const mockRefresh = vi.fn()
@@ -112,7 +112,8 @@ describe('TodayClient optimistic rollback', () => {
       />
     )
 
-    const alphaCard = screen.getByText('Alpha').closest('[role="listitem"], div')
+    const taskList = screen.getByRole('list', { name: "Today's task list" })
+    const alphaCard = within(taskList).getByText('Alpha').closest('[role="listitem"], div')
     expect(screen.getAllByRole('button', { name: 'Move down' })).toHaveLength(3)
 
     fireEvent.click(screen.getAllByRole('button', { name: 'Move down' })[0])
