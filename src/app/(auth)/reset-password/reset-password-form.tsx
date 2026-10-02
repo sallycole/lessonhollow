@@ -4,6 +4,7 @@ import { useActionState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { updatePassword, type ResetPasswordState } from './actions'
+import { PasswordInput } from '@/components/password-input'
 
 const initialState: ResetPasswordState = {}
 
@@ -44,10 +45,9 @@ export function ResetPasswordForm() {
       <form action={formAction}>
         <label>
           New password
-          <input
+          <PasswordInput
             id="password"
             name="password"
-            type="password"
             required
             autoComplete="new-password"
             minLength={8}
@@ -57,10 +57,9 @@ export function ResetPasswordForm() {
 
         <label>
           Confirm new password
-          <input
+          <PasswordInput
             id="confirmPassword"
             name="confirmPassword"
-            type="password"
             required
             autoComplete="new-password"
             minLength={8}

@@ -4,6 +4,7 @@ import { useActionState, useState } from 'react'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { login, resendConfirmation, type LoginState } from './actions'
+import { PasswordInput } from '@/components/password-input'
 
 const initialState: LoginState = {}
 
@@ -61,10 +62,9 @@ export function LoginForm() {
 
         <label>
           Password
-          <input
+          <PasswordInput
             id="password"
             name="password"
-            type="password"
             required
             autoComplete="current-password"
           />

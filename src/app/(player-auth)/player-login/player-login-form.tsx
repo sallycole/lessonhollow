@@ -2,6 +2,7 @@
 
 import { useActionState } from 'react'
 import { playerLogin, type PlayerLoginState } from './actions'
+import { PasswordInput } from '@/components/password-input'
 
 const initialState: PlayerLoginState = {}
 
@@ -25,10 +26,9 @@ export function PlayerLoginForm() {
 
         <label htmlFor="password">
           Your password
-          <input
+          <PasswordInput
             id="password"
             name="password"
-            type="password"
             required
             autoComplete="current-password"
           />

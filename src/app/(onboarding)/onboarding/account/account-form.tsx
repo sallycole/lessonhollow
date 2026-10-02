@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { timezones, detectTimezone } from '@/lib/timezones'
 import { createAccountAndPlayer } from './actions'
 import { trackEvent } from '@/components/analytics'
+import { PasswordInput } from '@/components/password-input'
 
 export function AccountForm() {
   const [selectedTimezone, setSelectedTimezone] = useState('')
@@ -115,10 +116,9 @@ export function AccountForm() {
 
         <label>
           Password
-          <input
+          <PasswordInput
             id="password"
             name="password"
-            type="password"
             required
             autoComplete="new-password"
             minLength={8}
