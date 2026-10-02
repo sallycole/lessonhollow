@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import { addLearners } from './actions'
 import { trackEvent } from '@/components/analytics'
+import { PasswordInput } from '@/components/password-input'
 
 type PlayerField = {
   firstName: string
@@ -212,9 +213,8 @@ export function PlayersForm() {
             </label>
             <label>
               Password
-              <input
+              <PasswordInput
                 id={`password-${idx}`}
-                type="password"
                 value={player.password}
                 onChange={(e) => updatePlayer(idx, 'password', e.target.value)}
                 required

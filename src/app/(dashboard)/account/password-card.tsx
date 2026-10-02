@@ -3,6 +3,7 @@
 import { useState, useTransition } from 'react'
 import { changePassword } from './actions'
 import { toast } from 'sonner'
+import { PasswordInput } from '@/components/password-input'
 
 export function PasswordCard() {
   const [editing, setEditing] = useState(false)
@@ -68,9 +69,8 @@ export function PasswordCard() {
         >
           <label>
             Current password
-            <input
+            <PasswordInput
               id="current-password"
-              type="password"
               value={currentPw}
               onChange={(e) => setCurrentPw(e.target.value)}
               disabled={isPending}
@@ -79,9 +79,8 @@ export function PasswordCard() {
           </label>
           <label>
             New password
-            <input
+            <PasswordInput
               id="new-password"
-              type="password"
               value={newPw}
               onChange={(e) => setNewPw(e.target.value)}
               disabled={isPending}
@@ -92,9 +91,8 @@ export function PasswordCard() {
           </label>
           <label>
             Confirm new password
-            <input
+            <PasswordInput
               id="confirm-password"
-              type="password"
               value={confirmPw}
               onChange={(e) => setConfirmPw(e.target.value)}
               disabled={isPending}
