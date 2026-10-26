@@ -2,30 +2,14 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-
-const SECTIONS = [
-  {
-    heading: 'Tips for You',
-    items: [
-      { label: 'Building a Curriculum File', href: '/help/tips/building-a-curriculum-file' },
-      { label: 'Forking the Lesson Hollow Repo', href: '/help/tips/forking-the-lesson-hollow-repo' },
-    ],
-  },
-  {
-    heading: 'Tips for Your LLM',
-    items: [
-      { label: 'Building a Curriculum File', href: '/help/llm/building-a-curriculum-file' },
-      { label: 'Using Open Source Curriculum Files', href: '/help/llm/using-open-source-curriculum-files' },
-    ],
-  },
-]
+import { HELP_SECTIONS } from '@/lib/help-pages'
 
 export function HelpNav() {
   const pathname = usePathname()
 
   return (
     <nav className="help-nav" aria-label="Help navigation">
-      {SECTIONS.map((section) => (
+      {HELP_SECTIONS.map((section) => (
         <div key={section.heading}>
           <h4>{section.heading}</h4>
           <ul>

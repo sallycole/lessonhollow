@@ -1,13 +1,20 @@
 import type { Metadata } from 'next'
+import { SITE_URL } from '@/lib/seo'
+
+const PAGE_PATH = '/help/tips/building-a-curriculum-file'
 
 export const metadata: Metadata = {
   title: 'Building a Curriculum File — Lesson Hollow Help',
   description:
     'How to create a Lesson Hollow curriculum CSV using a spreadsheet.',
+  alternates: {
+    canonical: `${SITE_URL}${PAGE_PATH}`,
+  },
   openGraph: {
     title: 'Building a Curriculum File — Lesson Hollow Help',
     description:
       'How to create a Lesson Hollow curriculum CSV using a spreadsheet.',
+    url: `${SITE_URL}${PAGE_PATH}`,
     images: [
       {
         url: '/og/lesson-hollow-collage-og.png',

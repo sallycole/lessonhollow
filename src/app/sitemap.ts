@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/blog'
 import { getLandingContent, getRegisteredCurriculumIds } from '@/content/curricula'
+import { getPublicHelpPagePaths } from '@/lib/help-pages'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://lessonhollow.com'
 
@@ -33,5 +34,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
     .filter((route): route is NonNullable<typeof route> => route !== null)
 
-  return [...staticRoutes, ...blogRoutes, ...discoverRoutes]
+  const helpRoutes: MetadataRoute.Sitemap = getPublicHelpPagePaths().map((path) => ({
+    url: `${SITE_URL}${path}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }))
+
+  return [...staticRoutes, ...blogRoutes, ...discoverRoutes, ...helpRoutes]
 }

@@ -1,14 +1,21 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { SITE_URL } from '@/lib/seo'
+
+const PAGE_PATH = '/help/tips/forking-the-lesson-hollow-repo'
 
 export const metadata: Metadata = {
   title: 'Forking the Lesson Hollow Repo — Lesson Hollow Help',
   description:
     'Fork Lesson Hollow and vibe-code it into your own homeschool dashboard instead of building from scratch.',
+  alternates: {
+    canonical: `${SITE_URL}${PAGE_PATH}`,
+  },
   openGraph: {
     title: 'Forking the Lesson Hollow Repo — Lesson Hollow Help',
     description:
       'Fork Lesson Hollow and vibe-code it into your own homeschool dashboard instead of building from scratch.',
+    url: `${SITE_URL}${PAGE_PATH}`,
     images: [
       {
         url: '/og/lesson-hollow-collage-og.png',
