@@ -11,6 +11,63 @@ declare global {
   interface Window {
     gtag: (...args: unknown[]) => void
     dataLayer: unknown[]
+    _phantom?: unknown
+    __nightmare?: unknown
+  }
+}
+
+/**
+ * Detects automated/headless browsers using conservative, well-known signals.
+ * Returns 'automated' for bots/scrapers/headless browsers, 'human' otherwise.
+ *
+ * Detection signals:
+ * - navigator.webdriver: Set to true by WebDriver/Selenium/Puppeteer
+ * - User agent tokens: HeadlessChrome, common bot/crawler identifiers
+ * - Global variables: PhantomJS (_phantom), Nightmare.js (__nightmare)
+ */
+function detectVisitorType(): 'automated' | 'human' {
+  try {
+    if (navigator.webdriver === true) {
+      return 'automated'
+    }
+
+    const ua = navigator.userAgent.toLowerCase()
+    const botPatterns = [
+      'headlesschrome',
+      'headless',
+      'bot',
+      'crawler',
+      'spider',
+      'lighthouse',
+      'pagespeed',
+      'chrome-lighthouse',
+      'googleother',
+      'googlebot',
+      'bingbot',
+      'yandexbot',
+      'baiduspider',
+      'slurp',
+      'duckduckbot',
+      'facebookexternalhit',
+      'twitterbot',
+      'linkedinbot',
+      'phantomjs',
+      'prerender',
+      'puppeteer',
+      'selenium',
+    ]
+
+    if (botPatterns.some((pattern) => ua.includes(pattern))) {
+      return 'automated'
+    }
+
+    if (typeof window !== 'undefined' && (window._phantom || window.__nightmare)) {
+      return 'automated'
+    }
+
+    return 'human'
+  } catch {
+    return 'human'
   }
 }
 
@@ -72,6 +129,37 @@ export function GoogleAnalytics() {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
+
+            // Detect automated/headless browsers and set visitor_type on ALL events
+            (function() {
+              var visitorType = 'human';
+              try {
+                if (navigator.webdriver === true) {
+                  visitorType = 'automated';
+                } else {
+                  var ua = navigator.userAgent.toLowerCase();
+                  var botPatterns = [
+                    'headlesschrome', 'headless', 'bot', 'crawler', 'spider',
+                    'lighthouse', 'pagespeed', 'chrome-lighthouse', 'googleother',
+                    'googlebot', 'bingbot', 'yandexbot', 'baiduspider', 'slurp',
+                    'duckduckbot', 'facebookexternalhit', 'twitterbot', 'linkedinbot',
+                    'phantomjs', 'prerender', 'puppeteer', 'selenium'
+                  ];
+                  for (var i = 0; i < botPatterns.length; i++) {
+                    if (ua.indexOf(botPatterns[i]) !== -1) {
+                      visitorType = 'automated';
+                      break;
+                    }
+                  }
+                  if (visitorType === 'human' && (window._phantom || window.__nightmare)) {
+                    visitorType = 'automated';
+                  }
+                }
+              } catch(e) {}
+              // gtag('set') sets parameters that are sent with ALL subsequent events
+              gtag('set', { visitor_type: visitorType });
+            })();
+
             gtag('config', '${GA_MEASUREMENT_ID}', {
               page_path: window.location.pathname,
               send_page_view: false,
