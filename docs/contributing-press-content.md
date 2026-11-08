@@ -17,8 +17,8 @@ Each entry in the array has these fields:
 | `publisher`   | yes      | Publisher name                                             |
 | `publisherUrl`| no       | Homepage URL of the publisher                              |
 | `url`         | yes      | Full URL to the article                                    |
-| `date`        | no       | Publication date in `YYYY-MM-DD` format, or `null` if unknown |
-| `dateNote`    | no       | Informal date note when exact date is unavailable (e.g. "Last checked October 2026") |
+| `date`        | no       | Publication date in `YYYY-MM-DD` format, or `null` if unknown. Only use a verified publication date from the article itself. |
+| `dateNote`    | no       | Approximate publication timeframe when exact date is unavailable (e.g. "Fall 2026"). Do not use for "last checked" or "last updated" metadata, which are editorial notes rather than publication dates. |
 | `summary`     | yes      | One or two sentences describing the article                |
 
 ### Example entry
@@ -40,8 +40,11 @@ Each entry in the array has these fields:
 - Read the article and use the exact title as published
 - Write a neutral, factual summary based on what the article actually says
 - Do not fabricate quotes, awards, rankings, or endorsements
-- If an exact publication date is not stated, use `"date": null` with a `dateNote` for context
+- Only use `date` for verified publication dates explicitly stated in the article
+- If no publication date is stated, set `"date": null` and omit `dateNote` unless an approximate publication timeframe is evident
+- Do not use "last checked" or "last updated" dates as publication dates; these are editorial metadata
 - If multiple articles are from the same publisher, do not imply they are independent sources
+- Link publisher names to the publisher's homepage URL when known
 
 ## Publishing a press release
 
