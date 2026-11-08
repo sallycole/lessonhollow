@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getAllPosts } from '@/lib/blog'
+import { getAllReleases } from '@/lib/press'
 import { getLandingContent, getRegisteredCurriculumIds } from '@/content/curricula'
 import { getPublicHelpPagePaths } from '@/lib/help-pages'
 
@@ -11,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/pricing`, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/blog`, changeFrequency: 'weekly', priority: 0.7 },
     { url: `${SITE_URL}/discover`, changeFrequency: 'weekly', priority: 0.7 },
+    { url: `${SITE_URL}/press`, changeFrequency: 'monthly', priority: 0.5 },
   ]
 
   const posts = getAllPosts()
@@ -40,5 +42,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }))
 
-  return [...staticRoutes, ...blogRoutes, ...discoverRoutes, ...helpRoutes]
+  const pressReleases = getAllReleases()
+  const pressRoutes: MetadataRoute.Sitemap = pressReleases.map((release) => ({
+    url: `${SITE_URL}/press/releases/${release.slug}`,
+    lastModified: new Date(release.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.4,
+  }))
+
+  return [...staticRoutes, ...blogRoutes, ...discoverRoutes, ...helpRoutes, ...pressRoutes]
 }

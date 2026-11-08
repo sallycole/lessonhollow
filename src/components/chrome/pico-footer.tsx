@@ -13,6 +13,9 @@ export function PicoFooter() {
             <Link href="/help">Help</Link>
           </li>
           <li>
+            <Link href="/press">Press</Link>
+          </li>
+          <li>
             <Link href="/privacy">Privacy</Link>
           </li>
           <li>

@@ -7334,3 +7334,128 @@ html {
     page-break-inside: avoid;
   }
 }
+
+/* ===== /press — Press Room ===== */
+/* Press Room page layout. */
+
+.pico .press-section {
+  margin-bottom: 3rem;
+}
+.pico .press-section > h2 {
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* Media coverage list — styled as cards with external links. */
+.pico .press-coverage-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.pico .press-coverage-item > article {
+  margin: 0;
+}
+.pico .press-coverage-item hgroup {
+  margin-bottom: 0.5rem;
+}
+.pico .press-coverage-item h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+.pico .press-coverage-item h3 > a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.4rem;
+}
+.pico .press-coverage-item h3 > a:hover {
+  color: var(--pico-primary);
+}
+.pico .press-coverage-item h3 > a > svg {
+  flex-shrink: 0;
+  vertical-align: middle;
+  opacity: 0.6;
+}
+.pico .press-meta {
+  margin: 0;
+  color: var(--pico-muted-color);
+  font-size: 0.875rem;
+}
+.pico .press-meta a {
+  color: var(--pico-muted-color);
+  text-decoration: none;
+}
+.pico .press-meta a:hover {
+  color: var(--pico-primary);
+}
+.pico .press-coverage-item > article > p:last-child {
+  margin-bottom: 0;
+  color: var(--pico-muted-color);
+}
+
+/* Press releases list — similar layout. */
+.pico .press-releases-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.pico .press-release-item > article {
+  margin: 0;
+}
+.pico .press-release-item hgroup {
+  margin-bottom: 0.5rem;
+}
+.pico .press-release-item h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.35;
+}
+.pico .press-release-item h3 > a {
+  text-decoration: none;
+}
+.pico .press-release-item h3 > a:hover {
+  color: var(--pico-primary);
+}
+.pico .press-release-item > article > p:last-child {
+  margin-bottom: 0;
+  color: var(--pico-muted-color);
+}
+
+/* Empty state. */
+.pico .press-empty {
+  color: var(--pico-muted-color);
+  font-style: italic;
+  padding: 1.5rem 0;
+}
+
+/* Individual press release page. */
+.pico article.press-release {
+  max-width: 48rem;
+  margin: 2rem auto;
+}
+.pico article.press-release > header {
+  background: transparent;
+  border-bottom: none;
+  margin: 0 0 1.5rem 0;
+  padding: 0;
+}
+.pico article.press-release > header > h1 {
+  margin: 0 0 0.75rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  line-height: 1.15;
+}
+.pico article.press-release > .press-nav {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--pico-muted-border-color);
+}
+.pico article.press-release > .press-nav > a {
+  margin: 0;
+}
