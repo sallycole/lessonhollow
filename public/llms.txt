@@ -6,30 +6,30 @@
 
 Pay as you go with no subscription or auto-renewal. No credit card required to sign up. Each child's first curriculum enrollment is free. After that, enrollments cost $0.50 each, sold as $10 for 20 credits.
 
-- [Pricing](/pricing): Full pricing details and how credits work.
+- [Pricing](https://lessonhollow.com/pricing): Full pricing details and how credits work.
 
 ## Getting Started
 
-- [Home](/): Overview of Lesson Hollow for homeschool families, microschool guides, and self-directed learners.
-- [Discover](/discover): Browse free ready-made curriculums and enroll your children.
+- [Home](https://lessonhollow.com/): Overview of Lesson Hollow for homeschool families, microschool guides, and self-directed learners.
+- [Discover](https://lessonhollow.com/discover): Browse free ready-made curriculums and enroll your children.
 
 ## Discover Curriculums
 
 Free curriculums families can enroll in and start tracking daily:
 
-- [K-8 American History](/discover/k-8-american-history): A chronological path through American history in 214 hand-picked picture books and videos.
-- [52 Library Visits in 52 Weeks](/discover/52-library-visits-in-52-weeks): A year-long library adventure with weekly quests for discovery and creativity.
-- [Introduction to Personal Curriculum](/discover/introduction-to-personal-curriculum): A starter course for building your own personal curriculum on any topic.
-- [Computer Skills for Kids](/discover/computer-skills-for-kids): Essential computer skills from typing to email to basic coding.
-- [Standard Algorithms](/discover/standard-algorithms): Master the standard algorithms for arithmetic.
-- [Great Americans for Ages 3 to 7](/discover/great-americans-ages-3-7): Picture book introductions to notable Americans for young children.
-- [Iain Banks Galactic Civilization Starter Pack](/discover/iain-banks-galactic-civilization-starter-pack): A reading path through Iain M. Banks' Culture novels.
-- [Augmented Reality Quests on Meta Quest 3](/discover/augmented-reality-quests-meta-quest-3): Hands-on augmented reality learning activities.
+- [K-8 American History](https://lessonhollow.com/discover/k-8-american-history): A chronological path through American history in 214 hand-picked picture books and videos.
+- [52 Library Visits in 52 Weeks](https://lessonhollow.com/discover/52-library-visits-in-52-weeks): A year-long library adventure with weekly quests for discovery and creativity.
+- [Introduction to Personal Curriculum](https://lessonhollow.com/discover/introduction-to-personal-curriculum): A starter course for building your own personal curriculum on any topic.
+- [Computer Skills for Kids](https://lessonhollow.com/discover/computer-skills-for-kids): Essential computer skills from typing to email to basic coding.
+- [Standard Algorithms](https://lessonhollow.com/discover/standard-algorithms): Master the standard algorithms for arithmetic.
+- [Great Americans for Ages 3 to 7](https://lessonhollow.com/discover/great-americans-ages-3-7): Picture book introductions to notable Americans for young children.
+- [Iain Banks Galactic Civilization Starter Pack](https://lessonhollow.com/discover/iain-banks-galactic-civilization-starter-pack): A reading path through Iain M. Banks' Culture novels.
+- [Augmented Reality Quests on Meta Quest 3](https://lessonhollow.com/discover/augmented-reality-quests-meta-quest-3): Hands-on augmented reality learning activities.
 
-## AI and LLM Integration
+## AI and Large Language Model Integration
 
-- [Building a Curriculum File (LLM Prompt)](/help/llm/building-a-curriculum-file): A copy-and-paste prompt for ChatGPT, Claude, or another large language model that writes importable curriculum CSV files.
-- [Using Open Source Curriculum Files](/help/llm/using-open-source-curriculum-files): Access real curriculum CSV examples and format documentation in the GitHub repository.
+- [Building a Curriculum File (Large Language Model Prompt)](https://lessonhollow.com/help/llm/building-a-curriculum-file): A copy-and-paste prompt for ChatGPT, Claude, or another large language model that writes importable curriculum CSV files.
+- [Using Open Source Curriculum Files](https://lessonhollow.com/help/llm/using-open-source-curriculum-files): Access real curriculum CSV examples and format documentation in the GitHub repository.
 
 ## MCP Server
 
@@ -45,5 +45,5 @@ Endpoint: `https://lessonhollow.com/api/mcp`
 
 ## More
 
-- [Blog](/blog): News, updates, and insights about self-directed learning.
-- [Press Room](/press): Media coverage and press releases.
+- [Blog](https://lessonhollow.com/blog): News, updates, and insights about self-directed learning.
+- [Press Room](https://lessonhollow.com/press): Media coverage and press releases.
