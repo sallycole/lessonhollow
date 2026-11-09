@@ -8,17 +8,18 @@ export const dynamic = 'force-dynamic'
 
 const DISCOVER_URL = `${SITE_URL}/discover`
 
+const DISCOVER_DESCRIPTION =
+  'Explore free ready-made homeschool curriculums on Lesson Hollow. Enroll your children in curated learning paths and track their daily progress.'
+
 export const metadata: Metadata = {
   title: 'Discover Curriculums — Lesson Hollow',
-  description:
-    'Browse curated learning paths on Lesson Hollow. Find curriculums for any subject.',
+  description: DISCOVER_DESCRIPTION,
   alternates: {
     canonical: DISCOVER_URL,
   },
   openGraph: {
     title: 'Discover Curriculums — Lesson Hollow',
-    description:
-      'Browse curated learning paths on Lesson Hollow. Find curriculums for any subject.',
+    description: DISCOVER_DESCRIPTION,
     type: 'website',
     siteName: SITE_NAME,
     url: DISCOVER_URL,
@@ -34,8 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Discover Curriculums — Lesson Hollow',
-    description:
-      'Browse curated learning paths on Lesson Hollow. Find curriculums for any subject.',
+    description: DISCOVER_DESCRIPTION,
     images: ['/og/lesson-hollow-default-og.png'],
   },
 }
