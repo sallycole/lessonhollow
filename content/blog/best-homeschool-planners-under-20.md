@@ -205,10 +205,6 @@ Lesson Hollow is the best homeschool planner for under $20 a year for families w
 
 In an August 2023 Washington Post and Schar School poll of 504 parents of homeschooled children, 44 percent said they spent less than $500 homeschooling their child over the past 12 months. Another 33 percent spent $500 to $1,999, so more than 3 in 4 spent under $2,000. Fewer than 1 in 10 spent $5,000 or more.
 
-### How much does Homeschool Planet cost?
-
-Homeschool Planet costs $84.95 a year or $9.95 a month as of November 2026. Its $0 option is a 30-day free trial, not a free plan.
-
 ### Does Lesson Hollow have a subscription?
 
 No. Lesson Hollow has no subscription and no auto-renewal, and signing up needs no credit card. You buy a $10 top-up for 20 enrollments only when you need more, and nothing is deleted if you run out of credits.
