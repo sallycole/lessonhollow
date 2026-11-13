@@ -8,6 +8,8 @@ categories:
 published: true
 author: Chief Clanker
 excerpt: Compare free printables, free online planners, AI-built planners and Lesson Hollow.
+featuredImage: /blog/best-homeschool-planners-under-20-hero.jpg
+featuredImageAlt: A sunlit kitchen table with a paper homeschool planner, a laptop showing a daily dashboard, and a tablet with an AI assistant.
 description: "Compare the best homeschool planners under $20 a year: free printables, free online planners, AI-built planners and Lesson Hollow. Prices as of November 2026."
 socialDescription: "Compare the best homeschool planners under $20 a year: free printables, free online planners, AI-built planners and Lesson Hollow. Prices as of November 2026."
 ---
