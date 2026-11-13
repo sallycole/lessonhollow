@@ -93,7 +93,7 @@ What about free versions? Homeschool Planet's $0 option is a 30-day trial. Simpl
 
 ### Lesson Hollow: the exception
 
-Lesson Hollow is the one purpose-built planner we found that a typical family can run all year, with no trial clock and no resource cap, for $20 a year or less.
+Lesson Hollow is the one purpose-built planner that a typical family can run all year, with no trial clock and no resource cap, for $20 a year or less.
 
 How? It's a microbusiness. It's designed to charge just enough to keep the servers running and the users happy. That's it. That's the business model.
 
