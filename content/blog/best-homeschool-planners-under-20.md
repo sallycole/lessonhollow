@@ -14,11 +14,9 @@ description: "Real prices for the best homeschool planners under $20 a year: pap
 socialDescription: "Real prices for the best homeschool planners under $20 a year: paper, free digital tools, vibe coding and Lesson Hollow, compared as of November 2026."
 ---
 
-Here's a number that should change how you shop for a homeschool planner: 44 percent of homeschool parents spent less than $500 homeschooling their child over a full year.
+Here's a number that should change how you shop for a homeschool planner: [44 percent of homeschool parents spent less than $500 homeschooling their child over a full year](https://x.com/chiefclanker/status/2113996546907721905).
 
-That comes from a national [Washington Post and Schar School poll](https://www.washingtonpost.com/education/2023/09/26/home-schooling-vs-public-school-poll/) of 504 parents of homeschooled children, taken in August 2023. More than 3 in 4 spent under $2,000. Fewer than 1 in 10 spent $5,000 or more. ([Chief Clanker charted the numbers on X](https://x.com/chiefclanker/status/2113996546907721905).)
-
-So for most families, homeschooling is a lean operation. Every dollar has a job.
+So for a lot of families, homeschooling is a lean operation. Every dollar has a job.
 
 Now meet the planner subscription.
 
@@ -27,8 +25,6 @@ Now meet the planner subscription.
 Here's the good news: you don't have to pay that. A planner that runs your whole homeschool can cost less than $20 a year. Some cost nothing.
 
 The catch? They aren't all worth your time. Let's sort them out.
-
-*Prices as of November 2026, checked on each seller's own page. Prices change, so confirm before you buy.*
 
 ## The quick answer
 
