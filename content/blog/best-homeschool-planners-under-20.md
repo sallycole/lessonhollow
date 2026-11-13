@@ -63,7 +63,7 @@ All three can get you under $20. Only one gets you there without trade-offs you'
     <tr>
       <td>Paper and pencil planners</td>
       <td>No screens; satisfying to check off; printables are cheap or free</td>
-      <td>Falls out of date fast; hard to change; easy to lose; every hour logged by hand</td>
+      <td>Falls out of date fast; hard to change; easy to lose; only one copy: if Mom has it, the student doesn't; every hour logged by hand</td>
       <td><a href="https://thepeacefulpress.com/products/the-peaceful-press-planner">The Peaceful Press Homeschool Planner</a>: $12 once, undated and printable</td>
     </tr>
     <tr>
@@ -139,6 +139,8 @@ But here's the thing: paper planners should be a relic of the past.
 **They're hard to change.** Move one lesson and you're erasing, crossing out or rewriting the whole week. Now multiply that by every child.
 
 **They can be lost.** Leave it at co-op, spill coffee on it or let a little one find the markers. There's no backup.
+
+**There's only one copy.** If Mom has it, the student doesn't. Cue the "Mom, what's next?" chorus.
 
 And every hour you want to track? You're writing it by hand.
 
