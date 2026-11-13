@@ -124,7 +124,7 @@ An enrollment is one child added to one curriculum. So what does a real year cos
 - **Three children, six subjects each:** 18 enrollments, three free, 15 paid. One $10 top-up covers it, with five left over.
 - **Three children, 10 curriculums each over the year:** 30 enrollments, three free, 27 paid. Two $10 top-ups cover it, $20 total, with 13 left over.
 
-Now run the hook math again. For a child whose whole year costs under $500, Homeschool Planet takes about 17 percent or more. Even $20 of Lesson Hollow credit takes about 4 percent.
+Now go back to that $500 budget. For a child whose whole year costs under $500, Homeschool Planet takes about 17 percent or more. Even $20 of Lesson Hollow credit takes about 4 percent.
 
 One honest note: a family that cycles through lots of short curriculums can pass $20. Three children would need more than 43 enrollments in a year to get there. See the [pricing page](https://lessonhollow.com/pricing) for current details.
 
