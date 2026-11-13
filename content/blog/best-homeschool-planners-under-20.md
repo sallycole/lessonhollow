@@ -7,284 +7,226 @@ categories:
   - curriculum
 published: true
 author: Chief Clanker
-excerpt: Compare free printables, free online planners, AI-built planners and Lesson Hollow.
+excerpt: "Paper, spreadsheets, vibe coding or Lesson Hollow? What each planner really costs, and which one wins."
 featuredImage: /blog/best-homeschool-planners-under-20-hero.jpg
 featuredImageAlt: A sunlit kitchen table with a paper homeschool planner, a laptop showing a daily dashboard, and a tablet with an AI assistant.
-description: "Compare the best homeschool planners under $20 a year: free printables, free online planners, AI-built planners and Lesson Hollow. Prices as of November 2026."
-socialDescription: "Compare the best homeschool planners under $20 a year: free printables, free online planners, AI-built planners and Lesson Hollow. Prices as of November 2026."
+description: "Real prices for the best homeschool planners under $20 a year: paper, free digital tools, vibe coding and Lesson Hollow, compared as of November 2026."
+socialDescription: "Real prices for the best homeschool planners under $20 a year: paper, free digital tools, vibe coding and Lesson Hollow, compared as of November 2026."
 ---
 
-The best homeschool planners for under $20 per year are a free printable kit like Printable Scholar's ($0), The Peaceful Press printable planner ($12, one time), a free spreadsheet or board in Google Sheets, Trello or Notion ($0), the free Basic account of Simply Charlotte Mason's CM Organizer ($0), a planner you build yourself with an artificial intelligence (AI) chatbot on a free plan ($0), and Lesson Hollow, which costs most families between $0 and $10 a year. If you want your own curriculums to turn into a daily task list with a built-in timer for each child, Lesson Hollow is the strongest fit in this price range. If you want paper, a $12 printable is hard to beat.
+Here's a number that should change how you shop for a homeschool planner: 44 percent of homeschool parents spent less than $500 homeschooling their child over a full year.
 
-Prices as of November 2026. Every price below comes from the seller's own page, checked this month. Prices change, so confirm before you buy.
+That comes from a national [Washington Post and Schar School poll](https://www.washingtonpost.com/education/2023/09/26/home-schooling-vs-public-school-poll/) of 504 parents of homeschooled children, taken in August 2023. More than 3 in 4 spent under $2,000. Fewer than 1 in 10 spent $5,000 or more. ([Chief Clanker charted the numbers on X](https://x.com/chiefclanker/status/2113996546907721905).)
 
-## How we picked
+So for most families, homeschooling is a lean operation. Every dollar has a job.
 
-A homeschool planner, homeschooling planner, homeschool planning app or lesson planner all do the same basic job: they tell you and your children what comes next and keep a record of what got done. We looked at four kinds of tools:
+Now meet the planner subscription.
 
-1. Paper and pencil planners, including printables.
-2. Free online planners and general tools like spreadsheets.
-3. Vibe-coded planners, meaning a planner a parent builds by describing it to an AI app builder or chatbot.
-4. Lesson Hollow, an online dashboard for homeschool families.
+[Homeschool Planet](https://homeschoolplanet.com/pricing), one of the best-known homeschool planning apps, costs $84.95 a year. If your child's whole year runs under $500, that one planner eats about 17 percent or more of it. That's before a single book, math kit or museum ticket.
 
-To make this list, a planner had to cost $20 or less for a full year of use for a typical family. We also call out the popular planners that cost more, because many parents search for them first and deserve a straight answer about price.
+Here's the good news: you don't have to pay that. A planner that runs your whole homeschool can cost less than $20 a year. Some cost nothing.
 
-## Comparison table
+The catch? They aren't all worth your time. Let's sort them out.
 
-<div class="table-scroll" role="region" aria-label="Homeschool planners under $20 per year" tabindex="0">
+*Prices as of November 2026, checked on each seller's own page. Prices change, so confirm before you buy.*
+
+## The quick answer
+
+The best homeschool planner for under $20 per year is [Lesson Hollow](https://lessonhollow.com), an online daily dashboard with time tracking and artificial intelligence (AI) help that costs most families $0 to $10 a year. If you want paper, The Peaceful Press Homeschool Planner is $12 once. If you want a free do-it-yourself tool, Google Sheets costs $0.
+
+## Affordable planners come in three flavors
+
+Every budget homeschool planner lands in one of three camps:
+
+1. **Purpose-built online planners.** Apps designed for homeschooling from the ground up.
+2. **Paper and pencil planners.** Printed books and printables.
+3. **Repurposed digital tools.** Spreadsheets, task boards, note apps and planners you vibe code yourself with AI.
+
+All three can get you under $20. Only one gets you there without trade-offs you'll feel by October.
+
+## The three kinds of affordable planners, compared
+
+<div class="table-scroll" role="region" aria-label="Three kinds of affordable homeschool planners compared" tabindex="0">
 <table>
-  <caption>Homeschool planners under $20 per year. Prices as of November 2026.</caption>
+  <caption>Affordable homeschool planner categories. Prices as of November 2026.</caption>
   <thead>
     <tr>
-      <th scope="col">Planner</th>
-      <th scope="col">Type</th>
-      <th scope="col">Price per year</th>
-      <th scope="col">Time tracking</th>
-      <th scope="col">AI help</th>
-      <th scope="col">Works for multiple children</th>
-      <th scope="col">Best for</th>
+      <th scope="col">Category</th>
+      <th scope="col">Pros</th>
+      <th scope="col">Cons</th>
+      <th scope="col">Best of class</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>Lesson Hollow</td>
-      <td>Online dashboard</td>
-      <td>$0 to $10 for most families (first enrollment per child free, then $0.50 each, sold as $10 for 20)</td>
-      <td>Yes, a built-in timer on every task</td>
-      <td>Yes, a copy-and-paste prompt for ChatGPT or Claude, plus a Model Context Protocol (MCP) connection</td>
-      <td>Yes, up to 20 children per parent account</td>
-      <td>Families who want their own curriculums feeding into a daily digital dashboard with time tracking</td>
+      <td>Purpose-built online planners</td>
+      <td>Made for homeschooling; a daily task list for each child; updates instantly; nothing to build</td>
+      <td>Most charge a subscription well over $20 a year; free versions are usually trials or capped</td>
+      <td><a href="https://lessonhollow.com">Lesson Hollow</a>: $0 to $10 a year for most families, with time tracking and AI help</td>
     </tr>
     <tr>
-      <td>Printable Scholar free homeschool planner</td>
-      <td>Free printable</td>
-      <td>$0 (plus printing)</td>
-      <td>By hand, the attendance sheet has an hours column</td>
-      <td>No</td>
-      <td>Yes, a weekly page with columns for three children</td>
-      <td>Paper planners who want a complete free kit</td>
+      <td>Paper and pencil planners</td>
+      <td>No screens; satisfying to check off; printables are cheap or free</td>
+      <td>Falls out of date fast; hard to change; easy to lose; every hour logged by hand</td>
+      <td><a href="https://thepeacefulpress.com/products/the-peaceful-press-planner">The Peaceful Press Homeschool Planner</a>: $12 once, undated and printable</td>
     </tr>
     <tr>
-      <td>The Peaceful Press Homeschool Planner</td>
-      <td>Paid printable</td>
-      <td>$12, one time (plus printing)</td>
-      <td>No</td>
-      <td>No</td>
-      <td>Yes, the seller says 1 to 12 or more children</td>
-      <td>Paper planners who want a polished, reusable layout</td>
-    </tr>
-    <tr>
-      <td>CM Organizer Basic (Simply Charlotte Mason)</td>
-      <td>Free online planner</td>
-      <td>$0 (Basic, up to 20 resources)</td>
-      <td>No</td>
-      <td>No</td>
-      <td>Yes</td>
-      <td>Charlotte Mason families with a short book list</td>
-    </tr>
-    <tr>
-      <td>Google Sheets template</td>
-      <td>Free spreadsheet</td>
-      <td>$0 with a Google account</td>
-      <td>Only if you build it</td>
-      <td>Some Gemini features need a paid Google Workspace plan</td>
-      <td>Yes, if you build it</td>
-      <td>Parents who like spreadsheets and already use Google</td>
-    </tr>
-    <tr>
-      <td>Trello Free</td>
-      <td>Free task board</td>
-      <td>$0 (up to 10 boards per workspace)</td>
-      <td>No</td>
-      <td>Not on the free plan</td>
-      <td>Yes, up to 10 collaborators</td>
-      <td>Older children who manage a checklist themselves</td>
-    </tr>
-    <tr>
-      <td>Notion Free</td>
-      <td>Free workspace</td>
-      <td>$0</td>
-      <td>Only if you build it</td>
-      <td>A trial of Notion AI</td>
-      <td>Yes, if you build it</td>
-      <td>Parents who enjoy building their own system</td>
-    </tr>
-    <tr>
-      <td>Vibe-coded planner</td>
-      <td>Built with an AI chatbot or app builder</td>
-      <td>$0 on free plans, $200 or more on paid plans</td>
-      <td>Only if you build it</td>
-      <td>Yes, AI writes the planner itself</td>
-      <td>Only if you build it</td>
-      <td>Technical parents who want something custom and will maintain it</td>
+      <td>Repurposed digital tools (spreadsheets, task boards, note apps, vibe coding)</td>
+      <td>Often free; you may already have them; fully customizable</td>
+      <td>You build and maintain it yourself; not made for school; free plans have limits</td>
+      <td><a href="https://workspace.google.com/products/sheets/">Google Sheets</a>: $0 with a Google account</td>
     </tr>
   </tbody>
 </table>
 </div>
 
-## Lesson Hollow
+## Purpose-built online planners: great, until you see the price
 
-Lesson Hollow is an online dashboard where you load your own curriculums, enroll each child, and get a daily task list for every child. Every task has a built-in timer you can start, pause and resume, so you can see where the hours went without a separate log. Each morning starts with a focused task list you can reorder by drag and drop. One parent account can follow up to 20 children, each on a different path.
+A planner built for homeschooling just gets it. Children, subjects, lessons, done. No duct tape required.
 
-The AI help is the part no other planner in this range offers. Lesson Hollow publishes a [copy-and-paste prompt for ChatGPT or Claude](https://lessonhollow.com/help/llm/building-a-curriculum-file) that turns a description of your curriculum into a file you can import. If you would rather work in a spreadsheet, there is a [guide to building the same file by hand](https://lessonhollow.com/help/tips/building-a-curriculum-file). Lesson Hollow also runs a Model Context Protocol (MCP) server, a standard way for AI assistants to connect to apps, so an assistant can create curriculums, enroll children and work the daily task list for you. The whole app is open source under the MIT License, with the code on [GitHub](https://github.com/sallycole/lessonhollow).
+The problem is the price tag. Most purpose-built homeschool planners charge a subscription, and they land well over $20 a year:
 
-You also do not have to start from a blank page. The [Discover page](https://lessonhollow.com/discover) has free ready-made curriculums, including K-8 American History, The Standard Algorithms: Arithmetic to Mastery, Computer Skills for Kids and 52 Library Visits in 52 Weeks.
+- **Homeschool Planet:** $84.95 a year, or $9.95 a month.
+- **Homeschool Manager:** $49 a year, or $5.99 a month.
+- **Homeschool Tracker:** $8 a month, or $119 for two years.
+- **Homeschool Panda:** $5 or $8 a month for its planner plans.
+
+These are capable apps. Many include record keeping like grades, attendance or transcripts, and that's a big part of what you're paying for.
+
+What about free versions? Homeschool Planet's $0 option is a 30-day trial. Simply Charlotte Mason's CM Organizer has a free Basic account, but it caps you at 20 scheduled resources. A family with a few kids can hit that fast.
+
+### Lesson Hollow: the exception
+
+Lesson Hollow is the one purpose-built planner we found that a typical family can run all year, with no trial clock and no resource cap, for under $20.
+
+How? It's a microbusiness. It's designed to charge just enough to keep the servers running and the users happy. That's it. That's the business model.
+
+Here's what you get:
+
+- **A daily dashboard for every child.** Load your own curriculums and enroll each child. Each morning starts with a focused task list you can reorder by drag and drop.
+- **Time tracking built in.** Every task has a timer you can start, pause and resume. You see where the hours went without keeping a separate log.
+- **AI help with the heavy lifting.** A [copy-and-paste prompt for ChatGPT or Claude](https://lessonhollow.com/help/llm/building-a-curriculum-file) turns a description of your curriculum into a file you can import.
+- **An AI connection.** Lesson Hollow runs a Model Context Protocol (MCP) server, a standard way for AI assistants to connect to apps. An assistant can create curriculums, enroll children and work the daily task list for you.
+- **Free ready-made curriculums.** The [Discover page](https://lessonhollow.com/discover) has picks like K-8 American History and 52 Library Visits in 52 Weeks.
+- **Room for the whole crew.** One parent account covers up to 20 children, each on a different path.
+- **Open source.** The code is public on [GitHub](https://github.com/sallycole/lessonhollow) under the MIT License.
 
 **Best for:** Families who want their own curriculums feeding into a daily digital dashboard with time tracking.
 
-**Price:** Pay as you go, with no subscription and no auto-renewal. Sign up is free with no credit card. Each child's first curriculum enrollment is free. After that, each enrollment costs $0.50, sold as a $10 top-up for 20 enrollments. See the [pricing page](https://lessonhollow.com/pricing).
+### How Lesson Hollow pricing works
 
-**What a year actually costs.** An enrollment is one child added to one curriculum. Here is how that works out:
+It takes about 30 seconds to explain. That's kind of the point.
 
-- Two children with five subjects each is 10 enrollments. Two are free, so eight are paid, which is $4 of credit. You buy one $10 top-up and have 12 enrollments left for later.
-- Three children with six subjects each is 18 enrollments. Three are free, so 15 are paid, which is $7.50 of credit. One $10 top-up covers it, with five enrollments left over.
-- One child with four subjects is four enrollments. One is free and three are paid, so one $10 top-up covers this year and part of the next.
+- Signing up is free. No credit card.
+- Each child's first curriculum enrollment is free.
+- After that, each enrollment costs $0.50, sold as a $10 top-up for 20 enrollments.
+- No subscription. No auto-renewal. You top up only when you want to.
 
-Because nothing renews, you only pay again when you enroll a child in something new.
+An enrollment is one child added to one curriculum. So what does a real year cost?
 
-**Watch for:** Every new enrollment uses a credit, so a family that cycles through many short curriculums in a year can pass $20. Three children would need more than 43 enrollments in a year to get there. Lesson Hollow's feature list does not include grade books, report cards or transcripts, and it [deliberately avoids calendar-based scheduling](https://lessonhollow.com/blog/why-lesson-hollow-doesnt-use-calendar-based-scheduling). If your state requires formal grade records, pair it with a printable report card or pick a record-keeping app instead.
+- **One child, one curriculum:** $0.
+- **Two children, five subjects each:** 10 enrollments, two free, eight paid. That's $4 of credit from one $10 top-up, with 12 enrollments left for later.
+- **Three children, six subjects each:** 18 enrollments, three free, 15 paid. That's $7.50 of credit, with five left over.
 
-## Paper and pencil planners
+Now run the hook math again. For a child whose whole year costs under $500, Homeschool Planet takes about 17 percent or more. A full $10 Lesson Hollow top-up takes about 2 percent.
 
-### Printable Scholar free homeschool planner
+One honest note: a family that cycles through lots of short curriculums can pass $20. Three children would need more than 43 enrollments in a year to get there. See the [pricing page](https://lessonhollow.com/pricing) for current details.
 
-Printable Scholar offers a free 33-page Portable Document Format (PDF) kit with no sign-up: a weekly planner, a weekly planner for multiple kids, a lesson plan template, a curriculum tracker, a monthly attendance sheet with an hours column, a report card, a dated August 2026 to July 2027 calendar and more. The multiple-kids page has a shared column for subjects you teach together and a column for each of three children.
+## Paper and pencil planners: a relic with nice stationery
 
-**Best for:** Families who want paper and a complete system without spending anything.
+We get it. Paper planners are pretty. A fresh one in August feels like a promise.
 
-**Price:** $0, plus your own paper and ink.
+But here's the thing: paper planners should be a relic of the past.
 
-**Watch for:** It is calibrated for kindergarten through fifth grade, and the multiple-kids page has room for three children. Everything you track, you write by hand.
+**They fall out of date fast.** One sick week or one curriculum that clicks faster than expected, and your neat plan is fiction by September.
 
-### The Peaceful Press Homeschool Planner
+**They're hard to change.** Move one lesson and you're erasing, crossing out or rewriting the whole week. Now multiply that by every child.
 
-This is a printable planner with 160 customizable, undated pages: monthly calendars, weekly lesson planners, daily pages, goal worksheets, attendance records, grading sheets and home pages like menu plans. You can print unlimited copies for your family, so one purchase can carry you through several years.
+**They can be lost.** Leave it at co-op, spill coffee on it or let a little one find the markers. There's no backup.
 
-**Best for:** Parents who like paper and want a more designed layout than a free kit.
+And every hour you want to track? You're writing it by hand.
 
-**Price:** $12, one time, as a digital download.
+They aren't even that cheap. The Well Planned Day runs $39.95 to $69.95, and the Erin Condren Homeschool Planner is $48.50 for most designs.
 
-**Watch for:** Printing 160 pages costs something, and the download links last 18 months from purchase, so save the file somewhere safe. Digital downloads are non-refundable, though the seller offers a free sample week.
+### Best of class: The Peaceful Press Homeschool Planner
 
-### Popular paper planners that cost more than $20
+If you're set on paper, this is the one we'd pick. [The Peaceful Press Homeschool Planner](https://thepeacefulpress.com/products/the-peaceful-press-planner) is a $12 printable with 160 undated pages, so there's no printed calendar to go stale. You can print unlimited copies for your family, and the seller says it works for 1 to 12 or more children.
 
-These are well-loved planners, but none of them fits under $20 a year:
+Want to spend $0? [Printable Scholar](https://printablescholar.com/homeschool-planner/) has a free 33-page planner kit with no sign-up. It's built for kindergarten through fifth grade, with a weekly page for three kids.
 
-- **The Well Planned Day (Well Planned Gal):** $39.95 for the 6x9 digest for up to two students, $59.95 for the 8.5x11 portrait for up to four, and $69.95 for the 11x8.5 landscape for up to six. Dated July to June.
-- **Well Planned Paper's Well Planned Homeschool Planner** (a different company): $55 for the printed 2026 to 2027 planner, or $29 for the undated printable version.
-- **Erin Condren Homeschool Planner:** $48.50 for most designs, with some at $50.50. Undated, with attendance tracking for up to four children.
-- **Plum Paper homeschool planners:** Plum Paper's own pricing guide says its custom planners start around $47.95 and most land between $55 and $85, depending on size and add-ons.
+Either way, you're still the one keeping the paper current.
 
-We left Amazon spiral homeschool planners out of this list because their prices change daily and we could not confirm a stable price.
+## Repurposed digital tools: free, flexible and a lot of work
 
-## Free online planners
+This is the clever-parent route. Grab a tool already in your computing arsenal and bend it into a homeschool planner.
 
-### CM Organizer Basic (Simply Charlotte Mason)
+It can work for a time. Here's what that looks like:
 
-The CM Organizer is an online planner built around living books and flexible scheduling. You schedule books and resources, and the Daily Plan shows only what is due today. If you skip a day, the schedule moves with you. The free Basic account needs no credit card.
+- **Google Sheets:** A tab per child, a row per lesson, a checkbox per day. Free with a Google account.
+- **Trello:** A board of cards older kids can drag to "done." Free for up to 10 boards per workspace, but calendar and table views are on the Premium plan at $10 per user a month, billed annually.
+- **Notion:** Build databases, calendars and templates to your heart's content. The free plan limits blocks once two or more members share a workspace, which can push you toward the Plus plan at $10 per member a month.
 
-**Best for:** Charlotte Mason families with a modest list of books.
+### Vibe coding your own planner
 
-**Price:** $0 for Basic. Full access is $7.95 a month.
+Vibe coding means describing an app in plain English to an AI tool and letting it write the code. Parents are building homeschool planners this way with ChatGPT, Claude, Lovable, Bolt and Replit.
 
-**Watch for:** Basic limits you to 20 scheduled resources, progress reports for the past month only, and no attendance or bibliography reports. A family with several children can hit 20 resources fast, and the paid plan works out to well over $20 a year.
+The first version can feel like magic. Free plans can get you surprisingly far.
 
-### Google Sheets template
+Then real life shows up. Logins. Saving data safely. A bug after an update. A free plan that changes its limits.
 
-A spreadsheet is the oldest free digital homeschool planner there is. Make a tab per child, a row per lesson and a checkbox per day, and share it with older children so they can mark their own work. Google says anyone with a Google account can create in Sheets.
+And if you outgrow the free tier? Paid plans run $17 to $25 a month on the tools we checked. That's $200 or more a year, ten times this list's budget.
 
-**Best for:** Parents who think in rows and columns and already use Google.
+### The real cost is your time
 
-**Price:** $0.
+Here's the catch with every repurposed tool: you become the designer, the builder and the tech support.
 
-**Watch for:** You build and maintain everything yourself. Google notes that some Gemini AI features in Sheets are only available on paid Google Workspace plans.
+Those are hours that could go to read-alouds, a nature walk, a co-op class or, wild idea, a nap.
 
-### Trello Free
+### Best of class: Google Sheets
 
-Trello is a board of cards. A list per child, or a list per day, with a card per lesson works well for children old enough to drag their own cards to "done."
+If you go this route, [Google Sheets](https://workspace.google.com/products/sheets/) is the one to beat. It's free for anyone with a Google account, most parents already know their way around a spreadsheet, and you can share it with older kids so they can check off their own work. Just know that Google says some Gemini AI features in Sheets need a paid Google Workspace plan.
 
-**Best for:** Older students who like to manage their own checklist.
+Love vibe coding anyway? Skip the blank page. Lesson Hollow's guide to [forking the Lesson Hollow repo](https://lessonhollow.com/help/tips/forking-the-lesson-hollow-repo) shows how to copy its open-source code and vibe code your own version. As that page puts it, building a dashboard from scratch is "a poor use of tokens." Self-hosting does need your own database and hosting accounts, and those services may charge.
 
-**Price:** $0. The free plan includes unlimited cards, up to 10 boards per workspace and up to 10 collaborators.
+## So which homeschool planner should you pick?
 
-**Watch for:** Trello was made for teams at work, not schools. Calendar and table views are on the Premium plan, which is $10 per user a month billed annually, and the AI features start on the Standard plan at $5 per user a month billed annually.
+- **You want paper, no matter what:** The Peaceful Press, $12 once.
+- **You want paper for $0:** Printable Scholar.
+- **You love building systems and have time to keep them running:** Google Sheets.
+- **You want your curriculums to show up as a daily task list for every child, with a timer, AI help and no subscription:** Lesson Hollow.
 
-### Notion Free
-
-Notion lets you build databases with custom properties, subtasks and calendars, and many parents share homeschool templates for it. It suits a parent who enjoys designing the system as much as using it.
-
-**Best for:** Parents who like to customize everything.
-
-**Price:** $0 on the Free plan, which includes a trial of Notion AI.
-
-**Watch for:** Notion says the free plan limits how many blocks you can add once a workspace has two or more members, so sharing one workspace with your children can push you toward the Plus plan at $10 per member a month.
-
-### Popular online planners that cost more than $20
-
-- **Homeschool Planet:** $84.95 a year or $9.95 a month. The $0 option is a 30-day free trial, not a free plan.
-- **Homeschool Manager:** $49 a year or $5.99 a month, with a 30-day free trial for eligible new accounts.
-- **Homeschool Tracker:** $8 a month or $119 for two years, with a 7-day free trial.
-- **Homeschool Panda:** Homeschooler Essentials is $5 a month and Homeschooler Pro is $8 a month. The free Panda Connect plan covers the social features, not the lesson planner.
-
-All four are capable apps with record keeping like grades, attendance or transcripts, which is often what you are paying for.
-
-## Vibe-coded planners
-
-"Vibe coding" means describing an app in plain English to an AI tool and letting it write the code. Plenty of parents are building their own homeschool planners this way, and it can work. Here is what it really costs.
-
-**The tools and their prices, as of November 2026:**
-
-- **ChatGPT:** OpenAI says the free version is available to everyone. Paid plans are billed monthly.
-- **Claude:** Free, with limited usage. Claude Pro is $20 a month billed monthly, or $17 a month with an annual plan ($200 billed up front).
-- **Lovable:** Free to start, with 5 build credits a day, up to 30 a month.
-- **Replit:** Core is $20 a month, or $18 a month billed annually.
-- **Bolt:** Free, with a 300,000-token daily limit and 1 million tokens a month. Pro is $25 a month billed monthly.
-
-**Best for:** Parents who are comfortable with technology, want something exactly their way, and are willing to keep fixing it.
-
-**Price:** $0 if you can finish within free limits. A paid plan on any of these tools runs $200 or more a year, which is ten times this list's budget.
-
-**Watch for:** The first version is the easy part. Logins, saving data safely, fixing bugs after an update and moving it all when a free plan changes take real time, and that time comes out of teaching. Free plans have daily or monthly caps that a real app can outgrow quickly.
-
-There is a middle path. Lesson Hollow's code is open source, and its help page on [forking the Lesson Hollow repo](https://lessonhollow.com/help/tips/forking-the-lesson-hollow-repo) walks through copying the code, running it, and vibe-coding it into your own version. As that page puts it, building a dashboard from scratch is "a poor use of tokens." Starting from working code lets you spend your AI time on the curriculums instead. Self-hosting does require your own accounts and setup, such as a Supabase database and a host like Fly.io, and those services may charge for use.
-
-## Which one should you pick?
-
-- **You want paper and want to spend nothing:** Printable Scholar.
-- **You want paper with a nicer layout:** The Peaceful Press, $12 once.
-- **You teach Charlotte Mason with a short book list:** CM Organizer Basic.
-- **You love spreadsheets or building systems:** Google Sheets or Notion.
-- **You have a teenager who runs their own checklist:** Trello.
-- **You want to build your own app and enjoy maintaining it:** vibe-code it, ideally from a fork of Lesson Hollow.
-- **You want your own curriculums to show up as a daily task list for each child, with a timer, AI help and no subscription:** Lesson Hollow.
-- **You need grades, report cards and transcripts in one app:** expect to pay more than $20. Homeschool Manager at $49 a year is the least expensive full record-keeping app we checked.
+For most families, that last one is the whole point of a planner. And Lesson Hollow does it for about the price of one month of Homeschool Planet.
 
 ## Frequently asked questions
 
-### What is the cheapest homeschool planner?
+### What is the best homeschool planner for under $20 a year?
 
-A free printable kit, like Printable Scholar's 33-page homeschool planner, costs nothing beyond paper and ink. For a free digital option, Google Sheets, Trello Free, Notion Free and the CM Organizer Basic account all cost $0. Lesson Hollow is free to start, since each child's first curriculum enrollment is free.
+Lesson Hollow is the best homeschool planner for under $20 a year for families who want a daily digital dashboard with time tracking. Each child's first curriculum enrollment is free and more enrollments are $0.50 each, so most families spend $0 to $10 a year. For paper, The Peaceful Press Homeschool Planner is $12 once. For a free do-it-yourself option, Google Sheets costs $0.
 
-### Is there a free homeschool planner app?
+### How much do homeschool families spend per year?
 
-Yes, with limits. The CM Organizer Basic account is free for up to 20 resources. Homeschool Planet's $0 option is a 30-day trial, not a free plan. Lesson Hollow has no monthly fee, so a family with one curriculum per child pays nothing, and additional enrollments are $0.50 each.
+In an August 2023 Washington Post and Schar School poll of 504 parents of homeschooled children, 44 percent said they spent less than $500 homeschooling their child over the past 12 months. Another 33 percent spent $500 to $1,999, so more than 3 in 4 spent under $2,000. Fewer than 1 in 10 spent $5,000 or more.
 
-### How much does a homeschool planner cost per year?
+### How much does Homeschool Planet cost?
 
-In November 2026, popular paper planners run $39.95 to $69.95 for The Well Planned Day and $48.50 and up for Erin Condren. Subscription apps run $49 a year for Homeschool Manager and $84.95 a year for Homeschool Planet. Printables, free online tools and Lesson Hollow can all come in under $20 a year.
-
-### Can I use AI to make a homeschool planner?
-
-Yes. You can ask ChatGPT or Claude to build a spreadsheet layout, or use an app builder like Lovable, Replit or Bolt to make a full app. Free plans can get you a first version, and paid plans cost $17 to $25 a month on the tools we checked. A lighter option is to let AI write the curriculum and use an existing planner for the tracking. Lesson Hollow's [curriculum prompt](https://lessonhollow.com/help/llm/building-a-curriculum-file) is built for exactly that.
-
-### What is the best homeschool planner for multiple children?
-
-On paper, The Peaceful Press says its printable works for 1 to 12 or more children, and Printable Scholar has a free weekly page for three. Online, Lesson Hollow lets one parent account follow up to 20 children, each with a separate daily task list, and charges by enrollment rather than per child. Lesson Hollow's guide to [tracking multiple kids on different paths](https://lessonhollow.com/blog/how-to-track-multiple-kids-on-different-paths) shows how that looks day to day.
+Homeschool Planet costs $84.95 a year or $9.95 a month as of November 2026. Its $0 option is a 30-day free trial, not a free plan.
 
 ### Does Lesson Hollow have a subscription?
 
-No. There is no subscription or auto-renewal. You buy a $10 top-up for 20 enrollments only when you need more, and the pricing page says nothing is deleted if you run out of credits. See [Lesson Hollow pricing](https://lessonhollow.com/pricing) for current details.
+No. Lesson Hollow has no subscription and no auto-renewal, and signing up needs no credit card. You buy a $10 top-up for 20 enrollments only when you need more, and nothing is deleted if you run out of credits.
 
-## The bottom line
+### Can I use AI to make a homeschool planner?
 
-You do not need to spend $50 or more on a homeschool planner. A free printable or a $12 printable serves paper families well. Free tools like Google Sheets, Trello and Notion work for parents who enjoy setting things up. Vibe-coding your own planner is possible, but it costs time even when it costs nothing else. For families who want their own curriculums turned into a daily, timed task list for each child, Lesson Hollow does that for most families at $10 a year or less. [Browse the free curriculums on Discover](https://lessonhollow.com/discover) to see how it works before you spend anything.
+Yes. You can vibe code a planner with tools like ChatGPT, Claude, Lovable, Bolt or Replit, but you will maintain it yourself, and paid plans run $17 to $25 a month on the tools we checked. A lighter option is to let AI write the curriculum and let a purpose-built planner do the tracking. Lesson Hollow's [curriculum prompt](https://lessonhollow.com/help/llm/building-a-curriculum-file) for ChatGPT or Claude is made for exactly that.
+
+### Are paper homeschool planners worth it?
+
+Paper planners suit parents who love writing things down, but they fall out of date quickly, are hard to change and can be lost. Popular printed homeschool planners cost $39.95 to $69.95. If you want paper, a $12 undated printable like The Peaceful Press Homeschool Planner keeps the cost low.
+
+## Try Lesson Hollow free
+
+Your homeschool budget has better things to do than feed a subscription.
+
+Sign up free with no credit card, and each child's first curriculum enrollment is on the house. Load your own curriculum or grab a free one from [Discover](https://lessonhollow.com/discover), and tomorrow morning starts with a daily task list for every child.
+
+[Start free at Lesson Hollow](https://lessonhollow.com)
