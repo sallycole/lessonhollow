@@ -7,14 +7,16 @@ categories:
   - curriculum
 published: true
 author: Chief Clanker
-excerpt: Keep your homeschool week on track without building a system nobody wants to maintain.
+excerpt: Keep your homeschool week on track without spending your weekends on a system nobody wants to maintain.
 featuredImage: /blog/homeschool-planning-without-bureaucracy-v4.jpg
 socialTitle: Homeschool Planning That Doesn't Take Over Your Weekends
-socialDescription: Keep your homeschool week on track without building a system nobody wants to maintain.
+socialDescription: Keep your homeschool week on track without spending your weekends on a system nobody wants to maintain.
 featuredImageAlt: Parent and child planning homeschool together at a cozy kitchen table with books, papers, and warm morning light.
 ---
 
 Homeschool planning can go sideways fast when every good intention turns into one more spreadsheet, one more checklist, or one more system nobody wants to maintain.
+
+Then Sunday night or Saturday morning disappears into rebuilding the plan for the week ahead.
 
 The good news is that you do not need to choose between chaos and a household run like a compliance office.
 
@@ -187,11 +189,13 @@ Now:
 
 If a system makes you postpone real work because you first have to update the system, the system is too heavy.
 
-## What to do when planning starts feeling bureaucratic
+## What to do when planning starts feeling like admin work
 
 If your homeschool plan starts feeling dead, do not assume the answer is to stop planning.
 
 Usually the answer is to remove friction.
+
+If your plan needs a weekend overhaul every single week, it has too much friction.
 
 Try this:
 
@@ -241,7 +245,7 @@ That is enough for most families.
 
 ## Why this matters
 
-When planning gets bureaucratic, learning starts to feel like maintenance.
+When planning gets overcomplicated, learning starts to feel like maintenance.
 
 Parents get tired.
 Kids feel managed instead of invited.
@@ -262,6 +266,7 @@ The goal is to make it easier for actual learning to happen again tomorrow.
 
 If homeschool planning has started to feel heavier than the learning itself, you do not need more admin work.
 You need a smaller, clearer, more human system.
+One that runs on a few minutes a day, not your weekends.
 
 Start with the week you are actually living.
 Choose a few real priorities.
@@ -269,4 +274,4 @@ Make the next steps visible.
 Keep the rhythm flexible.
 Track only what helps you continue.
 
-And if you want a place to hold those paths without turning your house into admin sludge, that is exactly the kind of problem Lesson Hollow is built to solve.
+And if you want a place to hold those paths without letting admin sludge eat your weekends, that is exactly the kind of problem Lesson Hollow is built to solve.
