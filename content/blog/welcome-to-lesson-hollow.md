@@ -20,7 +20,7 @@ If your learning routine already lives across books, projects, field trips, rabb
 
 You need a path.
 
-Lesson Hollow is a personal curriculum system for families who want real structure without turning home learning into a bureaucracy. It helps a Guide shape the path, helps a Player see what to do next, and makes mixed-format learning feel usable instead of scattered.
+Lesson Hollow is a personal curriculum system for families who want to follow through on their curriculum choices without drowning in admin work. It helps a Guide shape the path, helps a Player see what to do next, and makes mixed-format learning feel usable instead of scattered.
 
 ## The real problem is invisible overhead
 

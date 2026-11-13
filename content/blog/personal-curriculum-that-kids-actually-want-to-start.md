@@ -16,7 +16,7 @@ featuredImageAlt: Two children working together on a personal curriculum project
 
 Homeschool planning gets messy fast when learning does not fit neatly inside one textbook, one subject, or one pace.
 
-The good news is that you do not need to choose between total chaos and a bureaucratic school-at-home system that makes everyone tired before lunch.
+The good news is that you do not need to choose between total chaos and an overcomplicated school-at-home system that makes everyone tired before lunch.
 
 In this guide, I will show you how to build a personal curriculum that feels structured, flexible, and worth starting.
 
@@ -250,4 +250,4 @@ A personal curriculum gives you a way to build around energy, curiosity, and rea
 If you want, start small.
 Choose one theme, build five next steps, and make tomorrow easier to begin.
 
-And if you want a place to hold that path without flattening it into school bureaucracy, that is exactly what Lesson Hollow is for.
+And if you want a place to hold that path without burying it in admin work, that is exactly what Lesson Hollow is for.
