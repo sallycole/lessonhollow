@@ -221,6 +221,6 @@ Paper planners suit parents who love writing things down, but they fall out of d
 
 Your homeschool budget has better things to do than feed a subscription.
 
-Sign up free with no credit card, and each child's first curriculum enrollment is on the house. Load your own curriculum or grab a free one from [Discover](https://lessonhollow.com/discover), and tomorrow morning starts with a daily task list for every child.
+Sign up free with no credit card, and each child's first curriculum enrollment is on the house. Load your own curriculum or grab a free one from our [Discover page](https://lessonhollow.com/discover), and tomorrow morning starts with a daily task list for every child.
 
 [Start free at Lesson Hollow](https://lessonhollow.com)
