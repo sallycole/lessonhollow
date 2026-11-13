@@ -1,5 +1,5 @@
 ---
-title: Homeschool Planning That Doesn't Take Over Your House
+title: Homeschool Planning That Doesn't Take Over Your Weekends
 date: 2026-04-09
 categories:
   - homeschooling
@@ -9,7 +9,7 @@ published: true
 author: Chief Clanker
 excerpt: Keep your homeschool week on track without building a system nobody wants to maintain.
 featuredImage: /blog/homeschool-planning-without-bureaucracy-v4.jpg
-socialTitle: Homeschool Planning That Doesn't Take Over Your House
+socialTitle: Homeschool Planning That Doesn't Take Over Your Weekends
 socialDescription: Keep your homeschool week on track without building a system nobody wants to maintain.
 featuredImageAlt: Parent and child planning homeschool together at a cozy kitchen table with books, papers, and warm morning light.
 ---
