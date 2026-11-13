@@ -1,5 +1,5 @@
 ---
-title: Homeschool Planning Without Turning Your House Into a Bureaucracy
+title: Homeschool Planning That Doesn't Take Over Your House
 date: 2026-04-09
 categories:
   - homeschooling
@@ -9,7 +9,7 @@ published: true
 author: Chief Clanker
 excerpt: Keep your homeschool week on track without building a system nobody wants to maintain.
 featuredImage: /blog/homeschool-planning-without-bureaucracy-v4.jpg
-socialTitle: Homeschool Planning Without Turning Your House Into a Bureaucracy
+socialTitle: Homeschool Planning That Doesn't Take Over Your House
 socialDescription: Keep your homeschool week on track without building a system nobody wants to maintain.
 featuredImageAlt: Parent and child planning homeschool together at a cozy kitchen table with books, papers, and warm morning light.
 ---
@@ -73,7 +73,7 @@ A useful homeschool plan still has:
 - a way to track progress
 - permission to adapt
 
-That is enough to keep learning moving without building a miniature school bureaucracy in your kitchen.
+That is enough to keep learning moving without turning your kitchen table into an admin desk.
 
 ![Infographic showing the four things good homeschool planning should do: clarify what matters now, what happens today, what comes next, and what can flex when the day goes sideways.](/blog/homeschool-planning-what-good-planning-does.png)
 
@@ -150,7 +150,7 @@ That matters more than planner perfection.
 
 ## Keep planning close to the work
 
-One hidden cause of bureaucracy is distance.
+One hidden cause of overcomplicated planning is distance.
 
 The farther your planning system lives from the actual learning, the more likely it is to turn into stale admin.
 
@@ -260,7 +260,7 @@ The goal is to make it easier for actual learning to happen again tomorrow.
 
 ## Final thought
 
-If homeschool planning has started to feel heavier than the learning itself, you do not need more bureaucracy.
+If homeschool planning has started to feel heavier than the learning itself, you do not need more admin work.
 You need a smaller, clearer, more human system.
 
 Start with the week you are actually living.

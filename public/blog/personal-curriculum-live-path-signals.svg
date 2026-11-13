@@ -17,7 +17,7 @@
     <text x="640" y="570">• learner can start with less prompting</text>
     <text x="640" y="660">• materials fit the current path</text>
     <text x="640" y="750">• curiosity creates side quests</text>
-    <text x="640" y="840">• progress is visible without bureaucracy</text>
+    <text x="640" y="840">• progress is visible without extra admin</text>
   </g>
   <line x1="540" y1="240" x2="540" y2="1110" stroke="#b6a997" stroke-width="6"/>
 </svg>

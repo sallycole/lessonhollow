@@ -250,4 +250,4 @@ A personal curriculum gives you a way to build around energy, curiosity, and rea
 If you want, start small.
 Choose one theme, build five next steps, and make tomorrow easier to begin.
 
-And if you want a place to hold that path without flattening it into school bureaucracy, that is exactly what Lesson Hollow is for.
+And if you want a place to hold that path without burying it in admin work, that is exactly what Lesson Hollow is for.
