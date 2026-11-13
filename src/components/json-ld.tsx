@@ -142,3 +142,26 @@ export function CourseJsonLd({
   }
   return <JsonLd data={data} />
 }
+
+type FaqItem = {
+  question: string
+  answer: string
+}
+
+export function FaqPageJsonLd({ faqs }: { faqs: FaqItem[] }) {
+  if (faqs.length === 0) return null
+
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  }
+  return <JsonLd data={data} />
+}

@@ -1311,6 +1311,36 @@ html {
   margin: 0 0 2rem;
 }
 
+/* Comparison tables in post bodies: Pico styles the table; we add a
+   horizontal scroll region so wide tables stay readable on mobile. */
+.pico article.blog-post .table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 0 0 1.5rem;
+  max-width: 100%;
+}
+.pico article.blog-post .table-scroll:focus {
+  outline: 2px solid var(--pico-primary);
+  outline-offset: 2px;
+}
+.pico article.blog-post table {
+  width: max-content;
+  min-width: 100%;
+  margin: 0;
+  font-size: 0.9375rem;
+}
+.pico article.blog-post table caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--pico-color);
+}
+.pico article.blog-post table th,
+.pico article.blog-post table td {
+  vertical-align: top;
+}
+
 /* Post navigation: prev | home | next. Stacks on mobile. */
 .pico article.blog-post > .post-nav {
   display: grid;

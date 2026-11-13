@@ -2,10 +2,10 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getPostBySlug, getAllPosts } from '@/lib/blog'
+import { getPostBySlug, getAllPosts, extractFaqs } from '@/lib/blog'
 import { MarkdownContent } from '@/components/markdown-content'
 import { SITE_URL, SITE_NAME } from '@/lib/seo'
-import { BlogPostingJsonLd } from '@/components/json-ld'
+import { BlogPostingJsonLd, FaqPageJsonLd } from '@/components/json-ld'
 
 type Props = {
   params: Promise<{ slug: string }>
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   const description =
-    post.excerpt || `${post.title} — a post on the Lesson Hollow blog.`
+    post.description || post.excerpt || `${post.title} — a post on the Lesson Hollow blog.`
 
   const socialTitle = post.socialTitle || post.title
   const socialDescription = post.socialDescription || description
@@ -84,8 +84,9 @@ export default async function BlogPostPage({ params }: Props) {
         author={post.author}
         image={post.featuredImage}
         url={canonicalUrl}
-        description={post.excerpt}
+        description={post.description || post.excerpt}
       />
+      <FaqPageJsonLd faqs={extractFaqs(post.content)} />
       <article className="blog-post">
         <header>
           <h1>{post.title}</h1>
