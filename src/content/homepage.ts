@@ -15,7 +15,7 @@ export const hero = {
 export const features = {
   heading: 'Built for the way you actually learn',
   description:
-    'Whether you\'re guiding one child or a whole cohort, or just following your own curiosity, Lesson Hollow gives you the structure without the bureaucracy.',
+    'Whether you\'re guiding one child or a whole cohort, or just following your own curiosity, Lesson Hollow turns your curriculum choices into a daily plan you\'ll actually follow through on.',
   items: [
     {
       icon: ListChecks,
