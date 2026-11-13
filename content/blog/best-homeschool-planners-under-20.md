@@ -28,7 +28,7 @@ The catch? They aren't all worth your time. Let's sort them out.
 
 ## The quick answer
 
-The best homeschool planner for under $20 per year is [Lesson Hollow](https://lessonhollow.com), an online daily dashboard with time tracking and artificial intelligence (AI) help that costs most families $0 to $10 a year. If you want paper, The Peaceful Press Homeschool Planner is $12 once. If you want a free do-it-yourself tool, Google Sheets costs $0.
+The best homeschool planner for under $20 per year is [Lesson Hollow](https://lessonhollow.com), an online daily dashboard with time tracking and artificial intelligence (AI) help that costs most families $10 to $20 a year. If you want paper, [The Peaceful Press Homeschool Planner](https://thepeacefulpress.com/products/the-peaceful-press-planner) is $12 once. If you want a free do-it-yourself tool, [Google Sheets](https://workspace.google.com/products/sheets/) costs $0.
 
 ## Affordable planners come in three flavors
 
@@ -58,7 +58,7 @@ All three can get you under $20. Only one gets you there without trade-offs you'
       <td>Purpose-built online planners</td>
       <td>Made for homeschooling; a daily task list for each child; updates instantly; nothing to build</td>
       <td>Most charge a subscription well over $20 a year; free versions are usually trials or capped</td>
-      <td><a href="https://lessonhollow.com">Lesson Hollow</a>: $0 to $10 a year for most families, with time tracking and AI help</td>
+      <td><a href="https://lessonhollow.com">Lesson Hollow</a>: $10 to $20 a year for most families, with time tracking and AI help</td>
     </tr>
     <tr>
       <td>Paper and pencil planners</td>
@@ -93,7 +93,7 @@ What about free versions? Homeschool Planet's $0 option is a 30-day trial. Simpl
 
 ### Lesson Hollow: the exception
 
-Lesson Hollow is the one purpose-built planner we found that a typical family can run all year, with no trial clock and no resource cap, for under $20.
+Lesson Hollow is the one purpose-built planner we found that a typical family can run all year, with no trial clock and no resource cap, for $20 a year or less.
 
 How? It's a microbusiness. It's designed to charge just enough to keep the servers running and the users happy. That's it. That's the business model.
 
@@ -118,13 +118,13 @@ It takes about 30 seconds to explain. That's kind of the point.
 - After that, each enrollment costs $0.50, sold as a $10 top-up for 20 enrollments.
 - No subscription. No auto-renewal. You top up only when you want to.
 
-An enrollment is one child added to one curriculum. So what does a real year cost?
+An enrollment is one child added to one curriculum. So what does a real year cost? For most families, one or two $10 top-ups:
 
-- **One child, one curriculum:** $0.
-- **Two children, five subjects each:** 10 enrollments, two free, eight paid. That's $4 of credit from one $10 top-up, with 12 enrollments left for later.
-- **Three children, six subjects each:** 18 enrollments, three free, 15 paid. That's $7.50 of credit, with five left over.
+- **Two children, five subjects each:** 10 enrollments, two free, eight paid. One $10 top-up covers it, with 12 enrollments left for later.
+- **Three children, six subjects each:** 18 enrollments, three free, 15 paid. One $10 top-up covers it, with five left over.
+- **Three children, 10 curriculums each over the year:** 30 enrollments, three free, 27 paid. Two $10 top-ups cover it, $20 total, with 13 left over.
 
-Now run the hook math again. For a child whose whole year costs under $500, Homeschool Planet takes about 17 percent or more. A full $10 Lesson Hollow top-up takes about 2 percent.
+Now run the hook math again. For a child whose whole year costs under $500, Homeschool Planet takes about 17 percent or more. Even $20 of Lesson Hollow credit takes about 4 percent.
 
 One honest note: a family that cycles through lots of short curriculums can pass $20. Three children would need more than 43 enrollments in a year to get there. See the [pricing page](https://lessonhollow.com/pricing) for current details.
 
@@ -191,13 +191,13 @@ Love vibe coding anyway? Skip the blank page. Lesson Hollow's guide to [forking 
 - **You love building systems and have time to keep them running:** Google Sheets.
 - **You want your curriculums to show up as a daily task list for every child, with a timer, AI help and no subscription:** Lesson Hollow.
 
-For most families, that last one is the whole point of a planner. And Lesson Hollow does it for about the price of one month of Homeschool Planet.
+For most families, that last one is the whole point of a planner. And Lesson Hollow does it for less than a quarter of what Homeschool Planet costs in a year.
 
 ## Frequently asked questions
 
 ### What is the best homeschool planner for under $20 a year?
 
-Lesson Hollow is the best homeschool planner for under $20 a year for families who want a daily digital dashboard with time tracking. Each child's first curriculum enrollment is free and more enrollments are $0.50 each, so most families spend $0 to $10 a year. For paper, The Peaceful Press Homeschool Planner is $12 once. For a free do-it-yourself option, Google Sheets costs $0.
+Lesson Hollow is the best homeschool planner for under $20 a year for families who want a daily digital dashboard with time tracking. Each child's first curriculum enrollment is free and more enrollments are $0.50 each, so most families spend $10 to $20 a year. For paper, The Peaceful Press Homeschool Planner is $12 once. For a free do-it-yourself option, Google Sheets costs $0.
 
 ### How much do homeschool families spend per year?
 
