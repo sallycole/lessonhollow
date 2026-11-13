@@ -111,7 +111,7 @@ function generateLlmsTxt(): string {
   for (const post of posts) {
     const title = post.title
     const url = `${SITE_URL}/blog/${post.slug}`
-    const description = post.excerpt || `${post.title} on the Lesson Hollow blog.`
+    const description = post.description || post.excerpt || `${post.title} on the Lesson Hollow blog.`
     lines.push(`- [${title}](${url}): ${description}`)
   }
 

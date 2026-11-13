@@ -28,6 +28,7 @@ const frontmatterSchema = z.object({
   audioTitle: z.string().optional(),
   socialTitle: z.string().optional(),
   socialDescription: z.string().optional(),
+  description: z.string().optional(),
 })
 
 export type BlogPost = {
@@ -44,6 +45,7 @@ export type BlogPost = {
   audioTitle?: string
   socialTitle?: string
   socialDescription?: string
+  description?: string
   content: string
   readingTime: string
 }
@@ -89,6 +91,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     audioTitle: parsed.data.audioTitle,
     socialTitle: parsed.data.socialTitle,
     socialDescription: parsed.data.socialDescription,
+    description: parsed.data.description,
     content,
     readingTime: computeReadingTime(content),
   }
@@ -114,4 +117,33 @@ export function getAllCategories(): string[] {
     }
   }
   return Array.from(categories).sort()
+}
+
+function markdownToPlainText(text: string): string {
+  return text
+    .replace(/\[([^\]]+)\](?:\([^)]+\)|\[[^\]]*\])/g, '$1')
+    .replace(/[*_]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+export function extractFaqs(content: string): { question: string; answer: string }[] {
+  const heading = /^## Frequently asked questions\s*$/im
+  const start = content.search(heading)
+  if (start === -1) return []
+
+  const afterHeading = content.slice(start).replace(/^## Frequently asked questions\s*/i, '')
+  const nextHeading = afterHeading.search(/^##\s+/m)
+  const section = nextHeading === -1 ? afterHeading : afterHeading.slice(0, nextHeading)
+
+  return section
+    .split(/^###\s+/m)
+    .slice(1)
+    .map((part) => {
+      const newline = part.indexOf('\n')
+      const question = (newline === -1 ? part : part.slice(0, newline)).trim()
+      const answer = markdownToPlainText(newline === -1 ? '' : part.slice(newline))
+      return { question, answer }
+    })
+    .filter((faq) => faq.question && faq.answer)
 }
