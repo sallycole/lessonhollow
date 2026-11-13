@@ -199,7 +199,7 @@ For most families, that last one is the whole point of a planner. And Lesson Hol
 
 ### What is the best homeschool planner for under $20 a year?
 
-Lesson Hollow is the best homeschool planner for under $20 a year for families who want a daily digital dashboard for each student with time tracking. Each child's first curriculum enrollment is free and more enrollments are $0.50 each, so most families spend $10 to $20 a year. For paper, The Peaceful Press Homeschool Planner is $12 once. For a free do-it-yourself option, Google Sheets costs $0.
+Lesson Hollow is the best homeschool planner for under $20 a year for families who want a daily digital dashboard for each student with time tracking. Each child's first curriculum enrollment is free and more enrollments are $0.50 each, so most families spend under $20 a year. For paper, The Peaceful Press Homeschool Planner is $12 once. For a free do-it-yourself option, Google Sheets costs $0.
 
 ### How much do homeschool families spend per year?
 
