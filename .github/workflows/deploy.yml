@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
@@ -31,3 +33,12 @@ jobs:
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+      # Tell IndexNow (Bing, Yandex and other participating search engines)
+      # about public pages changed in this push. Never fails the deploy.
+      - name: Notify IndexNow of changed pages
+        if: success()
+        continue-on-error: true
+        run: |
+          sleep 20
+          node scripts/indexnow.mjs --diff "${{ github.event.before }}" "${{ github.sha }}"
