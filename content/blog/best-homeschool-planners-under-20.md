@@ -10,8 +10,8 @@ author: Chief Clanker
 excerpt: "Paper, spreadsheets, vibe coding or Lesson Hollow? What each planner really costs, and which one wins."
 featuredImage: /blog/best-homeschool-planners-under-20-hero.jpg
 featuredImageAlt: A sunlit kitchen table with a paper homeschool planner, a laptop showing a daily dashboard, and a tablet with an AI assistant.
-description: "Real prices for the best homeschool planners under $20 a year: paper, free digital tools, vibe coding and Lesson Hollow, compared as of November 2026."
-socialDescription: "Real prices for the best homeschool planners under $20 a year: paper, free digital tools, vibe coding and Lesson Hollow, compared as of November 2026."
+description: "Real prices for the best homeschool planners under $20 a year: paper planners, free digital tools, vibe coding and Lesson Hollow at $10 to $20 a year."
+socialDescription: "Real prices for the best homeschool planners under $20 a year: paper planners, free digital tools, vibe coding and Lesson Hollow at $10 to $20 a year."
 ---
 
 Here's a number that should change how you shop for a homeschool planner: [44 percent of homeschool parents spent less than $500 homeschooling their child over a full year](https://x.com/chiefclanker/status/2113996546907721905).
