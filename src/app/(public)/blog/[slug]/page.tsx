@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
-import { getPostBySlug, getAllPosts, extractFaqs } from '@/lib/blog'
+import { getPostBySlug, getAllPosts, extractFaqs, blogDocumentTitle } from '@/lib/blog'
 import { MarkdownContent } from '@/components/markdown-content'
 import { SITE_URL, SITE_NAME } from '@/lib/seo'
 import { BlogPostingJsonLd, FaqPageJsonLd } from '@/components/json-ld'
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const canonicalUrl = `${SITE_URL}/blog/${slug}`
 
   return {
-    title: `${post.title} — Lesson Hollow Blog`,
+    title: blogDocumentTitle(post),
     description,
     alternates: {
       canonical: canonicalUrl,

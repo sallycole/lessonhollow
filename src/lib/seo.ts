@@ -70,3 +70,62 @@ export function createSeoMetadata(options: SeoMetadataOptions): Metadata {
     }),
   }
 }
+
+export const META_DESCRIPTION_MAX_CHARS = 155
+
+const EN_DASH = '\u2013'
+const EM_DASH = '\u2014'
+
+/** Replace en/em dashes so meta copy follows the no-dash house style. */
+function normalizeMetaDashes(text: string): string {
+  return text
+    .replace(new RegExp(`(\\d)\\s*${EN_DASH}\\s*(\\d)`, 'g'), '$1 to $2')
+    .replace(new RegExp(EN_DASH, 'g'), ' to ')
+    .replace(new RegExp(`\\s*${EM_DASH}\\s*`, 'g'), ', ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+/**
+ * Trim a meta description to the search-result budget.
+ * Prefers a full sentence, then a clause boundary, then a word boundary,
+ * so future Discover landings stay under the limit without hand-editing.
+ */
+export function trimMetaDescription(
+  text: string,
+  max = META_DESCRIPTION_MAX_CHARS,
+): string {
+  const cleaned = normalizeMetaDashes(text)
+  if (cleaned.length <= max) return cleaned
+
+  const slice = cleaned.slice(0, max)
+
+  const sentenceEnds: number[] = []
+  const sentenceRe = /(?<![A-Z])(?<!\d)[.!?](?=\s+[A-Z]|$)/g
+  let match: RegExpExecArray | null
+  while ((match = sentenceRe.exec(slice)) !== null) {
+    sentenceEnds.push(match.index + 1)
+  }
+  if (sentenceEnds.length > 0) {
+    const end = sentenceEnds[sentenceEnds.length - 1]
+    if (end >= 60) {
+      return slice.slice(0, end).trim()
+    }
+  }
+
+  const clauseRe = /[,;](?=\s)/g
+  let clauseEnd = -1
+  while ((match = clauseRe.exec(slice)) !== null) {
+    clauseEnd = match.index
+  }
+  if (clauseEnd >= 60) {
+    return `${slice.slice(0, clauseEnd).trim()}.`
+  }
+
+  const wordBreak = slice.search(/\s+\S*$/)
+  if (wordBreak >= 1) {
+    return slice.slice(0, wordBreak).replace(/[,;:]+$/, '').trim()
+  }
+
+  return slice.trim()
+}
