@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import fs from 'fs'
 import path from 'path'
-import { getAllPosts, getPostBySlug, getAllCategories } from '../blog'
+import { getAllPosts, getPostBySlug, getAllCategories, blogDocumentTitle } from '../blog'
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
 const TEST_DIR = path.join(BLOG_DIR, '__test_tmp__')
@@ -160,6 +160,40 @@ No date.`
       )
       const post = getPostBySlug('__test-post-a')
       expect(post).toBeNull()
+    })
+
+    it('reads an optional seoTitle', () => {
+      writePost(
+        '__test-post-a.md',
+        `---
+title: Best Homeschool Planners for Under $20 per Year
+date: 2026-11-12
+seoTitle: Best Homeschool Planners Under $20 a Year | Lesson Hollow
+---
+
+Content.`
+      )
+      const post = getPostBySlug('__test-post-a')
+      expect(post!.seoTitle).toBe(
+        'Best Homeschool Planners Under $20 a Year | Lesson Hollow',
+      )
+    })
+  })
+
+  describe('blogDocumentTitle', () => {
+    it('uses seoTitle as the full document title when set', () => {
+      expect(
+        blogDocumentTitle({
+          title: 'Best Homeschool Planners for Under $20 per Year',
+          seoTitle: 'Best Homeschool Planners Under $20 a Year | Lesson Hollow',
+        }),
+      ).toBe('Best Homeschool Planners Under $20 a Year | Lesson Hollow')
+    })
+
+    it('falls back to the headline plus site suffix when seoTitle is absent', () => {
+      expect(blogDocumentTitle({ title: 'Welcome to Lesson Hollow' })).toBe(
+        'Welcome to Lesson Hollow — Lesson Hollow Blog',
+      )
     })
   })
 })

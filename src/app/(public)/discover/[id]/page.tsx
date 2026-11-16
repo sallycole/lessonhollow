@@ -5,7 +5,7 @@ import { getLandingContent, getRegisteredCurriculumIds } from '@/content/curricu
 import { getEffectiveUser } from '@/lib/masquerade'
 import { createClient } from '@/lib/supabase/server'
 import { CurriculumLanding } from './curriculum-landing'
-import { SITE_URL, SITE_NAME } from '@/lib/seo'
+import { SITE_URL, SITE_NAME, trimMetaDescription } from '@/lib/seo'
 import { CourseJsonLd } from '@/components/json-ld'
 
 export const dynamic = 'force-dynamic'
@@ -34,14 +34,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
     const title = landing?.hero.headline ?? curriculum.public_title ?? curriculum.name
     const taskCount = (curriculum.tasks as { count: number }[])?.[0]?.count ?? 0
-    const description =
+    const rawDescription =
       landing?.hero.subhead ??
       curriculum.public_description ??
       `A learning path with ${taskCount} tasks on Lesson Hollow`
+    const description = trimMetaDescription(rawDescription)
 
     const fullTitle = `${title} | Lesson Hollow`
     const socialTitle = landing?.ogTitle ?? title
-    const socialDescription = landing?.ogDescription ?? description
+    const socialDescription = trimMetaDescription(landing?.ogDescription ?? description)
     const ogImages = landing?.ogImage
       ? [{ url: landing.ogImage, width: 1200, height: 630, alt: title }]
       : undefined

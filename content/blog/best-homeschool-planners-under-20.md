@@ -10,8 +10,9 @@ author: Chief Clanker
 excerpt: "Paper, spreadsheets, vibe coding or Lesson Hollow? What each planner really costs, and which one wins."
 featuredImage: /blog/best-homeschool-planners-under-20-hero.jpg
 featuredImageAlt: A sunlit kitchen table with a paper homeschool planner, a laptop showing a daily dashboard, and a tablet with an AI assistant.
-description: "Real prices for the best homeschool planners under $20 a year: paper planners, free digital tools, vibe coding and Lesson Hollow at $10 to $20 a year."
-socialDescription: "Real prices for the best homeschool planners under $20 a year: paper planners, free digital tools, vibe coding and Lesson Hollow at $10 to $20 a year."
+seoTitle: "Best Homeschool Planners Under $20 a Year | Lesson Hollow"
+description: "Best homeschool planners on a budget: paper planners, free digital tools, vibe coding, and Lesson Hollow"
+socialDescription: "Best homeschool planners on a budget: paper planners, free digital tools, vibe coding, and Lesson Hollow"
 ---
 
 Here's a number that should change how you shop for a homeschool planner: [44 percent of homeschool parents spent less than $500 homeschooling their child over a full year](https://x.com/chiefclanker/status/2113996546907721905).
@@ -28,7 +29,7 @@ The catch? They aren't all worth your time. Let's sort them out.
 
 ## The quick answer
 
-The best homeschool planner for under $20 per year is [Lesson Hollow](https://lessonhollow.com), an online daily dashboard with time tracking and artificial intelligence (AI) help that costs most families $10 to $20 a year. If you want paper, [The Peaceful Press Homeschool Planner](https://thepeacefulpress.com/products/the-peaceful-press-planner) is $12 once. If you want a free do-it-yourself tool, [Google Sheets](https://workspace.google.com/products/sheets/) costs $0.
+The best homeschool planner for under $20 per year is [Lesson Hollow](https://lessonhollow.com), an online daily dashboard with time tracking and artificial intelligence (AI) help that costs most families under $20 a year. If you want paper, [The Peaceful Press Homeschool Planner](https://thepeacefulpress.com/products/the-peaceful-press-planner) is $12 once. If you want a free do-it-yourself tool, [Google Sheets](https://workspace.google.com/products/sheets/) costs $0.
 
 ## Affordable planners come in three flavors
 
@@ -58,7 +59,7 @@ All three can get you under $20. Only one gets you there without trade-offs you'
       <td>Purpose-built online planners</td>
       <td>Made for homeschooling; a daily task list for each child; updates instantly; nothing to build</td>
       <td>Most charge a subscription well over $20 a year; free versions are usually trials or capped</td>
-      <td><a href="https://lessonhollow.com">Lesson Hollow</a>: $10 to $20 a year for most families, with time tracking and AI help</td>
+      <td><a href="https://lessonhollow.com">Lesson Hollow</a>: under $20 a year for most families, with time tracking and AI help</td>
     </tr>
     <tr>
       <td>Paper and pencil planners</td>

@@ -6,7 +6,7 @@ import { SoftwareApplicationJsonLd } from '@/components/json-ld'
 
 export const metadata: Metadata = {
   title: 'Lesson Hollow | Build your curriculum. Track your progress.',
-  description: 'At Lesson Hollow, lifelong learners step up to be guides and their crew steps up to be players on a learning journey. Build curriculums together, knock out daily tasks, and watch the progress stack up.',
+  description: "Lesson Hollow turns your curriculum choices into a daily plan you'll actually follow through on. Build curriculums and track daily progress.",
   alternates: {
     canonical: SITE_URL,
   },

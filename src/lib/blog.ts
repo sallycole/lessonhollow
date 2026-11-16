@@ -26,6 +26,7 @@ const frontmatterSchema = z.object({
   featuredImageAlt: z.string().optional(),
   audioSrc: z.string().optional(),
   audioTitle: z.string().optional(),
+  seoTitle: z.string().optional(),
   socialTitle: z.string().optional(),
   socialDescription: z.string().optional(),
   description: z.string().optional(),
@@ -43,11 +44,19 @@ export type BlogPost = {
   featuredImageAlt?: string
   audioSrc?: string
   audioTitle?: string
+  seoTitle?: string
   socialTitle?: string
   socialDescription?: string
   description?: string
   content: string
   readingTime: string
+}
+
+export function blogDocumentTitle(post: { title: string; seoTitle?: string }): string {
+  if (post.seoTitle?.trim()) {
+    return post.seoTitle.trim()
+  }
+  return `${post.title} — Lesson Hollow Blog`
 }
 
 function computeReadingTime(content: string): string {
@@ -89,6 +98,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     featuredImageAlt: parsed.data.featuredImageAlt,
     audioSrc: parsed.data.audioSrc,
     audioTitle: parsed.data.audioTitle,
+    seoTitle: parsed.data.seoTitle,
     socialTitle: parsed.data.socialTitle,
     socialDescription: parsed.data.socialDescription,
     description: parsed.data.description,

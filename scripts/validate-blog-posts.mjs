@@ -11,6 +11,9 @@ import process from 'node:process'
 import matter from 'gray-matter'
 
 const BLOG_EXCERPT_MAX_CHARS = 110
+const META_DESCRIPTION_MAX_CHARS = 155
+const SEARCH_TITLE_MAX_CHARS = 60
+
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
 
@@ -69,7 +72,51 @@ for (const file of files) {
     }
   }
 
+  if (data.description != null) {
+    if (typeof data.description !== 'string') {
+      fail(file, 'frontmatter `description` must be a string when present.')
+    }
+    if (data.description.length > META_DESCRIPTION_MAX_CHARS) {
+      fail(
+        file,
+        `description is ${data.description.length} characters; max is ${META_DESCRIPTION_MAX_CHARS}. ` +
+          `Shorten it so it fits in the search-result snippet.`
+      )
+    }
+  }
+
+  if (data.socialDescription != null) {
+    if (typeof data.socialDescription !== 'string') {
+      fail(file, 'frontmatter `socialDescription` must be a string when present.')
+    }
+    if (data.socialDescription.length > META_DESCRIPTION_MAX_CHARS) {
+      fail(
+        file,
+        `socialDescription is ${data.socialDescription.length} characters; max is ${META_DESCRIPTION_MAX_CHARS}.`
+      )
+    }
+  }
+
+  if (data.seoTitle != null) {
+    if (typeof data.seoTitle !== 'string') {
+      fail(file, 'frontmatter `seoTitle` must be a string when present.')
+    }
+    if (data.seoTitle.length > SEARCH_TITLE_MAX_CHARS) {
+      fail(
+        file,
+        `seoTitle is ${data.seoTitle.length} characters; max is ${SEARCH_TITLE_MAX_CHARS} so it fits in search results.`
+      )
+    }
+    if (/[\u2013\u2014]/.test(data.seoTitle) || /\s-\s/.test(data.seoTitle)) {
+      fail(
+        file,
+        'seoTitle must not use an em dash, en dash, or hyphen as a separator. Use a pipe if you need a separator.'
+      )
+    }
+  }
+
   if (data.featuredImage != null) {
+
     if (typeof data.featuredImage !== 'string' || !data.featuredImage.startsWith('/')) {
       fail(
         file,

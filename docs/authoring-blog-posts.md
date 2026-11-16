@@ -19,6 +19,9 @@ Every post starts with a YAML frontmatter block. The fields the renderer reads a
 | `excerpt`          | no       | Promo text for the index card. **Hard limit: 110 characters.** See below. |
 | `featuredImage`    | no       | Absolute path under `public/`, e.g. `/blog/my-hero.jpg`. File must exist. |
 | `featuredImageAlt` | no       | Plain-text alt for screen readers and OpenGraph.                       |
+| `seoTitle`         | no       | The full `<title>` for search results. Keep it to 60 characters or fewer, with no em dash, en dash, or hyphen used as a separator. The `<h1>` on the page stays whatever `title` says. Leave this out and search gets `title` plus the site suffix. |
+| `description`      | no       | Meta description, also used for Open Graph and Twitter unless `socialDescription` is set. Aim for 120 to 155 characters. |
+| `socialDescription`| no       | Overrides `description` for Open Graph and Twitter only.               |
 
 Example:
 
@@ -51,6 +54,17 @@ Examples that fit:
 - `Introducing Lesson Hollow, a personal curriculum tracker for self-directed learners.` (85 chars)
 
 If a draft is over 110, the validator output will tell you exactly how many characters and which file. Trim and re-run.
+
+## Search-result titles with `seoTitle`
+
+Google shows roughly the first 60 characters of a title, so a long headline plus the site suffix gets cut off in search results. You do not have to shorten the headline on the page to fix that. Set `seoTitle` to the exact `<title>` you want search to use, including the brand if it still fits, and keep it to 60 characters or fewer. Do not use an em dash, en dash, or hyphen as the separator. A pipe is fine.
+
+```yaml
+title: Best Homeschool Planners for Under $20 per Year
+seoTitle: Best Homeschool Planners Under $20 a Year | Lesson Hollow
+```
+
+Leave `seoTitle` out and nothing changes: search falls back to `title` plus the site suffix. `socialTitle` still controls what Facebook and X display.
 
 ## Style notes
 
